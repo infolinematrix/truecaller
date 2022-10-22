@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BoxedContainer extends StatelessWidget {
-  const BoxedContainer({Key? key, required this.content}) : super(key: key);
+  const BoxedContainer({Key? key, required this.content, this.color})
+      : super(key: key);
 
   final Widget content;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color ?? Colors.transparent,
         border: Border.all(
-          color: Colors.grey.shade200,
+          color: Theme.of(context).indicatorColor,
         ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(8),
+        borderRadius: BorderRadius.all(
+          Radius.circular(8.0.sp),
         ),
       ),
       padding: EdgeInsets.all(16.0.sp),

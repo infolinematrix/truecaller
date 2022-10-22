@@ -4,9 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:truecaller/presentation/screens/home/accounts_screen.dart';
-import 'package:truecaller/presentation/screens/home/report_screen.dart';
-import 'package:truecaller/presentation/screens/home/settings_screen.dart';
+import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/functions.dart';
 import 'package:truecaller/utils/index.dart';
@@ -22,13 +20,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     with TickerProviderStateMixin {
   AnimationController? _hideFabAnimation;
 
-  final pages = [
-    const HomeScreen(),
-    const ReportScreen(),
-    const AccountsScreen(),
-    const SettingsScreen(),
-  ];
-
   @override
   initState() {
     super.initState();
@@ -40,17 +31,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   void dispose() {
     _hideFabAnimation!.dispose();
     super.dispose();
-  }
-
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => pages[_selectedIndex],
-    ));
   }
 
   bool _handleScrollNotification(ScrollNotification notification) {
@@ -83,97 +63,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
       child: Scaffold(
-        backgroundColor: Theme.of(context).bottomAppBarColor,
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _selectedIndex, //New
-          onTap: _onItemTapped,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.home_1),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.chart_square),
-              label: 'Reports',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.empty_wallet_change),
-              label: 'Accounts',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.personalcard),
-              label: 'Settings',
-            ),
-          ],
+        bottomNavigationBar: const BottomNavigation(
+          index: 0,
         ),
-        // bottomNavigationBar: Container(
-        //   height: 60,
-        //   decoration: BoxDecoration(
-        //     color: Theme.of(context).bottomAppBarColor,
-        //     borderRadius: const BorderRadius.only(
-        //       topLeft: Radius.circular(0),
-        //       topRight: Radius.circular(0),
-        //     ),
-        //   ),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //     children: [
-        //       Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: <Widget>[
-        //           const Icon(Iconsax.home_1), // icon
-        //           Text(
-        //             "Home",
-        //             style: Theme.of(context)
-        //                 .textTheme
-        //                 .bodySmall!
-        //                 .copyWith(fontWeight: FontWeight.w600),
-        //           ), // text
-        //         ],
-        //       ),
-        //       Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: <Widget>[
-        //           const Icon(Iconsax.chart_square), // icon
-        //           Text(
-        //             "Report",
-        //             style: Theme.of(context)
-        //                 .textTheme
-        //                 .bodySmall!
-        //                 .copyWith(fontWeight: FontWeight.w600),
-        //           ), // text
-        //         ],
-        //       ),
-        //       Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: <Widget>[
-        //           const Icon(Iconsax.empty_wallet_change), // icon
-        //           Text(
-        //             "Accounts",
-        //             style: Theme.of(context)
-        //                 .textTheme
-        //                 .bodySmall!
-        //                 .copyWith(fontWeight: FontWeight.w600),
-        //           ), // text
-        //         ],
-        //       ),
-        //       Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: <Widget>[
-        //           const Icon(Iconsax.personalcard), // icon
-        //           Text(
-        //             "Settings",
-        //             style: Theme.of(context)
-        //                 .textTheme
-        //                 .bodySmall!
-        //                 .copyWith(fontWeight: FontWeight.w600),
-        //           ), // text
-        //         ],
-        //       ),
-        //     ],
-        //   ),
-        // ),
         floatingActionButton: ScaleTransition(
           scale: _hideFabAnimation!,
           alignment: Alignment.bottomCenter,
@@ -188,7 +80,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             // 3
             slivers: <Widget>[
               SliverAppBar(
-                backgroundColor: Theme.of(context).bottomAppBarColor,
                 pinned: false,
                 expandedHeight: 65.h,
                 stretch: true,
@@ -196,7 +87,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   margin: EdgeInsets.only(top: 16.h),
                   padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                   child: Card(
-                    color: Colors.grey.shade100,
                     child: SizedBox(
                       height: 60.h,
                       child: Padding(
@@ -220,7 +110,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               ),
               SliverToBoxAdapter(
                 child: SizedBox(
-                  height: 80.h,
+                  height: 85.h,
                   child: ListView.builder(
                     itemCount: 10,
                     shrinkWrap: true,
@@ -262,8 +152,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                   overflow: TextOverflow.clip,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1!
-                                      .copyWith(),
+                                      .bodyText2!
+                                      .copyWith(fontWeight: FontWeight.w500),
                                 ),
                               ),
                             ),
