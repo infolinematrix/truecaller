@@ -1,30 +1,31 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:truecaller/theme/app_theme.dart';
-
-import 'application/router.dart';
+import 'package:get_storage/get_storage.dart';
+import 'app.dart';
+import 'firebase_options.dart';
 import 'presentation/screens/error.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runZonedGuarded(() {
+  runZonedGuarded(() async {
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
       if (kReleaseMode) exit(1);
     };
 
-    runApp(
-      const ProviderScope(
-        child: MyApp(),
-      ),
-    );
+    /**
+     * Initialize App
+     */
+    await intApp();
+
+    runApp(const ProviderScope(child: MyApp()));
+
     // Transparent status bar
     if (Platform.isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle =
@@ -36,25 +37,7 @@ void main() {
   });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812 - 44 - 34),
-      minTextAdapt: false,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return MaterialApp.router(
-          routerConfig: router,
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme,
-          title: 'Flutter Demo',
-          localizationsDelegates: const [FormBuilderLocalizations.delegate],
-          supportedLocales: FormBuilderLocalizations.delegate.supportedLocales,
-        );
-      },
-    );
-  }
+Future<void> intApp() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await GetStorage.init();
 }

@@ -3,7 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/functions.dart';
@@ -75,29 +77,54 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             child: const Icon(Icons.code),
           ),
         ),
+        drawer: const DrawerNavigation(),
         body: SafeArea(
           child: CustomScrollView(
-            // 3
             slivers: <Widget>[
+              // SliverToBoxAdapter(
+              //   child: Container(
+              //     margin: EdgeInsets.only(top: 16.0.h, bottom: 16.0.h),
+              //     padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+              //     child: const Text("Findo"),
+              //   ),
+              // ),
               SliverAppBar(
-                pinned: false,
-                expandedHeight: 65.h,
+                backgroundColor: Theme.of(context).canvasColor,
+                title: const Text("FINDO"),
+                actions: [
+                  IconButton(
+                      onPressed: () {}, icon: const Icon(Iconsax.notification))
+                ],
+              ),
+              SliverAppBar(
+                backgroundColor: Theme.of(context).canvasColor,
+                pinned: true,
+                expandedHeight: 50.h,
                 stretch: true,
+                automaticallyImplyLeading: false,
                 flexibleSpace: Container(
-                  margin: EdgeInsets.only(top: 16.h),
-                  padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                  child: Card(
-                    child: SizedBox(
-                      height: 60.h,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.menu),
-                            Icon(Icons.search),
-                          ],
+                  // margin: EdgeInsets.only(top: 16.h),
+                  padding: EdgeInsets.symmetric(horizontal: 0.0.w),
+                  // padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                  child: InkWell(
+                    onTap: () =>
+                        GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH"),
+                    child: Card(
+                      child: SizedBox(
+                        height: 50.h,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.0.w, vertical: 0.0.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(Iconsax.search_normal),
+                              const Expanded(child: SizedBox.shrink()),
+                              Text("SEARCH",
+                                  style: Theme.of(context).textTheme.caption),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -105,9 +132,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 ),
                 systemOverlayStyle: SystemUiOverlayStyle.dark,
               ),
-              SliverToBoxAdapter(
-                child: UIHelper.verticalSpaceMedium(),
-              ),
+              SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
               SliverToBoxAdapter(
                 child: SizedBox(
                   height: 85.h,
@@ -117,63 +142,62 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
                       return SizedBox(
-                        width: 85.w,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 45.h,
-                              width: 45.w,
-                              margin: EdgeInsets.symmetric(horizontal: 16.0.w),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: randomOpaqueColor(),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "H",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400),
+                        width: 90.w,
+                        child: Container(
+                          margin: EdgeInsets.only(left: 8.0.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ClipOval(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  color: Color(randomColor[randomNumber(
+                                      min: 0, max: randomColor.length - 1)]),
+                                  height: 40.0.sp,
+                                  width: 40.0.sp,
+                                  child: Text(
+                                    "M",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
-                            ),
-                            UIHelper.verticalSpaceSmall(),
-                            Flexible(
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 8.0.w),
-                                child: Text(
-                                  "My Account Book",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.clip,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText2!
-                                      .copyWith(fontWeight: FontWeight.w500),
+                              UIHelper.verticalSpaceSmall(),
+                              Flexible(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.0.w),
+                                  child: Text(
+                                    "My Account Book",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.clip,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2!
+                                        .copyWith(fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
-                            ),
-                            UIHelper.verticalSpaceExtraSmall(),
-                            Flexible(
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 8.0.w),
-                                child: Text(
-                                  "250.50",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(),
+                              UIHelper.verticalSpaceExtraSmall(),
+                              Flexible(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.0.w),
+                                  child: Text(
+                                    "250.50",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(),
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -183,6 +207,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               SliverToBoxAdapter(
                 child: UIHelper.verticalSpaceMedium(),
               ),
+              // SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
+                  child: BoxedContainer(
+                      content: Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed("PAYMENT");
+                          },
+                          child: const Text("PAYMENT")),
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed("RECEIPT");
+                          },
+                          child: const Text("RECEIPT")),
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed("TRANSFER");
+                          },
+                          child: const Text("TRANSFER")),
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH");
+                          },
+                          child: const Text("SEARCH")),
+                    ],
+                  )),
+                ),
+              ),
+              // SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.all(16.0.sp),
@@ -248,22 +304,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(6.0.sp),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: randomOpaqueColor(),
-                              border: Border.all(
-                                width: 0.0.sp,
-                                color: randomOpaqueColor(),
+                          // Container(
+                          //   padding: EdgeInsets.all(6.0.sp),
+                          //   decoration: BoxDecoration(
+                          //     shape: BoxShape.circle,
+                          //     color: Color(randomColor[randomNumber(
+                          //         min: 0, max: randomColor.length - 1)]),
+                          //     border: Border.all(
+                          //       width: 0.0.sp,
+                          //       color: Color(randomColor[randomNumber(
+                          //           min: 0, max: randomColor.length - 1)]),
+                          //     ),
+                          //   ),
+                          //   child: Text(
+                          //     "24",
+                          //     style: Theme.of(context)
+                          //         .textTheme
+                          //         .titleMedium!
+                          //         .copyWith(fontWeight: FontWeight.bold),
+                          //   ),
+                          // ),
+                          ClipOval(
+                            child: Container(
+                              alignment: Alignment.center,
+                              color: Color(randomColor[randomNumber(
+                                  min: 0, max: randomColor.length - 1)]),
+                              height: 35.0.sp,
+                              width: 35.0.sp,
+                              child: Text(
+                                "24",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(fontWeight: FontWeight.w500),
                               ),
-                            ),
-                            child: Text(
-                              "24",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
                           UIHelper.horizontalSpaceSmall(),

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.truecaller">
+    package="com.doriionline.findo">
    <application
-        android:label="truecaller"
+        android:label="Findo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

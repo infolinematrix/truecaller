@@ -18,6 +18,7 @@ class SettingsScreen extends ConsumerWidget {
     final formKey = GlobalKey<FormBuilderState>();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).canvasColor,
         title: const Text("SETTINGS"),
       ),
       bottomNavigationBar: const BottomNavigation(index: 3),
@@ -190,8 +191,8 @@ class SettingsScreen extends ConsumerWidget {
                       UIHelper.verticalSpaceExtraLarge(),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: TextButton(
-                            onPressed: () async {
+                        child: ButtonDefault(
+                            onTap: () async {
                               if (formKey.currentState?.saveAndValidate() ??
                                   false) {
                                 debugPrint(
@@ -202,7 +203,7 @@ class SettingsScreen extends ConsumerWidget {
                                 debugPrint('validation failed');
                               }
                             },
-                            child: const Text("SAVE & CONTINUE")),
+                            text: const Text("SAVE & CONTINUE")),
                       )
                     ],
                   ),

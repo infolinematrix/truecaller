@@ -64,7 +64,7 @@ class BottomNavigation extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => GoRouter.of(context).push('/accounts'),
+            onTap: () => GoRouter.of(context).push('/groups'),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

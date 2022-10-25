@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-void e(String tag) {
-  _printLog(tag);
+void log(tag) {
+  _printLog(tag.toString());
 }
 
 void _printLog(String tag) {

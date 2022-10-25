@@ -14,7 +14,7 @@ class BoxedContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: color ?? Colors.transparent,
         border: Border.all(
-          color: Theme.of(context).indicatorColor,
+          color: Theme.of(context).disabledColor,
         ),
         borderRadius: BorderRadius.all(
           Radius.circular(8.0.sp),
