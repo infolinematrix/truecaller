@@ -22,7 +22,7 @@ void main() {
     /**
      * Initialize App
      */
-    await intApp();
+    await initApp();
 
     runApp(const ProviderScope(child: MyApp()));
 
@@ -37,7 +37,7 @@ void main() {
   });
 }
 
-Future<void> intApp() async {
+Future<void> initApp() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GetStorage.init();
 }
