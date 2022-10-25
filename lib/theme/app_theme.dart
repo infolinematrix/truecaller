@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData lightTheme = ThemeData(
-//   brightness: Brightness.light,
-//   visualDensity: const VisualDensity(vertical: 0.5, horizontal: 0.5),
+  brightness: Brightness.light,
+  visualDensity: const VisualDensity(vertical: 0.5, horizontal: 0.5),
 //   // primarySwatch: const MaterialColor(
 //   //   0xff457BE0,
 //   //   <int, Color>{
@@ -21,7 +21,8 @@ ThemeData lightTheme = ThemeData(
 //   //     900: Color(0xff936F3E)
 //   //   },
 //   // ),
-  primarySwatch: Colors.blue, splashColor: Colors.green,
+  primarySwatch: Colors.blue,
+  splashColor: Colors.grey,
   primaryColor: const Color(0xFF212121),
   primaryColorLight: const Color(0x1aF5E0C3),
   primaryColorDark: const Color(0xff457BE0),
@@ -40,9 +41,9 @@ ThemeData lightTheme = ThemeData(
   indicatorColor: const Color(0xffb3e5fc),
   hintColor: Colors.grey,
   errorColor: Colors.red,
-  toggleableActiveColor: const Color(0xff6D42CE),
+  toggleableActiveColor: const Color(0xBD0D7BE0),
   secondaryHeaderColor: Colors.grey,
-// //  splashFactory: # override create method from  InteractiveInkFeatureFactory
+
   selectedRowColor: Colors.grey,
   unselectedWidgetColor: Colors.grey.shade400,
   disabledColor: Colors.grey.shade200,
@@ -89,12 +90,8 @@ ThemeData lightTheme = ThemeData(
       borderSide: BorderSide(color: Colors.grey.shade200, width: 1.0),
     ),
   ),
-  iconTheme: const IconThemeData(
-    color: Colors.black,
-  ),
-  primaryIconTheme: const IconThemeData(
-    color: Colors.black,
-  ),
+  iconTheme: const IconThemeData(color: Colors.black),
+  primaryIconTheme: const IconThemeData(color: Colors.black),
   sliderTheme: const SliderThemeData(),
   tabBarTheme: const TabBarTheme(),
   tooltipTheme: const TooltipThemeData(),
@@ -118,7 +115,7 @@ ThemeData lightTheme = ThemeData(
 
   appBarTheme: AppBarTheme(
     //app bar theme
-    // backgroundColor: Colors.white,
+    backgroundColor: Colors.white,
     // foregroundColor: Colors.black,
 
     centerTitle: false,

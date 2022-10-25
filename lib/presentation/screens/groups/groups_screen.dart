@@ -34,7 +34,9 @@ class GroupsScreen extends ConsumerWidget {
                       size: 28.0.sp,
                       color: Theme.of(context).primaryColorDark,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).pushNamed('GROUPS/CREATE');
+                    },
                   ),
                   UIHelper.horizontalSpaceMedium()
                 ],
@@ -44,9 +46,9 @@ class GroupsScreen extends ConsumerWidget {
                     width: double.infinity,
                     // padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                     // color: Colors.green,
-                    child: Card(
-                      child: SizedBox(
-                        height: 40.h,
+                    child: SizedBox(
+                      height: 40.h,
+                      child: Card(
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                           child: Row(

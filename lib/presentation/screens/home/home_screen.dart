@@ -109,9 +109,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   child: InkWell(
                     onTap: () =>
                         GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH"),
-                    child: Card(
-                      child: SizedBox(
-                        height: 50.h,
+                    child: Container(
+                      height: 50.h,
+                      margin: EdgeInsets.symmetric(horizontal: 8.0.w),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: const BorderRadius.only(
+                            bottomRight: Radius.circular(30),
+                            bottomLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                          ),
+                          side: BorderSide(
+                              width: 1, color: Theme.of(context).disabledColor),
+                        ),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 16.0.w, vertical: 0.0.h),

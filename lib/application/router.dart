@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:truecaller/presentation/screens/accounts/account_create_screen.dart';
+import 'package:truecaller/presentation/screens/accounts/account_edit_screen.dart';
 import 'package:truecaller/presentation/screens/accounts/account_search.dart';
 import 'package:truecaller/presentation/screens/accounts/accounts_screen.dart';
 import 'package:truecaller/presentation/screens/accounts/statement_screen.dart';
+import 'package:truecaller/presentation/screens/groups/group_create_screen.dart';
+import 'package:truecaller/presentation/screens/groups/group_edit_screen.dart';
 import 'package:truecaller/presentation/screens/groups/groups_screen.dart';
 import 'package:truecaller/presentation/screens/home/home_screen.dart';
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
@@ -49,23 +53,38 @@ final GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
-      path: '/groups',
-      name: "groups",
-      builder: (BuildContext context, GoRouterState state) {
-        return const GroupsScreen();
-      },
-      pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
-        context: context,
-        state: state,
-        child: const GroupsScreen(),
-      ),
-    ),
+        path: '/groups',
+        name: "groups",
+        pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+              context: context,
+              state: state,
+              child: const GroupsScreen(),
+            ),
+        routes: [
+          GoRoute(
+            path: 'create',
+            name: "GROUPS/CREATE",
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition<void>(
+              context: context,
+              state: state,
+              child: const GroupCreateScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'edit',
+            name: "GROUPS/EDIT",
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition<void>(
+              context: context,
+              state: state,
+              child: const GroupEditScreen(),
+            ),
+          ),
+        ]),
     GoRoute(
         path: '/accounts',
         name: "ACCOUNTS",
-        builder: (BuildContext context, GoRouterState state) {
-          return const AccountsScreen();
-        },
         pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
               context: context,
               state: state,
@@ -80,6 +99,26 @@ final GoRouter router = GoRouter(
               context: context,
               state: state,
               child: const AccountSearchScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'create',
+            name: 'ACCOUNTS/CREATE',
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition<void>(
+              context: context,
+              state: state,
+              child: const AccountCreateScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'edit',
+            name: 'ACCOUNTS/EDIT',
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition<void>(
+              context: context,
+              state: state,
+              child: const AccountEditScreen(),
             ),
           ),
         ]),

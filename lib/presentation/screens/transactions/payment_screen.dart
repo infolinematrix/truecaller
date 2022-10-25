@@ -16,9 +16,7 @@ class PaymentScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormBuilderState>();
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Theme.of(context).canvasColor,
-          title: const Text("PAYMENT")),
+      appBar: AppBar(title: const Text("PAYMENT")),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

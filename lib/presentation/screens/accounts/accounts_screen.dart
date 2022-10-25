@@ -32,7 +32,9 @@ class AccountsScreen extends ConsumerWidget {
                       size: 28.0.sp,
                       color: Theme.of(context).primaryColorDark,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).pushNamed("ACCOUNTS/CREATE");
+                    },
                   ),
                   UIHelper.horizontalSpaceMedium()
                 ],
