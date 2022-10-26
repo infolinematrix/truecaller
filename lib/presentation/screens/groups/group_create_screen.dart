@@ -52,20 +52,22 @@ class GroupCreateScreen extends ConsumerWidget {
                           height: inputHeight,
                           child: FormBuilderTextField(
                             name: 'name',
-                            enabled: false,
                             style: inputTextStyle,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(),
                             ]),
                             decoration:
                                 const InputDecoration(labelText: 'Group Name'),
+                            keyboardType: TextInputType.name,
+                            textInputAction: TextInputAction.next,
+                            textCapitalization: TextCapitalization.words,
                           ),
                         ),
                         UIHelper.verticalSpaceMedium(),
                         SizedBox(
                           height: inputHeight,
                           child: FormBuilderDropdown(
-                            name: 'mode',
+                            name: 'accountType',
                             style: inputTextStyle,
                             isExpanded: false,
                             itemHeight: null,
@@ -74,13 +76,16 @@ class GroupCreateScreen extends ConsumerWidget {
                             decoration: const InputDecoration(
                               labelText: 'Account Type',
                             ),
-                            items: ['CASH', 'BANK']
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                            ]),
+                            items: accountType
                                 .map(
-                                  (gender) => DropdownMenuItem(
+                                  (accountType) => DropdownMenuItem(
                                     alignment: AlignmentDirectional.centerStart,
-                                    value: gender,
+                                    value: accountType['code'],
                                     child: Text(
-                                      gender,
+                                      accountType['name'],
                                       style: inputTextStyle.copyWith(
                                         color: Theme.of(context).primaryColor,
                                       ),
@@ -96,10 +101,9 @@ class GroupCreateScreen extends ConsumerWidget {
                           // height: inputHeight,
                           child: FormBuilderSwitch(
                             title: const Text('Allow Payment entry'),
-                            name: 'accept_terms_switch',
+                            name: 'allowPayment',
                             initialValue: true,
                             decoration: checkBoxDecoration,
-                            // onChanged: _onChanged,
                           ),
                         ),
                         // UIHelper.verticalSpaceMedium(),
@@ -107,19 +111,17 @@ class GroupCreateScreen extends ConsumerWidget {
                           // height: inputHeight,
                           child: FormBuilderSwitch(
                             title: const Text('Allow Receipt entry'),
-                            name: 'accept_terms_switch',
+                            name: 'allowReceipt',
                             initialValue: true,
                             decoration: checkBoxDecoration,
-                            // onChanged: _onChanged,
                           ),
                         ),
                         SizedBox(
                           child: FormBuilderSwitch(
                             title: const Text('Allow Transfer entry'),
-                            name: 'accept_terms_switch',
+                            name: 'allowTransfer',
                             initialValue: true,
                             decoration: checkBoxDecoration,
-                            // onChanged: _onChanged,
                           ),
                         ),
                         UIHelper.verticalSpaceLarge(),
@@ -133,6 +135,9 @@ class GroupCreateScreen extends ConsumerWidget {
                             ]),
                             decoration:
                                 const InputDecoration(labelText: 'Description'),
+                            keyboardType: TextInputType.name,
+                            textInputAction: TextInputAction.next,
+                            textCapitalization: TextCapitalization.words,
                           ),
                         ),
                         UIHelper.verticalSpaceExtraLarge(),
@@ -140,7 +145,17 @@ class GroupCreateScreen extends ConsumerWidget {
                           alignment: Alignment.centerRight,
                           child: ButtonDefault(
                             text: const Text("SUBMIT"),
-                            onTap: () {},
+                            onTap: () async {
+                              if (formKey.currentState?.saveAndValidate() ??
+                                  false) {
+                                debugPrint(
+                                    formKey.currentState?.value.toString());
+                              } else {
+                                debugPrint(
+                                    formKey.currentState?.value.toString());
+                                debugPrint('validation failed');
+                              }
+                            },
                           ),
                         )
                       ],

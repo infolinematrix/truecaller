@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,7 @@ import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/ui_helper.dart';
 
 import '../../widgets/index.dart';
+import 'settings_controller.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -60,7 +62,11 @@ class SettingsScreen extends ConsumerWidget {
                           validator: FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
                           ]),
-                          decoration: const InputDecoration(labelText: 'Name'),
+                          decoration:
+                              const InputDecoration(labelText: 'Your Name'),
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          textCapitalization: TextCapitalization.words,
                         ),
                       ),
                       UIHelper.verticalSpaceMedium(),
@@ -79,7 +85,7 @@ class SettingsScreen extends ConsumerWidget {
                                     labelText: 'Date Format'),
                                 validator: FormBuilderValidators.compose(
                                     [FormBuilderValidators.required()]),
-                                items: ['Male', 'Female']
+                                items: dateFormat
                                     .map((gender) => DropdownMenuItem(
                                           alignment:
                                               AlignmentDirectional.centerStart,
@@ -103,7 +109,7 @@ class SettingsScreen extends ConsumerWidget {
                                     labelText: 'Currency Format'),
                                 validator: FormBuilderValidators.compose(
                                     [FormBuilderValidators.required()]),
-                                items: ['#,##,##0.00', '###,##0.00']
+                                items: currencyFormat
                                     .map((gender) => DropdownMenuItem(
                                           alignment:
                                               AlignmentDirectional.centerStart,
@@ -132,6 +138,12 @@ class SettingsScreen extends ConsumerWidget {
                                     [FormBuilderValidators.required()]),
                                 decoration: const InputDecoration(
                                     labelText: 'Cash in Hand'),
+                                textInputAction: TextInputAction.next,
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                  decimal: true,
+                                  signed: false,
+                                ),
                               ),
                             ),
                             UIHelper.horizontalSpaceMedium(),
@@ -195,8 +207,18 @@ class SettingsScreen extends ConsumerWidget {
                             onTap: () async {
                               if (formKey.currentState?.saveAndValidate() ??
                                   false) {
-                                debugPrint(
-                                    formKey.currentState?.value.toString());
+                                EasyLoading.show(status: 'Saving...');
+
+                                await ref
+                                    .watch(createSettings(formKey.currentState
+                                            ?.value as Map<String, dynamic>)
+                                        .future)
+                                    .then((value) {
+                                  if (value == true) {
+                                    EasyLoading.showSuccess("Successful");
+                                    EasyLoading.dismiss();
+                                  }
+                                });
                               } else {
                                 debugPrint(
                                     formKey.currentState?.value.toString());

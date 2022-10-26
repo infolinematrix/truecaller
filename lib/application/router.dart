@@ -9,6 +9,7 @@ import 'package:truecaller/presentation/screens/groups/group_create_screen.dart'
 import 'package:truecaller/presentation/screens/groups/group_edit_screen.dart';
 import 'package:truecaller/presentation/screens/groups/groups_screen.dart';
 import 'package:truecaller/presentation/screens/home/home_screen.dart';
+import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/payment_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/receipt_screen.dart';
@@ -19,17 +20,17 @@ import '../presentation/screens/reports/report_screen.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
-    // GoRoute(
-    //   path: '/',
-    //   name: 'ONBOARD',
-    //   pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
-    //     context: context,
-    //     state: state,
-    //     child: const OnboardScreen(),
-    //   ),
-    // ),
     GoRoute(
       path: '/',
+      name: 'ONBOARD',
+      pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+        context: context,
+        state: state,
+        child: const OnboardScreen(),
+      ),
+    ),
+    GoRoute(
+      path: '/home',
       name: 'HOME',
       builder: (BuildContext context, GoRouterState state) {
         return const HomeScreen();
@@ -85,11 +86,15 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: '/accounts',
         name: "ACCOUNTS",
-        pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
-              context: context,
-              state: state,
-              child: const AccountsScreen(),
-            ),
+        pageBuilder: (context, state) {
+          Map extra = state.extra! as Map;
+
+          return buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: AccountsScreen(parent: extra['parent']),
+          );
+        },
         routes: [
           GoRoute(
             path: 'accounts-search',
