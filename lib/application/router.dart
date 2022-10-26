@@ -107,15 +107,18 @@ final GoRouter router = GoRouter(
             ),
           ),
           GoRoute(
-            path: 'create',
-            name: 'ACCOUNTS/CREATE',
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition<void>(
-              context: context,
-              state: state,
-              child: const AccountCreateScreen(),
-            ),
-          ),
+              path: 'create',
+              name: 'CREATE',
+              pageBuilder: (context, state) {
+                Map extra = state.extra! as Map;
+                return buildPageWithDefaultTransition<void>(
+                  context: context,
+                  state: state,
+                  child: AccountCreateScreen(
+                    parent: extra['parent'],
+                  ),
+                );
+              }),
           GoRoute(
             path: 'edit',
             name: 'ACCOUNTS/EDIT',

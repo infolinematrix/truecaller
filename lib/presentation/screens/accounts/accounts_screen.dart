@@ -8,6 +8,7 @@ import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/presentation/screens/accounts/account_controller.dart';
 import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
+import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/functions.dart';
 import 'package:truecaller/utils/ui_helper.dart';
 
@@ -28,7 +29,7 @@ class AccountsScreen extends ConsumerWidget {
               return <Widget>[
                 SliverAppBar(
                   backgroundColor: Theme.of(context).canvasColor,
-                  title: Text(parent.name),
+                  title: Text(parent.name.toUpperCase()),
                   pinned: true,
                   floating: true,
                   forceElevated: innerBoxIsScrolled,
@@ -40,33 +41,15 @@ class AccountsScreen extends ConsumerWidget {
                         color: Theme.of(context).primaryColorDark,
                       ),
                       onPressed: () {
-                        GoRouter.of(context).pushNamed("ACCOUNTS/CREATE");
+                        GoRouter.of(context).push("/accounts/create",
+                            extra: {'parent': parent});
                       },
                     ),
                     UIHelper.horizontalSpaceMedium()
                   ],
                   bottom: PreferredSize(
                     preferredSize: Size.fromHeight(50.0.h),
-                    child: SizedBox(
-                      width: double.infinity,
-                      // padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                      child: Card(
-                        child: SizedBox(
-                          height: 40.h,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Icon(Iconsax.search_normal),
-                                Icon(Iconsax.microphone),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: const SearchBar(),
                   ),
                 ),
               ];

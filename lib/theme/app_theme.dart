@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
+  // brightness: Brightness.light,
   visualDensity: const VisualDensity(vertical: 0.5, horizontal: 0.5),
 //   // primarySwatch: const MaterialColor(
 //   //   0xff457BE0,
@@ -115,7 +115,7 @@ ThemeData lightTheme = ThemeData(
 
   appBarTheme: AppBarTheme(
     //app bar theme
-    backgroundColor: Colors.white,
+    // backgroundColor: Colors.white,
     // foregroundColor: Colors.black,
 
     centerTitle: false,

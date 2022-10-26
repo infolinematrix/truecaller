@@ -8,6 +8,7 @@ import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/screens/groups/groups_controller.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
+import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/functions.dart';
 import 'package:truecaller/utils/ui_helper.dart';
 
@@ -45,27 +46,7 @@ class GroupsScreen extends ConsumerWidget {
                   ],
                   bottom: PreferredSize(
                     preferredSize: Size.fromHeight(50.0.h),
-                    child: SizedBox(
-                      width: double.infinity,
-                      // padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                      // color: Colors.green,
-                      child: SizedBox(
-                        height: 40.h,
-                        child: Card(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Icon(Iconsax.search_normal),
-                                Icon(Iconsax.microphone),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: const SearchBar(),
                   ),
                 ),
               ];
@@ -84,7 +65,7 @@ class GroupsScreen extends ConsumerWidget {
                       AccountsModel group = data[index];
                       return ListTile(
                         visualDensity:
-                            const VisualDensity(horizontal: 0, vertical: -4),
+                            const VisualDensity(horizontal: 0, vertical: -2),
                         onTap: () => GoRouter.of(context)
                             .push('/accounts', extra: {'parent': group}),
                         leading: ClipOval(
@@ -112,6 +93,7 @@ class GroupsScreen extends ConsumerWidget {
                           group.description,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
+                          // style: Theme.of(context).textTheme.bodySmall,
                         ),
                         trailing: ClipOval(
                           child: Container(

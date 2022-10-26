@@ -81,13 +81,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         body: SafeArea(
           child: CustomScrollView(
             slivers: <Widget>[
-              // SliverToBoxAdapter(
-              //   child: Container(
-              //     margin: EdgeInsets.only(top: 16.0.h, bottom: 16.0.h),
-              //     padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-              //     child: const Text("Findo"),
-              //   ),
-              // ),
               SliverAppBar(
                 backgroundColor: Theme.of(context).canvasColor,
                 title: const Text("FINDO"),
@@ -109,36 +102,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   child: InkWell(
                     onTap: () =>
                         GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH"),
-                    child: Container(
-                      height: 50.h,
-                      margin: EdgeInsets.symmetric(horizontal: 8.0.w),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            topLeft: Radius.circular(30),
-                          ),
-                          side: BorderSide(
-                              width: 1, color: Theme.of(context).disabledColor),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.0.w, vertical: 0.0.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Icon(Iconsax.search_normal),
-                              const Expanded(child: SizedBox.shrink()),
-                              Text("SEARCH",
-                                  style: Theme.of(context).textTheme.caption),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: const SearchBar(),
                   ),
                 ),
                 systemOverlayStyle: SystemUiOverlayStyle.dark,

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
+
+import 'groups_controller.dart';
 
 class GroupCreateScreen extends ConsumerWidget {
   const GroupCreateScreen({super.key});
@@ -148,12 +152,20 @@ class GroupCreateScreen extends ConsumerWidget {
                             onTap: () async {
                               if (formKey.currentState?.saveAndValidate() ??
                                   false) {
-                                debugPrint(
-                                    formKey.currentState?.value.toString());
+                                EasyLoading.showProgress(1.0);
+                                await ref
+                                    .read(accountGroupProvider.notifier)
+                                    .create(
+                                        formData: formKey.currentState!.value)
+                                    .then((value) {
+                                  if (value == true) {
+                                    EasyLoading.showToast("Successful");
+                                    GoRouter.of(context).pop();
+                                  }
+                                });
                               } else {
-                                debugPrint(
-                                    formKey.currentState?.value.toString());
-                                debugPrint('validation failed');
+                                EasyLoading.dismiss();
+                                EasyLoading.showToast("Invalid Operation");
                               }
                             },
                           ),

@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:truecaller/application/constants.dart';
+import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
 
+import 'account_controller.dart';
+
 class AccountCreateScreen extends ConsumerWidget {
-  const AccountCreateScreen({super.key});
+  const AccountCreateScreen({super.key, required this.parent});
+
+  final AccountsModel parent;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,10 +61,7 @@ class AccountCreateScreen extends ConsumerWidget {
                             name: 'group',
                             enabled: false,
                             style: inputTextStyle,
-                            initialValue: "Household Expenses",
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(),
-                            ]),
+                            initialValue: parent.name,
                             decoration:
                                 const InputDecoration(labelText: 'Group'),
                           ),
@@ -72,10 +76,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                   name: 'type',
                                   enabled: false,
                                   style: inputTextStyle,
-                                  initialValue: "EXPENSES",
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(),
-                                  ]),
+                                  initialValue: parent.type,
                                   decoration:
                                       const InputDecoration(labelText: 'Type'),
                                 ),
@@ -87,23 +88,27 @@ class AccountCreateScreen extends ConsumerWidget {
                                   style: inputTextStyle,
                                   isExpanded: false,
                                   itemHeight: null,
-                                  initialValue: 'NO',
+                                  initialValue: ref.read(hasChildProvider),
                                   dropdownColor:
                                       Theme.of(context).scaffoldBackgroundColor,
                                   decoration: const InputDecoration(
                                     labelText: 'Has Child',
                                   ),
-                                  items: ['YES', 'NO']
-                                      .map((gender) => DropdownMenuItem(
+                                  items: yesNo
+                                      .map((yn) => DropdownMenuItem<bool>(
                                             alignment: AlignmentDirectional
                                                 .centerStart,
-                                            value: gender,
-                                            child: Text(gender,
-                                                style: inputTextStyle.copyWith(
+                                            value: yn['key'] as bool,
+                                            child: Text(yn['value'].toString(),
+                                                style: TextStyle(
                                                     color: Theme.of(context)
                                                         .primaryColor)),
                                           ))
                                       .toList(),
+                                  onChanged: (val) {
+                                    ref.read(hasChildProvider.state).state =
+                                        val as bool;
+                                  },
                                 ),
                               ),
                             ],
@@ -114,110 +119,159 @@ class AccountCreateScreen extends ConsumerWidget {
                           height: inputHeight,
                           child: FormBuilderTextField(
                             name: 'name',
-                            enabled: false,
                             style: inputTextStyle,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(),
                             ]),
                             decoration: const InputDecoration(
                                 labelText: 'Account Title'),
+                            keyboardType: TextInputType.name,
+                            textInputAction: TextInputAction.next,
+                            textCapitalization: TextCapitalization.words,
                           ),
                         ),
-                        UIHelper.verticalSpaceMedium(),
-                        SizedBox(
-                          height: inputHeight,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: FormBuilderDropdown(
-                                  name: 'limitedBudget',
-                                  style: inputTextStyle,
-                                  isExpanded: false,
-                                  itemHeight: null,
-                                  initialValue: 'YES',
-                                  dropdownColor:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Has Budget?',
+                        ref.watch(hasChildProvider) == true
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  UIHelper.verticalSpaceMedium(),
+                                  SizedBox(
+                                    height: inputHeight,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: FormBuilderDropdown(
+                                            name: 'hasBudget',
+                                            style: inputTextStyle,
+                                            isExpanded: false,
+                                            itemHeight: null,
+                                            initialValue: ref.watch(hasBudget),
+                                            dropdownColor: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                            decoration: const InputDecoration(
+                                              labelText: 'Has Budget?',
+                                            ),
+                                            items: yesNo
+                                                .map((yn) =>
+                                                    DropdownMenuItem<bool>(
+                                                      alignment:
+                                                          AlignmentDirectional
+                                                              .centerStart,
+                                                      value: yn['key'] as bool,
+                                                      child: Text(
+                                                          yn['value']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .primaryColor)),
+                                                    ))
+                                                .toList(),
+                                            onChanged: (val) {
+                                              ref.read(hasBudget.state).state =
+                                                  val as bool;
+                                            },
+                                          ),
+                                        ),
+                                        UIHelper.horizontalSpaceMedium(),
+                                        Expanded(
+                                          child: FormBuilderTextField(
+                                            name: 'budget',
+                                            enabled: ref.watch(hasBudget),
+                                            style: inputTextStyle,
+                                            initialValue: "0.0",
+                                            validator:
+                                                FormBuilderValidators.compose([
+                                              FormBuilderValidators.required(),
+                                            ]),
+                                            decoration: const InputDecoration(
+                                                labelText: 'Monthly Budget'),
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            keyboardType: const TextInputType
+                                                .numberWithOptions(
+                                              decimal: true,
+                                              signed: false,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  items: ['YES', 'NO']
-                                      .map((gender) => DropdownMenuItem(
-                                            alignment: AlignmentDirectional
-                                                .centerStart,
-                                            value: gender,
-                                            child: Text(gender,
-                                                style: inputTextStyle.copyWith(
-                                                    color: Theme.of(context)
-                                                        .primaryColor)),
-                                          ))
-                                      .toList(),
-                                ),
-                              ),
-                              UIHelper.horizontalSpaceMedium(),
-                              Expanded(
-                                child: FormBuilderTextField(
-                                  name: 'budget',
-                                  enabled: false,
-                                  style: inputTextStyle,
-                                  initialValue: "120.0",
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(),
-                                  ]),
-                                  decoration: const InputDecoration(
-                                      labelText: 'Monthly Budget'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        UIHelper.verticalSpaceMedium(),
-                        SizedBox(
-                          height: inputHeight,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: FormBuilderDropdown(
-                                  name: 'hasOpeningBalance',
-                                  style: inputTextStyle,
-                                  isExpanded: false,
-                                  itemHeight: null,
-                                  initialValue: 'YES',
-                                  dropdownColor:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Has Opening Balance?',
+                                  UIHelper.verticalSpaceMedium(),
+                                  SizedBox(
+                                    height: inputHeight,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: FormBuilderDropdown(
+                                            name: 'hasOpeningBalance',
+                                            style: inputTextStyle,
+                                            isExpanded: false,
+                                            itemHeight: null,
+                                            initialValue:
+                                                ref.watch(hasOpeningBanlance),
+                                            dropdownColor: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                            decoration: const InputDecoration(
+                                              labelText: 'Has Opening Balance?',
+                                            ),
+                                            items: yesNo
+                                                .map((yn) =>
+                                                    DropdownMenuItem<bool>(
+                                                      alignment:
+                                                          AlignmentDirectional
+                                                              .centerStart,
+                                                      value: yn['key'] as bool,
+                                                      child: Text(
+                                                          yn['value']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .primaryColor)),
+                                                    ))
+                                                .toList(),
+                                            onChanged: (val) {
+                                              ref
+                                                  .read(
+                                                      hasOpeningBanlance.state)
+                                                  .state = val as bool;
+                                            },
+                                          ),
+                                        ),
+                                        UIHelper.horizontalSpaceMedium(),
+                                        Expanded(
+                                          child: FormBuilderTextField(
+                                            name: 'openingBalance',
+                                            enabled:
+                                                ref.watch(hasOpeningBanlance),
+                                            style: inputTextStyle,
+                                            initialValue: "0.0",
+                                            validator:
+                                                FormBuilderValidators.compose([
+                                              FormBuilderValidators.required(),
+                                            ]),
+                                            decoration: const InputDecoration(
+                                                labelText: 'Opening Balance'),
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            keyboardType: const TextInputType
+                                                .numberWithOptions(
+                                              decimal: true,
+                                              signed: false,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  items: ['YES', 'NO']
-                                      .map((gender) => DropdownMenuItem(
-                                            alignment: AlignmentDirectional
-                                                .centerStart,
-                                            value: gender,
-                                            child: Text(gender,
-                                                style: inputTextStyle.copyWith(
-                                                    color: Theme.of(context)
-                                                        .primaryColor)),
-                                          ))
-                                      .toList(),
-                                ),
-                              ),
-                              UIHelper.horizontalSpaceMedium(),
-                              Expanded(
-                                child: FormBuilderTextField(
-                                  name: 'openingBalance',
-                                  enabled: false,
-                                  style: inputTextStyle,
-                                  initialValue: "120.0",
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(),
-                                  ]),
-                                  decoration: const InputDecoration(
-                                      labelText: 'Opening Balance'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        UIHelper.verticalSpaceLarge(),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                        UIHelper.verticalSpaceMedium(),
                         SizedBox(
                           height: inputHeight,
                           child: FormBuilderTextField(
@@ -228,6 +282,9 @@ class AccountCreateScreen extends ConsumerWidget {
                             ]),
                             decoration:
                                 const InputDecoration(labelText: 'Description'),
+                            keyboardType: TextInputType.name,
+                            textInputAction: TextInputAction.next,
+                            textCapitalization: TextCapitalization.sentences,
                           ),
                         ),
                         UIHelper.verticalSpaceMedium(),
@@ -256,29 +313,27 @@ class AccountCreateScreen extends ConsumerWidget {
                                 // height: inputHeight,
                                 child: FormBuilderSwitch(
                                   title: const Text('Allow Payment entry'),
-                                  name: 'accept_terms_switch',
-                                  initialValue: true,
+                                  name: 'allowPayment',
+                                  initialValue: parent.allowPayment,
                                   decoration: checkBoxDecoration,
-                                  // onChanged: _onChanged,
                                 ),
                               ),
+                              // UIHelper.verticalSpaceMedium(),
                               SizedBox(
                                 // height: inputHeight,
                                 child: FormBuilderSwitch(
                                   title: const Text('Allow Receipt entry'),
-                                  name: 'accept_terms_switch',
-                                  initialValue: true,
+                                  name: 'allowReceipt',
+                                  initialValue: parent.allowReceipt,
                                   decoration: checkBoxDecoration,
-                                  // onChanged: _onChanged,
                                 ),
                               ),
                               SizedBox(
                                 child: FormBuilderSwitch(
                                   title: const Text('Allow Transfer entry'),
-                                  name: 'accept_terms_switch',
-                                  initialValue: true,
+                                  name: 'allowTransfer',
+                                  initialValue: parent.allowTransfer,
                                   decoration: checkBoxDecoration,
-                                  // onChanged: _onChanged,
                                 ),
                               ),
                             ],
@@ -288,7 +343,7 @@ class AccountCreateScreen extends ConsumerWidget {
                         SizedBox(
                           height: inputHeight,
                           child: FormBuilderCheckbox(
-                            name: 'accept_terms',
+                            name: 'isActive',
                             initialValue: false,
                             decoration: checkBoxDecoration,
                             title: RichText(
@@ -317,7 +372,27 @@ class AccountCreateScreen extends ConsumerWidget {
                           alignment: Alignment.centerRight,
                           child: ButtonDefault(
                             text: const Text("SUBMIT"),
-                            onTap: () {},
+                            onTap: () async {
+                              if (formKey.currentState?.saveAndValidate() ??
+                                  false) {
+                                EasyLoading.show(status: 'Saving...');
+                                await ref
+                                    .read(accountProvider(parent.id).notifier)
+                                    .create(
+                                        parent: parent,
+                                        formData: formKey.currentState!.value)
+                                    .then((value) {
+                                  if (value == true) {
+                                    EasyLoading.dismiss();
+                                    EasyLoading.showSuccess("Successfull");
+                                    GoRouter.of(context).pop();
+                                  }
+                                });
+                              } else {
+                                EasyLoading.dismiss();
+                                EasyLoading.showToast("Validation fail");
+                              }
+                            },
                           ),
                         )
                       ],
