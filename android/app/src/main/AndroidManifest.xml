@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.doriionline.findo">
+    package="com.doriionline.findo" 
+    android:allowBackup="true">
    <application
         android:label="Findo"
         android:name="${applicationName}"

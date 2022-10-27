@@ -52,9 +52,8 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
         isSystem: false,
       );
 
-      // accountBox.put(data);
-      // store!.objStore.awaitAsyncSubmitted();
-      print(data);
+      accountBox.put(data);
+      store!.objStore.awaitAsyncSubmitted();
 
       getAccounts(parent.id);
 

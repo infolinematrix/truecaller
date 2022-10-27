@@ -65,11 +65,15 @@ class AccountsScreen extends ConsumerWidget {
                   child: ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (BuildContext context, int index) {
+                      AccountsModel account = data[index];
                       return ListTile(
                         visualDensity:
                             const VisualDensity(horizontal: 0, vertical: -4),
-                        onTap: () => GoRouter.of(context).pushNamed('STATEMENT',
-                            params: {'id': '1', 'name': 'SUBHA'}),
+                        onTap: () => account.hasChild == false
+                            ? GoRouter.of(context).pushNamed('STATEMENT',
+                                params: {'id': '1', 'name': 'SUBHA'})
+                            : GoRouter.of(context)
+                                .push('/accounts', extra: {'parent': account}),
                         leading: ClipOval(
                           child: Container(
                             alignment: Alignment.center,
@@ -78,7 +82,7 @@ class AccountsScreen extends ConsumerWidget {
                             height: 40.0.sp,
                             width: 40.0.sp,
                             child: Text(
-                              "M",
+                              account.name[0],
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge!
@@ -86,24 +90,30 @@ class AccountsScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        title: const Text(
-                          "Head Account",
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                        title: Text(
+                          account.name,
+                          maxLines: 1,
+                          style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
-                        subtitle: const Text("Description of account"),
-                        trailing: ClipOval(
-                          child: Container(
-                            alignment: Alignment.center,
-                            color: Theme.of(context).disabledColor,
-                            height: 25.0.sp,
-                            width: 25.0.sp,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              size: 12.0.sp,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
+                        subtitle: Text(
+                          account.description,
+                          maxLines: 1,
                         ),
+                        trailing: account.hasChild == true
+                            ? ClipOval(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  color: Theme.of(context).disabledColor,
+                                  height: 25.0.sp,
+                                  width: 25.0.sp,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 12.0.sp,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              )
+                            : const SizedBox.shrink(),
                       );
                     },
                   ),
