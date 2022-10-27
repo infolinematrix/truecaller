@@ -1,4 +1,5 @@
-import 'package:objectbox/objectbox.dart';
+import 'dart:io';
+
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -19,10 +20,10 @@ class Database {
 
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<Database> create() async {
-    final docsDir = await getApplicationDocumentsDirectory();
+    final docsDir = await _localPath;
 
     final objStore = await openStore(
-      directory: p.join(docsDir.path, "data-findo.mdb"),
+      directory: p.join(docsDir, "data-findo.mdb"),
       maxReaders: 1,
       maxDBSizeInKB: 1024 * 1024,
     );
@@ -32,4 +33,33 @@ class Database {
 
     return Database._create(objStore);
   }
+}
+
+Future<String> readcontent() async {
+  try {
+    final file = await _localFile;
+    // Read the file
+    String contents = await file.readAsString();
+    return contents;
+  } catch (e) {
+    // If there is an error reading, return a default String
+    return 'Error';
+  }
+}
+
+Future<File> writeContent() async {
+  final file = await _localFile;
+  // Write the file
+  return file.writeAsString('Hello Folks');
+}
+
+Future<File> get _localFile async {
+  final path = await _localPath;
+  return File('$path/readme.txt');
+}
+
+Future<String> get _localPath async {
+  final directory = await getApplicationDocumentsDirectory();
+
+  return directory.path;
 }

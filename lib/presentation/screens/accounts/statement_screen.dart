@@ -101,35 +101,36 @@ class AccountStatementScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 8.0.w, top: 4.h),
-                        child: Text(
-                          "28TH, OCTOBER, 2002",
-                          style: Theme.of(context)
-                              .textTheme
-                              .caption!
-                              .copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.only(left: 8.0.w, top: 4.h),
+                      //   child: Text(
+                      //     "28TH, OCTOBER, 2002",
+                      //     style: Theme.of(context)
+                      //         .textTheme
+                      //         .caption!
+                      //         .copyWith(color: Theme.of(context).primaryColor),
+                      //   ),
+                      // ),
                       ListTile(
                         // dense: true,
                         // contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                        leading: ClipOval(
-                          child: Container(
-                            alignment: Alignment.center,
-                            color: Color(randomColor[randomNumber(
-                                min: 0, max: randomColor.length - 1)]),
-                            height: 36.0.sp,
-                            width: 36.0.sp,
-                            child: Text(
-                              "M",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ),
+                        // leading: ClipOval(
+                        //   child: Container(
+                        //     alignment: Alignment.center,
+                        //     color: Color(randomColor[randomNumber(
+                        //         min: 0, max: randomColor.length - 1)]),
+                        //     height: 36.0.sp,
+                        //     width: 36.0.sp,
+                        //     child: Text(
+                        //       "M",
+                        //       style: Theme.of(context)
+                        //           .textTheme
+                        //           .titleLarge!
+                        //           .copyWith(fontWeight: FontWeight.w500),
+                        //     ),
+                        //   ),
+                        // ),
+                        leading: const DateWidget(),
                         title: const Text(
                           "To Account head",
                           style: TextStyle(fontWeight: FontWeight.w500),

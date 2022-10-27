@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -8,8 +7,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
-import 'package:truecaller/utils/functions.dart';
 import 'package:truecaller/utils/index.dart';
+
+import '../../../utils/functions.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -92,22 +92,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               SliverAppBar(
                 backgroundColor: Theme.of(context).canvasColor,
                 pinned: true,
-                expandedHeight: 50.h,
+                expandedHeight: 45.h,
                 stretch: true,
                 automaticallyImplyLeading: false,
                 flexibleSpace: Container(
-                  // margin: EdgeInsets.only(top: 16.h),
                   padding: EdgeInsets.symmetric(horizontal: 0.0.w),
-                  // padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                   child: InkWell(
                     onTap: () =>
                         GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH"),
                     child: const SearchBar(),
                   ),
                 ),
-                systemOverlayStyle: SystemUiOverlayStyle.dark,
               ),
               SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
+
               SliverToBoxAdapter(
                 child: SizedBox(
                   height: 85.h,
@@ -123,21 +121,77 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ClipOval(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  color: Color(randomColor[randomNumber(
-                                      min: 0, max: randomColor.length - 1)]),
-                                  height: 40.0.sp,
-                                  width: 40.0.sp,
-                                  child: Text(
-                                    "M",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge!
-                                        .copyWith(fontWeight: FontWeight.w500),
+                              Stack(
+                                children: [
+                                  ClipOval(
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      color: Color(randomColor[randomNumber(
+                                          min: 0,
+                                          max: randomColor.length - 1)]),
+                                      height: 40.0.sp,
+                                      width: 40.0.sp,
+                                      child: Text(
+                                        "M",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    // child: Container(
+                                    //   padding: EdgeInsets.symmetric(
+                                    //       horizontal: 4.0.sp, vertical: 2.0.sp),
+                                    //   decoration: BoxDecoration(
+                                    //     color: Theme.of(context).errorColor,
+                                    //     borderRadius: const BorderRadius.all(
+                                    //         Radius.circular(20)),
+                                    //   ),
+                                    //   child: FittedBox(
+                                    //     child: Text(
+                                    //       "124",
+                                    //       style: Theme.of(context)
+                                    //           .textTheme
+                                    //           .subtitle2!
+                                    //           .copyWith(
+                                    //               fontSize: 8.0.sp,
+                                    //               fontWeight: FontWeight.bold,
+                                    //               color: Theme.of(context)
+                                    //                   .canvasColor),
+                                    //     ),
+                                    //   ),
+                                    // ),
+
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4.0.sp,
+                                            vertical: 2.0.sp),
+                                        color: const Color(0xffF8742C),
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            "1223",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle2!
+                                                .copyWith(
+                                                    fontSize: 8.0.sp,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Theme.of(context)
+                                                        .canvasColor),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               UIHelper.verticalSpaceSmall(),
                               Flexible(
@@ -161,7 +215,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 8.0.w),
                                   child: Text(
-                                    "250.50",
+                                    "12 min ago",
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context)
@@ -179,163 +233,107 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
                 ),
               ),
+
               SliverToBoxAdapter(
                 child: UIHelper.verticalSpaceMedium(),
               ),
-              // SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                  child: BoxedContainer(
-                      content: Row(
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            GoRouter.of(context).pushNamed("PAYMENT");
-                          },
-                          child: const Text("PAYMENT")),
-                      TextButton(
-                          onPressed: () {
-                            GoRouter.of(context).pushNamed("RECEIPT");
-                          },
-                          child: const Text("RECEIPT")),
-                      TextButton(
-                          onPressed: () {
-                            GoRouter.of(context).pushNamed("TRANSFER");
-                          },
-                          child: const Text("TRANSFER")),
-                      TextButton(
-                          onPressed: () {
-                            GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH");
-                          },
-                          child: const Text("SEARCH")),
-                    ],
-                  )),
-                ),
-              ),
-              // SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0.sp),
-                  child: BoxedContainer(
-                    content: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Switch to full Screen",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(fontWeight: FontWeight.w500),
-                            ),
-                            UIHelper.verticalSpaceSmall(),
-                            const Text(
-                                "I gave it a border, but it would be nice to have rounded borders."),
-                            UIHelper.verticalSpaceSmall(),
-                            Row(
-                              children: [
-                                TextButton(
-                                  onPressed: (() => null),
-                                  child: const Text("Read more"),
-                                ),
-                                UIHelper.horizontalSpaceMedium(),
-                                TextButton(
-                                  onPressed: (() => null),
-                                  child: const Text("Dismiss"),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )),
-                        Icon(
-                          Iconsax.bank4,
-                          size: 50.sp,
-                          color: Theme.of(context).primaryColor,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+
+              // SliverToBoxAdapter(
+              //   child: Padding(
+              //     padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
+              //     child: BoxedContainer(
+              //         content: Row(
+              //       children: [
+              //         TextButton(
+              //             onPressed: () {
+              //               GoRouter.of(context).pushNamed("PAYMENT");
+              //             },
+              //             child: const Text("PAYMENT")),
+              //         TextButton(
+              //             onPressed: () {
+              //               GoRouter.of(context).pushNamed("RECEIPT");
+              //             },
+              //             child: const Text("RECEIPT")),
+              //         TextButton(
+              //             onPressed: () {
+              //               GoRouter.of(context).pushNamed("TRANSFER");
+              //             },
+              //             child: const Text("TRANSFER")),
+              //         TextButton(
+              //             onPressed: () {
+              //               GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH");
+              //             },
+              //             child: const Text("SEARCH")),
+              //       ],
+              //     )),
+              //   ),
+              // ),
+
+              // SliverToBoxAdapter(
+              //   child: Padding(
+              //     padding: EdgeInsets.all(16.0.sp),
+              //     child: BoxedContainer(
+              //       content: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           Expanded(
+              //               child: Column(
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             mainAxisAlignment: MainAxisAlignment.start,
+              //             children: [
+              //               Text(
+              //                 "Switch to full Screen",
+              //                 style: Theme.of(context)
+              //                     .textTheme
+              //                     .titleMedium!
+              //                     .copyWith(fontWeight: FontWeight.w500),
+              //               ),
+              //               UIHelper.verticalSpaceSmall(),
+              //               const Text(
+              //                   "I gave it a border, but it would be nice to have rounded borders."),
+              //               UIHelper.verticalSpaceSmall(),
+              //               Row(
+              //                 children: [
+              //                   TextButton(
+              //                     onPressed: (() => null),
+              //                     child: const Text("Read more"),
+              //                   ),
+              //                   UIHelper.horizontalSpaceMedium(),
+              //                   TextButton(
+              //                     onPressed: (() => null),
+              //                     child: const Text("Dismiss"),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ],
+              //           )),
+              //           Icon(
+              //             Iconsax.bank4,
+              //             size: 50.sp,
+              //             color: Theme.of(context).primaryColor,
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
               SliverToBoxAdapter(
                 child: UIHelper.verticalSpaceMedium(),
               ),
               SliverFixedExtentList(
                 itemExtent: 55.h, // I'm forcing item heights
-                delegate: SliverChildBuilderDelegate(childCount: 25,
-                    (context, index) {
+                delegate:
+                    SliverChildBuilderDelegate(childCount: 2, (context, index) {
                   return ListTile(
-                    leading: SizedBox(
-                      // height: 45.h,
-                      width: 70.w,
-                      // margin: EdgeInsets.symmetric(horizontal: 16.0.w),
-
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // Container(
-                          //   padding: EdgeInsets.all(6.0.sp),
-                          //   decoration: BoxDecoration(
-                          //     shape: BoxShape.circle,
-                          //     color: Color(randomColor[randomNumber(
-                          //         min: 0, max: randomColor.length - 1)]),
-                          //     border: Border.all(
-                          //       width: 0.0.sp,
-                          //       color: Color(randomColor[randomNumber(
-                          //           min: 0, max: randomColor.length - 1)]),
-                          //     ),
-                          //   ),
-                          //   child: Text(
-                          //     "24",
-                          //     style: Theme.of(context)
-                          //         .textTheme
-                          //         .titleMedium!
-                          //         .copyWith(fontWeight: FontWeight.bold),
-                          //   ),
-                          // ),
-                          ClipOval(
-                            child: Container(
-                              alignment: Alignment.center,
-                              color: Color(randomColor[randomNumber(
-                                  min: 0, max: randomColor.length - 1)]),
-                              height: 35.0.sp,
-                              width: 35.0.sp,
-                              child: Text(
-                                "24",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ),
-                          UIHelper.horizontalSpaceSmall(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text("Sept"),
-                              Text(
-                                "2022",
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
+                    leading: const DateWidget(),
                     title: Text(
                       "Account Head",
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1!
-                          .copyWith(fontWeight: FontWeight.bold),
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
                     subtitle: Row(
                       children: [
