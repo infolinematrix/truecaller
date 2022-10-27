@@ -144,18 +144,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                   Positioned(
                                     top: 0,
                                     right: 0,
-                                    child: Container(
+                                    // child: Container(
+                                    //   padding: EdgeInsets.symmetric(
+                                    //       horizontal: 4.0.sp, vertical: 2.0.sp),
+                                    //   decoration: BoxDecoration(
+                                    //     color: Theme.of(context).errorColor,
+                                    //     borderRadius: const BorderRadius.all(
+                                    //         Radius.circular(20)),
+                                    //   ),
+                                    //   child: FittedBox(
+                                    //     child: Text(
+                                    //       "124",
+                                    //       style: Theme.of(context)
+                                    //           .textTheme
+                                    //           .subtitle2!
+                                    //           .copyWith(
+                                    //               fontSize: 8.0.sp,
+                                    //               fontWeight: FontWeight.bold,
+                                    //               color: Theme.of(context)
+                                    //                   .canvasColor),
+                                    //     ),
+                                    //   ),
+                                    // ),
+
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child: Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 4.0.sp,
                                             vertical: 2.0.sp),
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context).errorColor,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(20)),
-                                        ),
-                                        child: FittedBox(
+                                        color: const Color(0xffF8742C),
+                                        child: Align(
+                                          alignment: Alignment.center,
                                           child: Text(
-                                            "124",
+                                            "1223",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .subtitle2!
@@ -165,7 +187,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                                     color: Theme.of(context)
                                                         .canvasColor),
                                           ),
-                                        )),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -191,7 +215,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 8.0.w),
                                   child: Text(
-                                    "250.50",
+                                    "12 min ago",
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context)
