@@ -30,7 +30,7 @@ final List randomColor = [
 ];
 
 final txnType = ['RECEIPT', 'PAYMENT'];
-final txnMode = ['Cash', 'Online', 'Cheque', 'Bank Transfer'];
+final txnMode = ['CASH', 'BANK'];
 
 final dateFormat = ['dd-MM-yyyy', 'MM-dd-yyyy', 'yyyy-MM-dd'];
 final currencyFormat = ['###,##0.00', '##,#0.00'];

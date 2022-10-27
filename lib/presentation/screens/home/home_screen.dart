@@ -7,6 +7,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
+import 'package:truecaller/presentation/widgets/main_menu.dart';
 import 'package:truecaller/utils/index.dart';
 
 import '../../../utils/functions.dart';
@@ -105,7 +106,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 ),
               ),
               SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
-
               SliverToBoxAdapter(
                 child: SizedBox(
                   height: 85.h,
@@ -233,92 +233,92 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
                 ),
               ),
-
               SliverToBoxAdapter(
                 child: UIHelper.verticalSpaceMedium(),
               ),
-
-              // SliverToBoxAdapter(
-              //   child: Padding(
-              //     padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-              //     child: BoxedContainer(
-              //         content: Row(
-              //       children: [
-              //         TextButton(
-              //             onPressed: () {
-              //               GoRouter.of(context).pushNamed("PAYMENT");
-              //             },
-              //             child: const Text("PAYMENT")),
-              //         TextButton(
-              //             onPressed: () {
-              //               GoRouter.of(context).pushNamed("RECEIPT");
-              //             },
-              //             child: const Text("RECEIPT")),
-              //         TextButton(
-              //             onPressed: () {
-              //               GoRouter.of(context).pushNamed("TRANSFER");
-              //             },
-              //             child: const Text("TRANSFER")),
-              //         TextButton(
-              //             onPressed: () {
-              //               GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH");
-              //             },
-              //             child: const Text("SEARCH")),
-              //       ],
-              //     )),
-              //   ),
-              // ),
-
-              // SliverToBoxAdapter(
-              //   child: Padding(
-              //     padding: EdgeInsets.all(16.0.sp),
-              //     child: BoxedContainer(
-              //       content: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Expanded(
-              //               child: Column(
-              //             crossAxisAlignment: CrossAxisAlignment.start,
-              //             mainAxisAlignment: MainAxisAlignment.start,
-              //             children: [
-              //               Text(
-              //                 "Switch to full Screen",
-              //                 style: Theme.of(context)
-              //                     .textTheme
-              //                     .titleMedium!
-              //                     .copyWith(fontWeight: FontWeight.w500),
-              //               ),
-              //               UIHelper.verticalSpaceSmall(),
-              //               const Text(
-              //                   "I gave it a border, but it would be nice to have rounded borders."),
-              //               UIHelper.verticalSpaceSmall(),
-              //               Row(
-              //                 children: [
-              //                   TextButton(
-              //                     onPressed: (() => null),
-              //                     child: const Text("Read more"),
-              //                   ),
-              //                   UIHelper.horizontalSpaceMedium(),
-              //                   TextButton(
-              //                     onPressed: (() => null),
-              //                     child: const Text("Dismiss"),
-              //                   ),
-              //                 ],
-              //               ),
-              //             ],
-              //           )),
-              //           Icon(
-              //             Iconsax.bank4,
-              //             size: 50.sp,
-              //             color: Theme.of(context).primaryColor,
-              //           )
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
+              const MainMenuWidget(),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
+                  child: BoxedContainer(
+                      content: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).push(
+                                "/transaction/account-select",
+                                extra: {'allowedTransactionType': 'PAYMENT'});
+                          },
+                          child: const Text("PAYMENT")),
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed("RECEIPT");
+                          },
+                          child: const Text("RECEIPT")),
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed("TRANSFER");
+                          },
+                          child: const Text("TRANSFER")),
+                      TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed("ACCOUNTS/SEARCH");
+                          },
+                          child: const Text("HELP")),
+                    ],
+                  )),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0.sp),
+                  child: BoxedContainer(
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "NEW UPDATE AVAILABLE",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle2!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                            UIHelper.verticalSpaceSmall(),
+                            const Text(
+                                "I gave it a border, but it would be nice to have rounded borders."),
+                            UIHelper.verticalSpaceSmall(),
+                            Row(
+                              children: [
+                                TextButton(
+                                  onPressed: (() => null),
+                                  child: const Text("UPDATE NOW"),
+                                ),
+                                UIHelper.horizontalSpaceMedium(),
+                                TextButton(
+                                  onPressed: (() => null),
+                                  child: const Text("LATER"),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )),
+                        Icon(
+                          Iconsax.document_download,
+                          size: 50.sp,
+                          color: Theme.of(context).secondaryHeaderColor,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               SliverToBoxAdapter(
                 child: UIHelper.verticalSpaceMedium(),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/presentation/screens/accounts/account_create_screen.dart';
 import 'package:truecaller/presentation/screens/accounts/account_edit_screen.dart';
 import 'package:truecaller/presentation/screens/accounts/account_search.dart';
@@ -12,6 +13,7 @@ import 'package:truecaller/presentation/screens/home/home_screen.dart';
 import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
 import 'package:truecaller/presentation/screens/settings/bank_account_screen.dart';
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
+import 'package:truecaller/presentation/screens/transactions/account_select_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/payment_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/receipt_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/transfer_screen.dart';
@@ -168,11 +170,39 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(
+        path: '/transaction',
+        name: 'TRANSACTION',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          //TODO
+          return buildPageWithDefaultTransition(
+              context: context, state: state, child: const HomeScreen());
+        },
+        routes: [
+          GoRoute(
+            path: 'account-select',
+            name: 'ACCOUNT-SELECT',
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              Map extra = state.extra! as Map;
+              return buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: AccountSelectScreen(
+                    allowedTransactionType: extra['allowedTransactionType'],
+                  ));
+            },
+          ),
+        ]),
+    GoRoute(
       path: '/payment',
       name: 'PAYMENT',
       pageBuilder: (BuildContext context, GoRouterState state) {
+        AccountsModel account = state.extra as AccountsModel;
         return buildPageWithDefaultTransition(
-            context: context, state: state, child: const PaymentScreen());
+            context: context,
+            state: state,
+            child: PaymentScreen(
+              account: account,
+            ));
       },
     ),
     GoRoute(
