@@ -270,12 +270,66 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     SliverChildBuilderDelegate(childCount: 2, (context, index) {
                   return ListTile(
                     leading: Container(
-                      width: 70.w,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("assets/icons/calendar-2.png"),
-                          fit: BoxFit.cover,
+                      clipBehavior: Clip.hardEdge,
+                      width: 45.sp,
+                      height: 50.sp,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(context).highlightColor,
                         ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            color: Theme.of(context).highlightColor,
+                            height: 15.sp,
+                            margin: EdgeInsets.only(bottom: 4.sp),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "SEPT",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Center(
+                            child: Column(
+                              children: [
+                                Text(
+                                  "24",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16.0.sp),
+                                ),
+                                Text(
+                                  "2022",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(fontSize: 10.sp),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
                       ),
 
                       // child: Row(
