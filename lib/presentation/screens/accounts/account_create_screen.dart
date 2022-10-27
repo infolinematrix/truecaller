@@ -88,7 +88,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                   style: inputTextStyle,
                                   isExpanded: false,
                                   itemHeight: null,
-                                  initialValue: ref.read(hasChildProvider),
+                                  initialValue: ref.watch(hasChildProvider),
                                   dropdownColor:
                                       Theme.of(context).scaffoldBackgroundColor,
                                   decoration: const InputDecoration(
@@ -130,7 +130,7 @@ class AccountCreateScreen extends ConsumerWidget {
                             textCapitalization: TextCapitalization.words,
                           ),
                         ),
-                        ref.watch(hasChildProvider) == true
+                        ref.watch(hasChildProvider) == false
                             ? Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,

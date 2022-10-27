@@ -48,7 +48,7 @@ class AccountsScreen extends ConsumerWidget {
                     UIHelper.horizontalSpaceMedium()
                   ],
                   bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(50.0.h),
+                    preferredSize: Size.fromHeight(45.0.h),
                     child: const SearchBar(),
                   ),
                 ),

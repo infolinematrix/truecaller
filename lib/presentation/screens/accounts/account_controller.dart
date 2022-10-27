@@ -44,9 +44,11 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
         allowReceipt: formData['allowReceipt'],
         allowTransfer: formData['allowTransfer'],
         hasChild: formData['hasChild'],
-        budget: formData['hasBudget'] == true ? formData['budget'] : 0.0,
+        budget: formData['hasBudget'] == true
+            ? double.parse(formData['budget'].toString()).toDouble()
+            : 0.0,
         openingBalance: formData['hasOpeningBalance'] == true
-            ? formData['openingBalance']
+            ? double.parse(formData['openingBalance'].toString()).toDouble()
             : 0.0,
         isActive: formData['isActive'],
         isSystem: false,
