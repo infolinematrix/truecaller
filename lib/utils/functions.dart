@@ -1,7 +1,10 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Color randomOpaqueColor() {
   return Color(Random().nextInt(0xffff9999)).withAlpha(0xff);
@@ -63,4 +66,31 @@ DateTime firstDayOfYear() {
 DateTime lastDayOfYear() {
   DateTime now = DateTime.now().toUtc();
   return DateTime(now.year, 12, 31);
+}
+
+Future<void> gotoUrl({required String url, LaunchMode? launchMode}) async {
+  final Uri uriUrl = Uri.parse(url.toString());
+
+  if (!await launchUrl(uriUrl, mode: LaunchMode.externalApplication)) {
+    throw 'Could not launch $uriUrl';
+  }
+}
+
+Future<String> getIp() async {
+  String strIp = '';
+  List interfaces = await NetworkInterface.list();
+
+  strIp = interfaces[0].addresses[0].address;
+
+  return strIp.toString().trim();
+}
+
+Future<String> getFCMToken() async {
+  final token =
+      await FirebaseMessaging.instance.getToken().then((value) => value);
+  return token!;
+}
+
+Future<void> subscribeFirebaseMessagingTopic({required String topic}) async {
+  await FirebaseMessaging.instance.subscribeToTopic(topic.trim());
 }

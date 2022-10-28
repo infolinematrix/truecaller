@@ -100,22 +100,22 @@ class SettingsScreen extends ConsumerWidget {
                             ),
                             UIHelper.horizontalSpaceMedium(),
                             Expanded(
-                              child: FormBuilderDropdown<String>(
-                                name: 'currencyFormat',
+                              child: FormBuilderDropdown(
+                                name: 'currency',
                                 isExpanded: false,
                                 itemHeight: null,
                                 dropdownColor:
                                     Theme.of(context).scaffoldBackgroundColor,
                                 decoration: const InputDecoration(
-                                    labelText: 'Currency Format'),
+                                    labelText: 'Currency'),
                                 validator: FormBuilderValidators.compose(
                                     [FormBuilderValidators.required()]),
-                                items: currencyFormat
-                                    .map((gender) => DropdownMenuItem(
+                                items: currencies
+                                    .map((currencie) => DropdownMenuItem(
                                           alignment:
                                               AlignmentDirectional.centerStart,
-                                          value: gender,
-                                          child: Text(gender,
+                                          value: currencie['code'],
+                                          child: Text(currencie['name'],
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.w500)),
                                         ))
@@ -208,6 +208,7 @@ class SettingsScreen extends ConsumerWidget {
                             onTap: () async {
                               if (formKey.currentState?.saveAndValidate() ??
                                   false) {
+                                EasyLoading.show(status: 'Wait...');
                                 await ref
                                     .watch(createSettings(formKey.currentState
                                             ?.value as Map<String, dynamic>)
@@ -217,8 +218,8 @@ class SettingsScreen extends ConsumerWidget {
                                     EasyLoading.showSuccess("Successful");
 
                                     if (formKey
-                                            .currentState!.value['hsdBank'] ==
-                                        true) {
+                                            .currentState!.value['hasBank'] ==
+                                        'YES') {
                                       GoRouter.of(context)
                                           .replace('/settings/bank-account');
                                     }
