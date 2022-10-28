@@ -3,22 +3,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:truecaller/data/models/settings_model.dart';
 
 import 'package:truecaller/data/repositories/settings_repository.dart';
+import 'package:truecaller/utils/local_auth.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 class InitialDataModel {
   final bool isLoggedin;
   final List<SettingsModel> settings;
+  final bool isAuth;
 
-  InitialDataModel({required this.isLoggedin, required this.settings});
+  InitialDataModel(
+      {required this.isLoggedin, required this.settings, required this.isAuth});
 }
 
 final inttAppProvider =
     FutureProvider.autoDispose<InitialDataModel>((ref) async {
   final isLoggedin = await ref.watch(isLoggedInProvider);
   final settings = await ref.watch(getSettingsProvider.future);
+  final isAuth = await ref.watch(localAuthProvider.future);
 
-  return InitialDataModel(isLoggedin: isLoggedin, settings: settings);
+  return InitialDataModel(
+      isLoggedin: isLoggedin, settings: settings, isAuth: isAuth);
 });
 
 // -- IS LOGGEDIN
@@ -38,4 +43,12 @@ final isLoggedInProvider = Provider.autoDispose((ref) async {
 final getSettingsProvider = FutureProvider((ref) async {
   final data = await SettingsRepository().getAll();
   return data;
+});
+
+//--Local Auth
+final localAuthProvider = FutureProvider<bool>((ref) async {
+  final auth = LocalAuth();
+  await auth.authenticate();
+
+  return auth.isAuthorised;
 });
