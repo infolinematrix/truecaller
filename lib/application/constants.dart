@@ -39,6 +39,10 @@ final List<Map<String, dynamic>> currencies = [
   {'code': 'lira', 'name': 'Turkish lira', 'symbol': '₺'},
   {'code': 'pound', 'name': 'Pound', 'symbol': "£"},
   {'code': 'doller', 'name': 'US Doller', 'symbol': "\$"},
+  {'code': 'yen', 'name': 'Yen', 'symbol': "¥"},
+  {'code': 'franc', 'name': 'French franc', 'symbol': "₣"},
+  {'code': 'peso', 'name': 'Peso', 'symbol': "₱"},
+  {'code': 'ruble', 'name': 'Ruble', 'symbol': "₽"},
 ];
 
 final yesNo = [
