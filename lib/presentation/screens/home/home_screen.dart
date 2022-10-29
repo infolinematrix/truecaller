@@ -106,6 +106,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 ),
               ),
               SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
+              // SliverToBoxAdapter(
+              //     child: ElevatedButton(
+              //   onPressed: () async {
+              //     await LocalAuth().authenticate();
+              //   },
+              //   child: const Text("AUTH"),
+              // )),
+              // SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
               SliverToBoxAdapter(
                 child: SizedBox(
                   height: 85.h,

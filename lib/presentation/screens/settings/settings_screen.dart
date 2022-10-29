@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/theme/app_theme.dart';
@@ -99,22 +100,22 @@ class SettingsScreen extends ConsumerWidget {
                             ),
                             UIHelper.horizontalSpaceMedium(),
                             Expanded(
-                              child: FormBuilderDropdown<String>(
-                                name: 'currencyFormat',
+                              child: FormBuilderDropdown(
+                                name: 'currency',
                                 isExpanded: false,
                                 itemHeight: null,
                                 dropdownColor:
                                     Theme.of(context).scaffoldBackgroundColor,
                                 decoration: const InputDecoration(
-                                    labelText: 'Currency Format'),
+                                    labelText: 'Currency'),
                                 validator: FormBuilderValidators.compose(
                                     [FormBuilderValidators.required()]),
-                                items: currencyFormat
-                                    .map((gender) => DropdownMenuItem(
+                                items: currencies
+                                    .map((currencie) => DropdownMenuItem(
                                           alignment:
                                               AlignmentDirectional.centerStart,
-                                          value: gender,
-                                          child: Text(gender,
+                                          value: currencie['code'],
+                                          child: Text(currencie['name'],
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.w500)),
                                         ))
@@ -207,8 +208,7 @@ class SettingsScreen extends ConsumerWidget {
                             onTap: () async {
                               if (formKey.currentState?.saveAndValidate() ??
                                   false) {
-                                EasyLoading.show(status: 'Saving...');
-
+                                EasyLoading.show(status: 'Wait...');
                                 await ref
                                     .watch(createSettings(formKey.currentState
                                             ?.value as Map<String, dynamic>)
@@ -216,7 +216,13 @@ class SettingsScreen extends ConsumerWidget {
                                     .then((value) {
                                   if (value == true) {
                                     EasyLoading.showSuccess("Successful");
-                                    EasyLoading.dismiss();
+
+                                    if (formKey
+                                            .currentState!.value['hasBank'] ==
+                                        'YES') {
+                                      GoRouter.of(context)
+                                          .replace('/settings/bank-account');
+                                    }
                                   }
                                 });
                               } else {

@@ -34,6 +34,16 @@ final txnMode = ['CASH', 'BANK'];
 
 final dateFormat = ['dd-MM-yyyy', 'MM-dd-yyyy', 'yyyy-MM-dd'];
 final currencyFormat = ['###,##0.00', '##,#0.00'];
+final List<Map<String, dynamic>> currencies = [
+  {'code': 'rupee', 'name': 'Indian Rupees', 'symbol': '₹'},
+  {'code': 'lira', 'name': 'Turkish lira', 'symbol': '₺'},
+  {'code': 'pound', 'name': 'Pound', 'symbol': "£"},
+  {'code': 'doller', 'name': 'US Doller', 'symbol': "\$"},
+  {'code': 'yen', 'name': 'Yen', 'symbol': "¥"},
+  {'code': 'franc', 'name': 'French franc', 'symbol': "₣"},
+  {'code': 'peso', 'name': 'Peso', 'symbol': "₱"},
+  {'code': 'ruble', 'name': 'Ruble', 'symbol': "₽"},
+];
 
 final yesNo = [
   {'key': true, 'value': 'Yes'},

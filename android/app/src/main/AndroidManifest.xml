@@ -1,12 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.doriionline.findo" 
     android:allowBackup="true">
+
+    <!-- <uses-permission android:name="android.permission.USE_FINGERPRINT"/> -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
    <application
         android:label="Findo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".MainActivity"
+            android:name="io.flutter.embedding.android.FlutterFragmentActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

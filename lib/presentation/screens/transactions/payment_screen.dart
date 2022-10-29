@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,15 +14,15 @@ import 'package:truecaller/utils/index.dart';
 
 import 'transaction_controller.dart';
 
-class PaymentScreen extends ConsumerWidget {
+class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key, required this.account});
 
   final AccountsModel account;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final formKey = GlobalKey<FormBuilderState>();
-    final banks = ref.watch(banksProvider);
+    // final banks = ref.watch(banksProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).canvasColor,
@@ -104,91 +105,118 @@ class PaymentScreen extends ConsumerWidget {
                                         ),
                                       ),
                                       UIHelper.horizontalSpaceMedium(),
-                                      Expanded(
-                                          child: SizedBox(
-                                        height: inputHeight,
-                                        child: FormBuilderDropdown(
-                                          name: 'mode',
-                                          style: inputTextStyle,
-                                          initialValue:
-                                              ref.watch(txnModeProvider),
-                                          isExpanded: false,
-                                          itemHeight: null,
-                                          dropdownColor: Theme.of(context)
-                                              .scaffoldBackgroundColor,
-                                          decoration: const InputDecoration(
-                                            labelText: 'Mode',
-                                          ),
-                                          onChanged: (value) {
-                                            ref
-                                                .read(txnModeProvider.state)
-                                                .update((state) =>
-                                                    value.toString());
-                                          },
-                                          items: txnMode
-                                              .map((mode) => DropdownMenuItem(
-                                                    alignment:
-                                                        AlignmentDirectional
-                                                            .centerStart,
-                                                    value: mode,
-                                                    child: Text(mode,
-                                                        style: inputTextStyle
-                                                            .copyWith(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .primaryColor)),
-                                                  ))
-                                              .toList(),
-                                        ),
-                                      )),
-                                    ],
-                                  ),
-                                  ref.watch(txnModeProvider) == 'BANK'
-                                      ? Column(
-                                          children: [
-                                            UIHelper.verticalSpaceMedium(),
-                                            banks.when(
-                                              error: (error, stackTrace) =>
-                                                  const Text(
-                                                      "Something went wring"),
-                                              loading: () =>
-                                                  const Text("Wait.."),
-                                              data: (data) {
-                                                return SizedBox(
-                                                  height: inputHeight,
-                                                  child: FormBuilderDropdown(
-                                                    name: 'bank_account',
-                                                    style: inputTextStyle,
-                                                    isExpanded: false,
-                                                    itemHeight: null,
-                                                    initialValue: data[0].id,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                      labelText: 'Bank Account',
-                                                    ),
-                                                    items: data
-                                                        .map((item) =>
+                                      Consumer(
+                                        builder: (context, ref, child) {
+                                          return Expanded(
+                                            child: SizedBox(
+                                              height: inputHeight,
+                                              child: FormBuilderDropdown(
+                                                name: 'mode',
+                                                style: inputTextStyle,
+                                                initialValue:
+                                                    ref.watch(txnModeProvider),
+                                                isExpanded: false,
+                                                itemHeight: null,
+                                                dropdownColor: Theme.of(context)
+                                                    .scaffoldBackgroundColor,
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: 'Mode',
+                                                ),
+                                                onChanged: (value) {
+                                                  ref
+                                                      .read(
+                                                          txnModeProvider.state)
+                                                      .update((state) =>
+                                                          value.toString());
+                                                },
+                                                items: txnMode
+                                                    .map(
+                                                        (mode) =>
                                                             DropdownMenuItem(
                                                               alignment:
                                                                   AlignmentDirectional
                                                                       .centerStart,
-                                                              value: item.id,
-                                                              child: Text(
-                                                                item.name,
-                                                                style: TextStyle(
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .primaryColor),
-                                                              ),
+                                                              value: mode,
+                                                              child: Text(mode,
+                                                                  style: inputTextStyle
+                                                                      .copyWith(
+                                                                          color:
+                                                                              Theme.of(context).primaryColor)),
                                                             ))
-                                                        .toList(),
-                                                  ),
-                                                );
-                                              },
+                                                    .toList(),
+                                              ),
                                             ),
-                                          ],
-                                        )
-                                      : const SizedBox.shrink(),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  Consumer(builder: (context, ref, child) {
+                                    final banks = ref.watch(banksProvider);
+                                    return ref.watch(txnModeProvider) == 'BANK'
+                                        ? Column(
+                                            children: [
+                                              UIHelper.verticalSpaceMedium(),
+                                              banks.when(
+                                                error: (error, stackTrace) =>
+                                                    const Text(
+                                                        "Something went wring"),
+                                                loading: () =>
+                                                    const Text("Wait.."),
+                                                data: (data) {
+                                                  return data.isNotEmpty
+                                                      ? SizedBox(
+                                                          height: inputHeight,
+                                                          child:
+                                                              FormBuilderDropdown(
+                                                            name:
+                                                                'bank_account',
+                                                            style:
+                                                                inputTextStyle,
+                                                            isExpanded: false,
+                                                            itemHeight: null,
+                                                            initialValue:
+                                                                data[0].id,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                              labelText:
+                                                                  'Bank Account',
+                                                            ),
+                                                            items: data
+                                                                .map((item) =>
+                                                                    DropdownMenuItem(
+                                                                      alignment:
+                                                                          AlignmentDirectional
+                                                                              .centerStart,
+                                                                      value: item
+                                                                          .id,
+                                                                      child:
+                                                                          Text(
+                                                                        item.name,
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Theme.of(context).primaryColor),
+                                                                      ),
+                                                                    ))
+                                                                .toList(),
+                                                          ),
+                                                        )
+                                                      : SizedBox(
+                                                          height: inputHeight,
+                                                          child: Text(
+                                                              "No bank account found",
+                                                              style: TextStyle(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .errorColor)),
+                                                        );
+                                                },
+                                              ),
+                                            ],
+                                          )
+                                        : const SizedBox.shrink();
+                                  }),
                                   UIHelper.verticalSpaceMedium(),
                                   SizedBox(
                                     height: inputHeight,
@@ -205,27 +233,44 @@ class PaymentScreen extends ConsumerWidget {
                                             ]),
                                             decoration: const InputDecoration(
                                                 labelText: 'Amount'),
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            keyboardType: const TextInputType
+                                                .numberWithOptions(
+                                              decimal: true,
+                                              signed: false,
+                                            ),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'^(\d+)?\.?\d{0,2}'))
+                                            ],
                                           ),
                                         ),
                                         UIHelper.horizontalSpaceMedium(),
-                                        Expanded(
-                                          child: FormBuilderTextField(
-                                            name: 'narration',
-                                            enabled: false,
-                                            style: inputTextStyle,
-                                            initialValue:
-                                                ref.watch(txnModeProvider) ==
+                                        Consumer(
+                                          builder: (context, ref, child) {
+                                            return Expanded(
+                                              child: FormBuilderTextField(
+                                                name: 'narration',
+                                                enabled: false,
+                                                style: inputTextStyle,
+                                                initialValue: ref.watch(
+                                                            txnModeProvider) ==
                                                         'BANK'
                                                     ? 'By Bank'
                                                     : 'By Cash',
-                                            validator:
-                                                FormBuilderValidators.compose([
-                                              FormBuilderValidators.required(),
-                                            ]),
-                                            decoration: const InputDecoration(
-                                                labelText: 'Narration'),
-                                          ),
-                                        ),
+                                                validator: FormBuilderValidators
+                                                    .compose([
+                                                  FormBuilderValidators
+                                                      .required(),
+                                                ]),
+                                                decoration:
+                                                    const InputDecoration(
+                                                        labelText: 'Narration'),
+                                              ),
+                                            );
+                                          },
+                                        )
                                       ],
                                     ),
                                   ),

@@ -26,7 +26,9 @@ void main() {
      */
     await initApp();
 
-    runApp(const ProviderScope(child: MyApp()));
+    runApp(
+      const ProviderScope(child: MyApp()),
+    );
 
     // Transparent status bar
     if (Platform.isAndroid) {

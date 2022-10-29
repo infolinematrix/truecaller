@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/data/repositories/account_repository.dart';
 import 'package:truecaller/data/source/objectstore.dart';
+import 'package:truecaller/objectbox.g.dart';
 import 'package:truecaller/utils/functions.dart';
 
 final accountBox = store!.objStore.box<AccountsModel>();
@@ -45,5 +47,23 @@ class AccountGroupState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
       debugPrint(e.toString());
       return false;
     }
+  }
+
+  Future<bool> delete({required int groupId}) async {
+    try {
+      QueryBuilder<AccountsModel> builder =
+          accountBox.query(AccountsModel_.parent.equals(groupId));
+
+      Query<AccountsModel> query = builder.build();
+      List<AccountsModel> data = query.find().toList();
+
+      if (data.isNotEmpty) {
+        EasyLoading.showError("Can't remove! Child account exist.");
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+    return true;
   }
 }

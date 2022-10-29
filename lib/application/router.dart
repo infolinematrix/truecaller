@@ -11,6 +11,7 @@ import 'package:truecaller/presentation/screens/groups/group_edit_screen.dart';
 import 'package:truecaller/presentation/screens/groups/groups_screen.dart';
 import 'package:truecaller/presentation/screens/home/home_screen.dart';
 import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
+import 'package:truecaller/presentation/screens/settings/bank_account_screen.dart';
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/account_select_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/payment_screen.dart';
@@ -150,14 +151,23 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/settings',
       name: "SETTINGS",
-      builder: (BuildContext context, GoRouterState state) {
-        return const SettingsScreen();
-      },
       pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
         context: context,
         state: state,
         child: const SettingsScreen(),
       ),
+      routes: [
+        GoRoute(
+          path: 'bank-account',
+          name: 'BANK-ACCOUNT',
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return buildPageWithDefaultTransition(
+                context: context,
+                state: state,
+                child: const SettingsBankAccountScreen());
+          },
+        ),
+      ],
     ),
     GoRoute(
         path: '/transaction',
