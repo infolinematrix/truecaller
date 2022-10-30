@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:intl/intl.dart';
 
@@ -27,13 +26,4 @@ String formatCurrency(var n) {
 
   return currencyFormatDecimal
       .format(double.parse(formattedString.toString()).toDouble()); // 1.51
-}
-
-Future<String> getIp() async {
-  String strIp = '';
-  List interfaces = await NetworkInterface.list();
-
-  strIp = interfaces[0].addresses[0].address;
-
-  return strIp.toString().trim();
 }

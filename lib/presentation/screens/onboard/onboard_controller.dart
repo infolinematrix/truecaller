@@ -46,6 +46,7 @@ final getSettingsProvider = FutureProvider((ref) async {
 });
 
 //--Local Auth
+//TODO: Enable when ready
 final localAuthProvider = FutureProvider<bool>((ref) async {
   final auth = LocalAuth();
   await auth.authenticate();

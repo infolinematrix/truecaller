@@ -70,8 +70,8 @@ class AccountsScreen extends ConsumerWidget {
                         visualDensity:
                             const VisualDensity(horizontal: 0, vertical: -4),
                         onTap: () => account.hasChild == false
-                            ? GoRouter.of(context).pushNamed('STATEMENT',
-                                params: {'id': '1', 'name': 'SUBHA'})
+                            ? GoRouter.of(context)
+                                .pushNamed('STATEMENT', extra: account)
                             : GoRouter.of(context)
                                 .push('/accounts', extra: {'parent': account}),
                         leading: ClipOval(

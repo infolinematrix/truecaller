@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:truecaller/utils/index.dart';
 
 class DateWidget extends StatelessWidget {
-  const DateWidget({
-    Key? key,
-  }) : super(key: key);
+  const DateWidget({Key? key, required this.strDate}) : super(key: key);
+
+  final String strDate;
 
   @override
   Widget build(BuildContext context) {
+    final date = dateMap(strDate);
+
     return Container(
       clipBehavior: Clip.hardEdge,
       width: 45.sp,
@@ -27,7 +30,7 @@ class DateWidget extends StatelessWidget {
         children: [
           Container(
             color: Theme.of(context).highlightColor,
-            height: 15.sp,
+            height: 14.sp,
             margin: EdgeInsets.only(bottom: 4.sp),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -35,7 +38,7 @@ class DateWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "SEPT",
+                  date['month'],
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -47,14 +50,14 @@ class DateWidget extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "24",
+                  date['day'],
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 14.0.sp),
                 ),
                 Text(
-                  "2022",
+                  date['year'],
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!

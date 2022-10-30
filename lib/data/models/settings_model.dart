@@ -6,6 +6,7 @@ class SettingsModel {
 
   @Index()
   String key;
+
   String value;
 
   SettingsModel({this.id = 0, required this.key, required this.value});

@@ -2,9 +2,14 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+dp(Object obj) {
+  if (!kDebugMode) debugPrint(obj.toString());
+}
 
 Color randomOpaqueColor() {
   return Color(Random().nextInt(0xffff9999)).withAlpha(0xff);
@@ -22,7 +27,7 @@ DateTime convertDateToLocal(String strDate) {
 }
 
 DateTime dateTodayStart() {
-  final now = DateTime.now().toUtc();
+  final now = DateTime.now().toLocal();
   final lastMidnight = now.subtract(Duration(
     hours: now.hour,
     minutes: now.minute,
@@ -35,36 +40,36 @@ DateTime dateTodayStart() {
 }
 
 DateTime firstDayOfWeek() {
-  DateTime now = DateTime.now().toUtc().toLocal();
+  DateTime now = DateTime.now().toLocal();
   int currentDay = now.weekday;
   DateTime firstDayOfWeek = now.subtract(Duration(days: currentDay - 1));
   return firstDayOfWeek;
 }
 
 DateTime lastDayOfWeek() {
-  DateTime now = DateTime.now().toUtc().toLocal();
+  DateTime now = DateTime.now().toLocal();
   DateTime firstDayOfWeek =
       now.add(Duration(days: DateTime.daysPerWeek - now.weekday));
   return firstDayOfWeek;
 }
 
 DateTime firstDayOfMonth() {
-  DateTime now = DateTime.now().toUtc();
+  DateTime now = DateTime.now().toLocal();
   return DateTime(now.year, now.month, 1);
 }
 
 DateTime lastDayOfMonth() {
-  DateTime now = DateTime.now().toUtc();
+  DateTime now = DateTime.now().toLocal();
   return DateTime(now.year, now.month + 1, 0);
 }
 
 DateTime firstDayOfYear() {
-  DateTime now = DateTime.now().toUtc();
+  DateTime now = DateTime.now().toLocal();
   return DateTime(now.year, 1, 1);
 }
 
 DateTime lastDayOfYear() {
-  DateTime now = DateTime.now().toUtc();
+  DateTime now = DateTime.now().toLocal();
   return DateTime(now.year, 12, 31);
 }
 

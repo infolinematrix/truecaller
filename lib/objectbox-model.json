@@ -4,44 +4,105 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:1136632353125770723",
-      "lastPropertyId": "4:2714933296040486894",
-      "name": "SettingsModel",
+      "id": "1:3587945294040094239",
+      "lastPropertyId": "14:2240438684854528459",
+      "name": "AccountsModel",
       "properties": [
         {
-          "id": "1:5479330234775252978",
+          "id": "1:3751026663864751467",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:4262839762336058850",
-          "name": "key",
-          "type": 9,
-          "flags": 2048,
-          "indexId": "1:407250738002964339"
+          "id": "2:729472125419628461",
+          "name": "parent",
+          "type": 6,
+          "flags": 8,
+          "indexId": "1:8652495411927107198"
         },
         {
-          "id": "4:2714933296040486894",
-          "name": "value",
+          "id": "3:6634474258144786480",
+          "name": "name",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "2:6544985954594090028"
+        },
+        {
+          "id": "4:8736996499202676156",
+          "name": "type",
           "type": 9
+        },
+        {
+          "id": "5:4925159674100123602",
+          "name": "hasChild",
+          "type": 1
+        },
+        {
+          "id": "6:8563201432824939981",
+          "name": "isActive",
+          "type": 1,
+          "flags": 8,
+          "indexId": "3:2746443304144647962"
+        },
+        {
+          "id": "7:1714798893465991265",
+          "name": "isSystem",
+          "type": 1,
+          "flags": 8,
+          "indexId": "4:1611618025593321597"
+        },
+        {
+          "id": "8:3367288634707214150",
+          "name": "budget",
+          "type": 8
+        },
+        {
+          "id": "9:1376842290259502632",
+          "name": "allowReceipt",
+          "type": 1
+        },
+        {
+          "id": "10:7976699294300509236",
+          "name": "allowPayment",
+          "type": 1
+        },
+        {
+          "id": "11:3617656544665544323",
+          "name": "allowTransfer",
+          "type": 1
+        },
+        {
+          "id": "12:7169108749033722654",
+          "name": "openingBalance",
+          "type": 8
+        },
+        {
+          "id": "13:388382213400431850",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "14:2240438684854528459",
+          "name": "createdOn",
+          "type": 10
         }
       ],
       "relations": []
     },
     {
-      "id": "2:102319205058729371",
-      "lastPropertyId": "2:5816637362583636027",
+      "id": "2:1909471998653054089",
+      "lastPropertyId": "2:8439057008360783066",
       "name": "ScrollModel",
       "properties": [
         {
-          "id": "1:2679063944012957536",
+          "id": "1:6957128523376889245",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:5816637362583636027",
+          "id": "2:8439057008360783066",
           "name": "slno",
           "type": 6
         }
@@ -49,86 +110,111 @@
       "relations": []
     },
     {
-      "id": "3:3731670892608306914",
-      "lastPropertyId": "14:6174512439246525141",
-      "name": "AccountsModel",
+      "id": "3:2429490463401786500",
+      "lastPropertyId": "3:4796288076083726606",
+      "name": "SettingsModel",
       "properties": [
         {
-          "id": "1:8473676476291076604",
+          "id": "1:2796824751288382801",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:8486667794109534753",
-          "name": "parent",
-          "type": 6,
-          "flags": 8,
-          "indexId": "2:7938685004843081510"
-        },
-        {
-          "id": "3:4485062781369001996",
-          "name": "name",
+          "id": "2:537273727052013725",
+          "name": "key",
           "type": 9,
-          "flags": 2080,
-          "indexId": "3:4670785169465325414"
+          "flags": 2048,
+          "indexId": "5:5566726979630867220"
         },
         {
-          "id": "4:853889851814695325",
-          "name": "type",
+          "id": "3:4796288076083726606",
+          "name": "value",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:6670135516669978220",
+      "lastPropertyId": "13:8120996116591326252",
+      "name": "TransactionsModel",
+      "properties": [
+        {
+          "id": "1:205443973016576243",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2608262832704091844",
+          "name": "account",
+          "type": 5,
+          "flags": 8,
+          "indexId": "6:8165566941112676848"
+        },
+        {
+          "id": "3:8307104008231653495",
+          "name": "accountName",
           "type": 9
         },
         {
-          "id": "5:3270469194557778921",
-          "name": "hasChild",
-          "type": 1
+          "id": "4:1833299203713034297",
+          "name": "narration",
+          "type": 9
         },
         {
-          "id": "6:8225081245848385589",
-          "name": "isActive",
-          "type": 1,
-          "flags": 8,
-          "indexId": "4:8921073315528330602"
-        },
-        {
-          "id": "7:9161165334190256823",
-          "name": "isSystem",
-          "type": 1,
-          "flags": 8,
-          "indexId": "5:5997533166285115945"
-        },
-        {
-          "id": "8:1332993432919055622",
-          "name": "budget",
-          "type": 8
-        },
-        {
-          "id": "9:7944136579042952718",
-          "name": "allowReceipt",
-          "type": 1
-        },
-        {
-          "id": "10:1010018675042071174",
-          "name": "allowPayment",
-          "type": 1
-        },
-        {
-          "id": "11:6893099663783042236",
-          "name": "allowTransfer",
-          "type": 1
-        },
-        {
-          "id": "12:9095880957008457684",
-          "name": "openingBalance",
-          "type": 8
-        },
-        {
-          "id": "13:4847783130571718819",
+          "id": "5:7308999433698019718",
           "name": "description",
           "type": 9
         },
         {
-          "id": "14:6174512439246525141",
+          "id": "6:5936965314665774222",
+          "name": "amountDr",
+          "type": 7
+        },
+        {
+          "id": "7:9156167102570850397",
+          "name": "amountCr",
+          "type": 7
+        },
+        {
+          "id": "8:1370996393102818295",
+          "name": "txnMode",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "7:8454848033744381955"
+        },
+        {
+          "id": "9:7356588122190672795",
+          "name": "modeAccount",
+          "type": 5,
+          "flags": 8,
+          "indexId": "8:3075213950846503505"
+        },
+        {
+          "id": "10:7842207762504896190",
+          "name": "txnType",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "9:5383769689304780895"
+        },
+        {
+          "id": "11:1489578814845409431",
+          "name": "scrollNo",
+          "type": 5,
+          "flags": 8,
+          "indexId": "10:309534776079532775"
+        },
+        {
+          "id": "12:3360457327064616118",
+          "name": "txnDate",
+          "type": 10,
+          "flags": 8,
+          "indexId": "11:1904891229686050323"
+        },
+        {
+          "id": "13:8120996116591326252",
           "name": "createdOn",
           "type": 10
         }
@@ -136,17 +222,15 @@
       "relations": []
     }
   ],
-  "lastEntityId": "3:3731670892608306914",
-  "lastIndexId": "5:5997533166285115945",
+  "lastEntityId": "4:6670135516669978220",
+  "lastIndexId": "11:1904891229686050323",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    1476695947901763224
-  ],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }

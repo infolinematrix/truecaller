@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-double inputHeight = 45.0.h;
+double inputHeight = 40.0.h;
 
 final List<Map<String, dynamic>> hasBankAccount = [
   {'code': 'YES', 'name': 'Yes, I have'},

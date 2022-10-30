@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData lightTheme = ThemeData(
@@ -128,7 +126,7 @@ ThemeData lightTheme = ThemeData(
       letterSpacing: 1.2.sp,
     ),
     iconTheme: const IconThemeData(color: Colors.black),
-    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    // systemOverlayStyle: SystemUiOverlayStyle.dark,
   ),
   bottomAppBarTheme: const BottomAppBarTheme(
       // bottom app bar theme
@@ -165,12 +163,9 @@ ThemeData lightTheme = ThemeData(
   buttonBarTheme: const ButtonBarThemeData(
       // button bar theme
       ),
-      
+
   fontFamily: 'ROBOTO',
   splashFactory: InkSplash.splashFactory,
-
-  
-
 );
 
 /// DARK THEME

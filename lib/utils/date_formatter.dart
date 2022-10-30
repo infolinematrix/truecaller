@@ -1,3 +1,30 @@
+//--
+List<String> monthsShortUpercase = [
+  'JAN',
+  'FEB',
+  'MAR',
+  'APR',
+  'MAY',
+  'JUN',
+  'JULY',
+  'AUG',
+  'SEPT',
+  'OCT',
+  'NOV',
+  'DEC'
+];
+
+Map<String, dynamic> dateMap(String dt) {
+  DateTime parseDt = DateTime.parse(dt);
+
+  final data = {
+    'day': parseDt.day.toString(),
+    'month': monthsShortUpercase[parseDt.month - 1],
+    'year': parseDt.year.toString()
+  };
+  return data;
+}
+
 String formatDate(String dt) {
   if (dt == "null") return "Date Error";
 

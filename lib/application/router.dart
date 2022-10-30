@@ -15,7 +15,7 @@ import 'package:truecaller/presentation/screens/settings/bank_account_screen.dar
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/account_select_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/payment_screen.dart';
-import 'package:truecaller/presentation/screens/transactions/receipt_screen.dart';
+import 'package:truecaller/presentation/screens/transactions/receive_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/transfer_screen.dart';
 
 import '../presentation/screens/error.dart';
@@ -132,22 +132,18 @@ final GoRouter router = GoRouter(
               child: const AccountEditScreen(),
             ),
           ),
+          GoRoute(
+              path: 'statement',
+              name: "STATEMENT",
+              pageBuilder: (context, state) {
+                AccountsModel account = state.extra as AccountsModel;
+                return buildPageWithDefaultTransition<void>(
+                  context: context,
+                  state: state,
+                  child: AccountStatementScreen(account: account),
+                );
+              }),
         ]),
-    GoRoute(
-        path: '/statement/:id/:name',
-        name: "STATEMENT",
-        pageBuilder: (context, state) {
-          String name = state.params['name']!;
-          int id = int.parse(state.params['id']!);
-          return buildPageWithDefaultTransition<void>(
-            context: context,
-            state: state,
-            child: AccountStatementScreen(
-              name: name,
-              id: id,
-            ),
-          );
-        }),
     GoRoute(
       path: '/settings',
       name: "SETTINGS",
@@ -210,7 +206,7 @@ final GoRouter router = GoRouter(
       name: 'RECEIPT',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return buildPageWithDefaultTransition<void>(
-            context: context, state: state, child: const ReceiptScreen());
+            context: context, state: state, child: const ReceiveScreen());
       },
     ),
     GoRoute(

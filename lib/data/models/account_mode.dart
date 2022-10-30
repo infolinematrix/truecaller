@@ -9,6 +9,7 @@ class AccountsModel {
 
   @Unique()
   String name;
+
   String type;
   bool hasChild;
 

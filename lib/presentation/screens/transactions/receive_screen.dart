@@ -9,8 +9,8 @@ import 'package:truecaller/presentation/widgets/container_block.dart';
 import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
 
-class ReceiptScreen extends ConsumerWidget {
-  const ReceiptScreen({super.key});
+class ReceiveScreen extends ConsumerWidget {
+  const ReceiveScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

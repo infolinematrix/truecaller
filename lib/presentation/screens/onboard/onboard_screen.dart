@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:truecaller/presentation/screens/error.dart';
@@ -26,9 +24,9 @@ class OnboardScreen extends ConsumerWidget {
           return const SettingsScreen();
         }
 
-        if (data.isAuth == false) {
-          exit(0);
-        }
+        // if (data.isAuth == false) {
+        //   exit(0);
+        // }
 
         return const HomeScreen();
       },

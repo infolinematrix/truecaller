@@ -1,4 +1,4 @@
-class AppValidation {
+class InputValidation {
   static String? validateMobileNumber(value) {
     RegExp regex = RegExp(r'^[1-9]\d{9}$');
     if (!regex.hasMatch(value)) {

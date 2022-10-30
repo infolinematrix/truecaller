@@ -4,25 +4,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
+import 'package:truecaller/data/models/account_mode.dart';
+import 'package:truecaller/data/models/transactions_model.dart';
 import 'package:truecaller/presentation/screens/accounts/account_statement_controller.dart';
+import 'package:truecaller/presentation/screens/error.dart';
+
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/functions.dart';
 import 'package:truecaller/utils/ui_helper.dart';
 import 'package:intl/intl.dart';
 
 class AccountStatementScreen extends ConsumerWidget {
-  const AccountStatementScreen(
-      {super.key, required this.name, required this.id});
-  final int id;
-  final String name;
+  const AccountStatementScreen({super.key, required this.account});
+
+  final AccountsModel account;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormBuilderState>();
+    final transactions = ref.watch(transactionsProvider(account.id));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).canvasColor,
-        title: const Text("ACCOUNT NAME"),
+        title: Text(account.name.toUpperCase()),
         actions: [
           IconButton(
               onPressed: () {
@@ -94,82 +98,21 @@ class AccountStatementScreen extends ConsumerWidget {
                 )
               : const SizedBox.shrink(),
           Expanded(
-            child: ListView.builder(
-              itemCount: 15,
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Padding(
-                      //   padding: EdgeInsets.only(left: 8.0.w, top: 4.h),
-                      //   child: Text(
-                      //     "28TH, OCTOBER, 2002",
-                      //     style: Theme.of(context)
-                      //         .textTheme
-                      //         .caption!
-                      //         .copyWith(color: Theme.of(context).primaryColor),
-                      //   ),
-                      // ),
-                      ListTile(
-                        // dense: true,
-                        // contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                        // leading: ClipOval(
-                        //   child: Container(
-                        //     alignment: Alignment.center,
-                        //     color: Color(randomColor[randomNumber(
-                        //         min: 0, max: randomColor.length - 1)]),
-                        //     height: 36.0.sp,
-                        //     width: 36.0.sp,
-                        //     child: Text(
-                        //       "M",
-                        //       style: Theme.of(context)
-                        //           .textTheme
-                        //           .titleLarge!
-                        //           .copyWith(fontWeight: FontWeight.w500),
-                        //     ),
-                        //   ),
-                        // ),
-                        leading: const DateWidget(),
-                        title: const Text(
-                          "To Account head",
-                          style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        subtitle: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Iconsax.export_3, //import_2
-                                  size: 15.sp, color: Colors.red,
-                                ),
-                                UIHelper.horizontalSpaceExtraSmall(),
-                                const Text("Payment description"),
-                              ],
-                            ),
-                          ],
-                        ),
-                        trailing: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              "12,650",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "Cash",
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+            child: transactions.when(
+              error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              data: (data) {
+                return ListView.separated(
+                  itemCount: data.length,
+                  separatorBuilder: (context, index) => Divider(
+                    height: 5.0.h,
                   ),
+                  itemBuilder: (BuildContext context, int index) {
+                    TransactionsModel txn = data[index];
+                    return TransactionItem(txn: txn);
+                  },
                 );
               },
             ),

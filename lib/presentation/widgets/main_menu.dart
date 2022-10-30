@@ -2,9 +2,9 @@ import 'package:animate_do/animate_do.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
-import 'package:truecaller/utils/functions.dart';
 import 'package:truecaller/utils/index.dart';
 
 class MainMenuWidget extends StatelessWidget {
@@ -30,8 +30,8 @@ class MainMenuWidget extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     child: GestureDetector(
                       onTap: () async {
-                        Navigator.pushNamed(context, "/account_select",
-                            arguments: "RECEIPT");
+                        GoRouter.of(context).push("/transaction/account-select",
+                            extra: {'allowedTransactionType': 'RECEIVE'});
                       },
                       child: SizedBox(
                         width: mainMenuWidth,
@@ -48,14 +48,13 @@ class MainMenuWidget extends StatelessWidget {
                               child: Center(
                                 child: Icon(
                                   Iconsax.import_1,
-                                  // color: Colors.white,
                                   size: 24.sp,
                                 ),
                               ),
                             ),
                             UIHelper.verticalSpaceSmall(),
                             Text(
-                              "Receipt",
+                              "Receive",
                               style: TextStyle(
                                   // color: Colors.grey.shade800,
                                   fontSize: 12.sp,
@@ -71,8 +70,8 @@ class MainMenuWidget extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     child: GestureDetector(
                       onTap: () async {
-                        Navigator.pushNamed(context, "/account_select",
-                            arguments: "RECEIPT");
+                        GoRouter.of(context).push("/transaction/account-select",
+                            extra: {'allowedTransactionType': 'PAYMENT'});
                       },
                       child: SizedBox(
                         width: mainMenuWidth,
