@@ -12,9 +12,10 @@ class DateWidget extends StatelessWidget {
     final date = dateMap(strDate);
 
     return Container(
+      // margin: EdgeInsets.symmetric(vertical: 1.h),
       clipBehavior: Clip.hardEdge,
-      width: 45.sp,
-      height: 45.sp,
+      width: 45.w,
+      height: 45.h,
       decoration: BoxDecoration(
         border: Border.all(
           color: Theme.of(context).highlightColor,

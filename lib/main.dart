@@ -32,12 +32,9 @@ void main() {
 
     // Transparent status bar
     if (Platform.isAndroid) {
-      
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark));
-
-      
     }
   }, (Object error, StackTrace stack) {
     ErrorScreen(msg: error.toString());

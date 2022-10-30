@@ -12,7 +12,9 @@ import 'package:truecaller/presentation/widgets/main_menu.dart';
 import 'package:truecaller/utils/index.dart';
 
 import 'components/app_aupdate.dart';
+import 'components/app_bar.dart';
 import 'components/month_summary.dart';
+import 'components/recent_activity.dart';
 import 'components/today_summary.dart';
 import 'components/todays_transaction_widget.dart';
 import 'home_controller.dart';
@@ -215,15 +217,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             data: (data) {
               return CustomScrollView(
                 slivers: <Widget>[
-                  SliverAppBar(
-                    backgroundColor: Theme.of(context).canvasColor,
-                    title: const Text("FINDO"),
-                    actions: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Iconsax.notification))
-                    ],
-                  ),
+                  const AppBarWidget(),
                   SliverAppBar(
                     backgroundColor: Theme.of(context).canvasColor,
                     pinned: true,
@@ -240,122 +234,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     ),
                   ),
                   SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
+
+                  const RecentActivity(),
+
                   SliverToBoxAdapter(
-                    child: SizedBox(
-                      height: 85.h,
-                      child: ListView.builder(
-                        itemCount: 10,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            width: 90.w,
-                            child: Container(
-                              margin: EdgeInsets.only(left: 8.0.w),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Stack(
-                                    children: [
-                                      ClipOval(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          color: Color(randomColor[randomNumber(
-                                              min: 0,
-                                              max: randomColor.length - 1)]),
-                                          height: 40.0.sp,
-                                          width: 40.0.sp,
-                                          child: Text(
-                                            "M",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge!
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 0,
-                                        right: 0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 4.0.sp,
-                                                vertical: 2.0.sp),
-                                            color: const Color(0xffF8742C),
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                "1223",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle2!
-                                                    .copyWith(
-                                                        fontSize: 8.0.sp,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Theme.of(context)
-                                                            .canvasColor),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  UIHelper.verticalSpaceSmall(),
-                                  Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 8.0.w),
-                                      child: Text(
-                                        "My Account Book",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.clip,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2!
-                                            .copyWith(
-                                                fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ),
-                                  UIHelper.verticalSpaceExtraSmall(),
-                                  Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 8.0.w),
-                                      child: Text(
-                                        "12 min ago",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!
-                                            .copyWith(),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: UIHelper.verticalSpaceMedium(),
+                    child: UIHelper.verticalSpaceSmall(),
                   ),
                   const MainMenuWidget(),
 
                   //--Today Summary
                   TodaySummary(data: data.todayMonthSummary),
 
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: const Image(
+                          image: AssetImage('assets/images/banner1.png'),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SliverToBoxAdapter(
+                    child: UIHelper.verticalSpaceSmall(),
+                  ),
+                  
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
@@ -434,7 +339,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                         (context, index) {
                       return ListTile(
                         visualDensity:
-                            const VisualDensity(horizontal: 0, vertical: -4),
+                            const VisualDensity(horizontal: 0, vertical: -2),
                         title: Text(
                           data.monthlyAccountWiseSummary[index]['account'].name,
                           style: Theme.of(context).textTheme.subtitle2,

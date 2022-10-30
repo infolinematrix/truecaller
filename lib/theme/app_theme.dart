@@ -144,6 +144,7 @@ ThemeData lightTheme = ThemeData(
       // navigation rail theme
       ),
   typography: Typography.material2018(),
+
   cupertinoOverrideTheme: const CupertinoThemeData(
       //cupertino theme
       ),
@@ -282,7 +283,7 @@ ThemeData darkTheme = ThemeData(
     navigationRailTheme: const NavigationRailThemeData(
         // navigation rail theme
         ),
-    typography: Typography.material2018(),
+    typography: Typography.material2021(),
     cupertinoOverrideTheme: const CupertinoThemeData(
         //cupertino theme
         ),
