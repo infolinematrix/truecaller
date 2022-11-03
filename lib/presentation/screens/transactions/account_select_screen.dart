@@ -83,9 +83,9 @@ class AccountSelectScreen extends ConsumerWidget {
                               .pushNamed("PAYMENT", extra: account);
                         }
 
-                        if (allowedTransactionType == 'RECEIPT') {
+                        if (allowedTransactionType == 'RECEIVE') {
                           GoRouter.of(context)
-                              .pushNamed("RECEIPT", extra: account);
+                              .pushNamed("RECEIVE", extra: account);
                         }
                       },
                     );

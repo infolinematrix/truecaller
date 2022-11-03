@@ -66,32 +66,39 @@ final monthlyAccountWiseExpensesSummaryProvider =
     var data = [];
     AccountRepository().all().then((accounts) async {
       for (AccountsModel account in accounts) {
-        if (account.type != 'BANK') {
+        if (account.type != 'BANK' && account.type == 'EXPENSES') {
           var summary = await AccountRepository().accountSummary(
               accountNo: account.id,
-              startDate: firstDayOfMonth(),
-              endtDate: lastDayOfMonth());
+              startDate: firstDayCurrentMonth,
+              endtDate: lastDayCurrentMonth);
 
           // var balance =
           //     double.parse(account.openingBalance.toString()).toDouble() -
           //         (double.parse(summary['sum_credit'].toString()).toDouble() -
           //             double.parse(summary['sum_debit'].toString()).toDouble());
+          double balance = 0;
+          double percentageUsed = 0;
 
-          var balance =
-              double.parse(summary['sum_debit'].toString()).toDouble();
+          if (account.budget! > 0) {
+            balance = double.parse(summary['sum_debit'].toString()).toDouble();
 
-          var percentageUsed =
-              (double.parse(summary['sum_debit'].toString()).toDouble() /
-                      double.parse(account.budget.toString()).toDouble()) *
-                  100;
+            percentageUsed =
+                (double.parse(summary['sum_debit'].toString()).toDouble() /
+                        double.parse(account.budget.toString()).toDouble()) *
+                    100;
+          } else {
+            balance = double.parse(summary['sum_debit'].toString()).toDouble();
+          }
 
-          data.addAll([
-            {
-              'account': account,
-              'balance': balance,
-              'percetageUsed': percentageUsed
-            }
-          ]);
+          if (balance > 0) {
+            data.addAll([
+              {
+                'account': account,
+                'balance': balance,
+                'percetageUsed': percentageUsed
+              }
+            ]);
+          }
         }
       }
     });
@@ -106,7 +113,7 @@ final currentMonthSummaryProvider =
     Provider.autoDispose<Map<String, dynamic>>((ref) {
   try {
     final List<TransactionsModel> data = TransactionRepository().getByDateRange(
-        startDate: firstDayOfMonth(), endtDate: lastDayOfMonth());
+        startDate: firstDayCurrentMonth, endtDate: lastDayCurrentMonth);
 
     double r = 0;
     double p = 0;

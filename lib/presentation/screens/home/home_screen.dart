@@ -260,7 +260,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   SliverToBoxAdapter(
                     child: UIHelper.verticalSpaceSmall(),
                   ),
-                  
+
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
@@ -279,7 +279,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               child: const Text("PAYMENT")),
                           TextButton(
                               onPressed: () {
-                                GoRouter.of(context).pushNamed("RECEIPT");
+                                GoRouter.of(context).push(
+                                    "/transaction/account-select",
+                                    extra: {
+                                      'allowedTransactionType': 'RECEIVE'
+                                    });
                               },
                               child: const Text("RECEIVE")),
                           TextButton(
@@ -319,7 +323,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "EXPENDITURE SUMMARY - APRIL. 2022",
+                          "EXPENDITURE SUMMARY - ${months[DateTime.now().month - 1].toUpperCase()}, ${DateTime.now().year} ",
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
@@ -340,6 +344,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       return ListTile(
                         visualDensity:
                             const VisualDensity(horizontal: 0, vertical: -2),
+                        leading: ClipOval(
+                          child: Container(
+                            alignment: Alignment.center,
+                            color: Color(randomColor[randomNumber(
+                                min: 0, max: randomColor.length - 1)]),
+                            height: 40.0.sp,
+                            width: 40.0.sp,
+                            child: Text(
+                              data.monthlyAccountWiseSummary[index]['account']
+                                  .name[0],
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
                         title: Text(
                           data.monthlyAccountWiseSummary[index]['account'].name,
                           style: Theme.of(context).textTheme.subtitle2,
@@ -350,38 +371,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                         trailing: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
-                              height: 10.0.h,
-                              width: 100.w,
-                              child: Stack(
-                                children: <Widget>[
-                                  Container(
-                                    color: Theme.of(context).disabledColor,
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 4,
-                                  ),
-                                  Positioned(
-                                    right: 0,
-                                    child: Container(
-                                      color: Theme.of(context).hoverColor,
-                                      width: data.monthlyAccountWiseSummary[
-                                              index]['percetageUsed'] ??
-                                          double.parse(data
-                                                  .monthlyAccountWiseSummary[
-                                                      index]['percetageUsed']
-                                                  .toString())
-                                              .toDouble()
-                                              .w, // here you can define your percentage of progress, 0.2 = 20%, 0.3 = 30 % .....
-                                      height: 4,
+                            data.monthlyAccountWiseSummary[index]['account']
+                                        .budget >
+                                    0
+                                ? SizedBox(
+                                    height: 10.0.h,
+                                    width: 100.w,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Container(
+                                          color:
+                                              Theme.of(context).disabledColor,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 4,
+                                        ),
+                                        Positioned(
+                                          right: 0,
+                                          child: Container(
+                                            color: Theme.of(context).hoverColor,
+                                            width: data.monthlyAccountWiseSummary[
+                                                    index]['percetageUsed'] ??
+                                                double.parse(data
+                                                        .monthlyAccountWiseSummary[
+                                                            index]
+                                                            ['percetageUsed']
+                                                        .toString())
+                                                    .toDouble()
+                                                    .w, // here you can define your percentage of progress, 0.2 = 20%, 0.3 = 30 % .....
+                                            height: 4,
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                  )
+                                : SizedBox(
+                                    height: 10.0.h,
                                   ),
-                                ],
-                              ),
-                            ),
                             Text(
                                 data.monthlyAccountWiseSummary[index]['balance']
                                     .toString(),
-                                style: Theme.of(context).textTheme.subtitle2),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(fontWeight: FontWeight.w500)),
                             data.monthlyAccountWiseSummary[index]['account']
                                         .budget >
                                     0
@@ -398,6 +431,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       );
                     }),
                   ),
+
                   const SliverToBoxAdapter(
                     child: Divider(),
                   ),

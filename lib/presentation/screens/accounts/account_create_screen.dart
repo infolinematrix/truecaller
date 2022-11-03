@@ -130,7 +130,8 @@ class AccountCreateScreen extends ConsumerWidget {
                             textCapitalization: TextCapitalization.words,
                           ),
                         ),
-                        ref.watch(hasChildProvider) == false
+                        ref.watch(hasChildProvider) == false &&
+                                parent.allowReceipt == false
                             ? Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,

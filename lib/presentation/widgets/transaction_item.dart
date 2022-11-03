@@ -16,7 +16,7 @@ class TransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      visualDensity: const VisualDensity(vertical: -0),
+      visualDensity: const VisualDensity(horizontal: 0, vertical: -2),
       leading: DateWidget(strDate: txn.txnDate!.toString()),
       title: Text(
         txn.description!,

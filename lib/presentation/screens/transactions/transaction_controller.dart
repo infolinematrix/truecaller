@@ -78,7 +78,7 @@ final doPayment = FutureProvider.family
         accountName: formData['name'],
         narration: 'By Cash',
         amountDr: double.parse(formData['amount'].toString()).toDouble(),
-        amountCr: 0.0,
+        amountCr: double.parse(formData['amount'].toString()).toDouble(),
         txnMode: formData['mode'].toString().trim(),
         modeAccount: 0,
         txnType: 'PAYMENT',
@@ -100,10 +100,71 @@ final doPayment = FutureProvider.family
         accountName: formData['name'],
         narration: 'By Bank',
         amountDr: double.parse(formData['amount'].toString()).toDouble(),
-        amountCr: 0.0,
+        amountCr: double.parse(formData['amount'].toString()).toDouble(),
         txnMode: formData['mode'].toString().trim(),
         modeAccount: bank!.id,
         txnType: 'PAYMENT',
+        scrollNo: scrollNo + 1,
+        txnDate: DateTime.now().toLocal(),
+        createdOn: DateTime.now().toLocal(),
+        description: formData['description'] ?? 'No description',
+      );
+
+      id = await transactionBox.putAsync(data);
+    }
+
+    if (id != 0) {
+      await updateScroll();
+      store!.objStore.awaitAsyncSubmitted();
+
+      return true;
+    }
+  } catch (e) {
+    rethrow;
+  }
+
+  return false;
+});
+
+/// RECEIVE ENTRY
+final doReceipt = FutureProvider.family
+    .autoDispose<bool, Map<String, dynamic>>((ref, formData) async {
+  try {
+    int id = 0;
+    var scrollNo = await getScroll();
+
+    if (formData['mode'] == 'CASH') {
+      final data = TransactionsModel(
+        account: formData['account'],
+        accountName: formData['name'],
+        narration: 'By Cash',
+        amountDr: double.parse(formData['amount'].toString()).toDouble(),
+        amountCr: double.parse(formData['amount'].toString()).toDouble(),
+        txnMode: formData['mode'].toString().trim(),
+        modeAccount: 0,
+        txnType: 'RECEIVE',
+        scrollNo: scrollNo + 1,
+        txnDate: DateTime.now().toLocal(),
+        createdOn: DateTime.now().toLocal(),
+        description: formData['description'] ?? 'No description',
+      );
+
+      id = await transactionBox.putAsync(data);
+    }
+
+    if (formData['mode'] == 'BANK') {
+      AccountsModel? bank =
+          AccountRepository().accountBox.get(formData['bank_account']);
+
+      final data = TransactionsModel(
+        account: formData['account'],
+        accountName: formData['name'],
+        narration: 'By Bank',
+        amountDr: double.parse(formData['amount'].toString()).toDouble(),
+        amountCr: double.parse(formData['amount'].toString()).toDouble(),
+        txnMode: formData['mode'].toString().trim(),
+        modeAccount: bank!.id,
+        txnType: 'RECEIVE',
         scrollNo: scrollNo + 1,
         txnDate: DateTime.now().toLocal(),
         createdOn: DateTime.now().toLocal(),

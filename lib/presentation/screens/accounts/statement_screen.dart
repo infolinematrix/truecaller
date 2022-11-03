@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/data/models/transactions_model.dart';
 import 'package:truecaller/presentation/screens/accounts/account_statement_controller.dart';
 import 'package:truecaller/presentation/screens/error.dart';
+import 'package:truecaller/presentation/screens/home/home_controller.dart';
 
 import 'package:truecaller/presentation/widgets/index.dart';
-import 'package:truecaller/utils/functions.dart';
-import 'package:truecaller/utils/ui_helper.dart';
+import 'package:truecaller/utils/index.dart';
 import 'package:intl/intl.dart';
 
 class AccountStatementScreen extends ConsumerWidget {
@@ -26,7 +28,7 @@ class AccountStatementScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).canvasColor,
-        title: Text(account.name.toUpperCase()),
+        title: Text("STATEMENT - ${account.name.toUpperCase()}"),
         actions: [
           IconButton(
               onPressed: () {
@@ -111,7 +113,40 @@ class AccountStatementScreen extends ConsumerWidget {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     TransactionsModel txn = data[index];
-                    return TransactionItem(txn: txn);
+                    return Slidable(
+                      key: const ValueKey(0),
+                      endActionPane: ActionPane(
+                        extentRatio: .20.w,
+                        motion: const ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            backgroundColor:
+                                Theme.of(context).primaryColorLight,
+                            foregroundColor: Theme.of(context).primaryColorDark,
+                            icon: Iconsax.close_circle,
+                            label: 'Delete',
+                            onPressed: (context) async {
+                              AlertAction? action = await confirmDialog(context,
+                                  '''Are you sure ?\nYou want delete transaction''');
+
+                              if (action == AlertAction.ok) {
+                                await ref
+                                    .read(transactionsProvider(account.id)
+                                        .notifier)
+                                    .delete(txnId: txn.id)
+                                    .then((value) {
+                                  if (value == true) {
+                                    EasyLoading.showSuccess("Deleted..");
+                                    ref.refresh(homeDataProvider);
+                                  }
+                                });
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                      child: TransactionItem(txn: txn),
+                    );
                   },
                 );
               },

@@ -220,8 +220,11 @@ class SettingsScreen extends ConsumerWidget {
                                     if (formKey
                                             .currentState!.value['hasBank'] ==
                                         'YES') {
-                                      GoRouter.of(context)
-                                          .replace('/settings/bank-account');
+                                      GoRouter.of(context).replaceNamed(
+                                          'SETTINGS-BANK-ACCOUNT');
+                                    } else {
+                                      
+                                      GoRouter.of(context).replaceNamed('HOME');
                                     }
                                   }
                                 });

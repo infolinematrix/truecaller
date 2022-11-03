@@ -14,6 +14,21 @@ List<String> monthsShortUpercase = [
   'DEC'
 ];
 
+List<String> months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
 Map<String, dynamic> dateMap(String dt) {
   DateTime parseDt = DateTime.parse(dt);
 
@@ -39,20 +54,6 @@ String formatDate(String dt) {
 String strToDate(String dt) {
   DateTime tempDate = DateTime.now();
 
-  List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
   var suffix = "th";
   var digit = tempDate.day % 10;
   if ((digit > 0 && digit < 4) && (tempDate.day < 11 || tempDate.day > 13)) {
@@ -68,22 +69,7 @@ String strToDate(String dt) {
 String strToMonth(String dt) {
   DateTime tempDate = DateTime.now();
 
-  List<String> months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
-
-  String d = "${months[tempDate.month - 1]}, ${tempDate.year}";
+  String d = "${monthsShortUpercase[tempDate.month - 1]}, ${tempDate.year}";
 
   return d;
 }
@@ -91,27 +77,13 @@ String strToMonth(String dt) {
 String strToShortDate(String dt) {
   DateTime tempDate = DateTime.now();
 
-  List<String> months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
   var suffix = "th";
   var digit = tempDate.day % 10;
   if ((digit > 0 && digit < 4) && (tempDate.day < 11 || tempDate.day > 13)) {
     suffix = ["st", "nd", "rd"][digit - 1];
   }
   String d =
-      "${tempDate.day}$suffix-${months[tempDate.month - 1]}-${tempDate.year}";
+      "${tempDate.day}$suffix-${monthsShortUpercase[tempDate.month - 1]}-${tempDate.year}";
 
   return d;
 }
@@ -119,22 +91,7 @@ String strToShortDate(String dt) {
 String strToShortMonth(int monthNo) {
   // DateTime tempDate = DateTime.now();
 
-  List<String> months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
-
-  String d = months[monthNo - 1];
+  String d = monthsShortUpercase[monthNo - 1];
 
   return d;
 }

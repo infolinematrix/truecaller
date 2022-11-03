@@ -64,4 +64,16 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
       return false;
     }
   }
+
+  //--Delete
+  Future delete({required int parentId, required int id}) async {
+    try {
+      
+      //--Check there is child account exist
+      accountBox.remove(id);
+      getAccounts(parentId);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

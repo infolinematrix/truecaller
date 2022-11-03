@@ -60,8 +60,18 @@ DateTime firstDayOfMonth() {
 
 DateTime lastDayOfMonth() {
   DateTime now = DateTime.now().toLocal();
-  return DateTime(now.year, now.month + 1, 0);
+
+  var lstday = DateTime(now.year, now.month + 1, 0);
+  print(lstday.day);
+  return lstday;
 }
+
+DateTime firstDayCurrentMonth =
+    DateTime.utc(DateTime.now().year, DateTime.now().month, 1);
+DateTime lastDayCurrentMonth = DateTime.utc(
+  DateTime.now().year,
+  DateTime.now().month + 1,
+).subtract(const Duration(days: 1));
 
 DateTime firstDayOfYear() {
   DateTime now = DateTime.now().toLocal();

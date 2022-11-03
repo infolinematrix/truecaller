@@ -39,4 +39,14 @@ class TransactionState
       rethrow;
     }
   }
+
+  Future<bool> delete({required int txnId}) async {
+    try {
+      transactionBox.remove(txnId);
+      getTransactions();
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -1,6 +1,8 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
@@ -63,52 +65,141 @@ class GroupsScreen extends ConsumerWidget {
                     itemCount: data.length,
                     itemBuilder: (BuildContext context, int index) {
                       AccountsModel group = data[index];
-                      return ListTile(
-                        visualDensity:
-                            const VisualDensity(horizontal: 0, vertical: -2),
-                        onTap: () => GoRouter.of(context)
-                            .push('/accounts', extra: {'parent': group}),
-                        leading: ClipOval(
-                          child: Container(
-                            alignment: Alignment.center,
-                            color: Color(randomColor[randomNumber(
-                                min: 0, max: randomColor.length - 1)]),
-                            height: 40.0.sp,
-                            width: 40.0.sp,
-                            child: Text(
-                              group.name[0],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ),
-                        title: Text(
-                          group.name,
-                          maxLines: 1,
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        subtitle: Text(
-                          group.description,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          // style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        trailing: ClipOval(
-                          child: Container(
-                            alignment: Alignment.center,
-                            color: Theme.of(context).disabledColor,
-                            height: 25.0.sp,
-                            width: 25.0.sp,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              size: 12.0.sp,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      );
+                      return group.isSystem == false
+                          ? SlideInDown(
+                              duration:
+                                  Duration(milliseconds: (index + 1) * 100),
+                              child: Slidable(
+                                key: const ValueKey(0),
+                                endActionPane: ActionPane(
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      // backgroundColor:
+                                      //     Theme.of(context).primaryColorLight,
+                                      // foregroundColor:
+                                      //     Theme.of(context).primaryColorDark,
+                                      icon: Iconsax.box_remove,
+                                      label: 'Delete',
+                                      onPressed: (context) async {},
+                                    ),
+                                    SlidableAction(
+                                      // backgroundColor:
+                                      //     Theme.of(context).primaryColorLight,
+                                      // foregroundColor:
+                                      //     Theme.of(context).primaryColorDark,
+                                      icon: Iconsax.edit,
+                                      label: 'Update',
+                                      onPressed: (context) {},
+                                    ),
+                                  ],
+                                ),
+                                child: ListTile(
+                                  visualDensity: const VisualDensity(
+                                      horizontal: 0, vertical: -2),
+                                  onTap: () => GoRouter.of(context).push(
+                                      '/accounts',
+                                      extra: {'parent': group}),
+                                  leading: ClipOval(
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      color: Color(randomColor[randomNumber(
+                                          min: 0,
+                                          max: randomColor.length - 1)]),
+                                      height: 40.0.sp,
+                                      width: 40.0.sp,
+                                      child: Text(
+                                        group.name[0],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                    group.name,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  subtitle: Text(
+                                    group.description,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                  trailing: ClipOval(
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      color: Theme.of(context).disabledColor,
+                                      height: 25.0.sp,
+                                      width: 25.0.sp,
+                                      child: Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 12.0.sp,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : SlideInDown(
+                              duration:
+                                  Duration(milliseconds: (index + 1) * 100),
+                              child: ListTile(
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -2),
+                                onTap: () => GoRouter.of(context).push(
+                                    '/accounts',
+                                    extra: {'parent': group}),
+                                leading: ClipOval(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    color: Color(randomColor[randomNumber(
+                                        min: 0, max: randomColor.length - 1)]),
+                                    height: 40.0.sp,
+                                    width: 40.0.sp,
+                                    child: Text(
+                                      group.name[0],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ),
+                                title: Text(
+                                  group.name,
+                                  maxLines: 1,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                subtitle: Text(
+                                  group.description,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                trailing: ClipOval(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    color: Theme.of(context).disabledColor,
+                                    height: 25.0.sp,
+                                    width: 25.0.sp,
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 12.0.sp,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                     },
                   ),
                 );

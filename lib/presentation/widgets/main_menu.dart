@@ -31,46 +31,6 @@ class MainMenuWidget extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async {
                         GoRouter.of(context).push("/transaction/account-select",
-                            extra: {'allowedTransactionType': 'RECEIVE'});
-                      },
-                      child: SizedBox(
-                        width: mainMenuWidth,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 50.sp,
-                              height: 50.sp,
-                              decoration: BoxDecoration(
-                                color: Color(randomColor[randomNumber(
-                                    min: 0, max: randomColor.length - 1)]),
-                                borderRadius: BorderRadius.circular(10.sp),
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  Iconsax.import_1,
-                                  size: 24.sp,
-                                ),
-                              ),
-                            ),
-                            UIHelper.verticalSpaceSmall(),
-                            Text(
-                              "Receive",
-                              style: TextStyle(
-                                  // color: Colors.grey.shade800,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  FadeInDown(
-                    duration: const Duration(milliseconds: 200),
-                    child: GestureDetector(
-                      onTap: () async {
-                        GoRouter.of(context).push("/transaction/account-select",
                             extra: {'allowedTransactionType': 'PAYMENT'});
                       },
                       child: SizedBox(
@@ -96,6 +56,45 @@ class MainMenuWidget extends StatelessWidget {
                             UIHelper.verticalSpaceSmall(),
                             Text(
                               "Payment",
+                              style: TextStyle(
+                                  // color: Colors.grey.shade800,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  FadeInDown(
+                    duration: const Duration(milliseconds: 200),
+                    child: GestureDetector(
+                      onTap: () async {
+                        GoRouter.of(context).push("/transaction/account-select",
+                            extra: {'allowedTransactionType': 'RECEIVE'});
+                      },
+                      child: SizedBox(
+                        width: mainMenuWidth,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 50.sp,
+                              height: 50.sp,
+                              decoration: BoxDecoration(
+                                color: Color(randomColor[randomNumber(
+                                    min: 0, max: randomColor.length - 1)]),
+                                borderRadius: BorderRadius.circular(10.sp),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Iconsax.import_1,
+                                  size: 24.sp,
+                                ),
+                              ),
+                            ),
+                            UIHelper.verticalSpaceSmall(),
+                            Text(
+                              "Receive",
                               style: TextStyle(
                                   // color: Colors.grey.shade800,
                                   fontSize: 12.sp,

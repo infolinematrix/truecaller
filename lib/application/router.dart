@@ -155,7 +155,7 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           path: 'bank-account',
-          name: 'BANK-ACCOUNT',
+          name: 'SETTINGS-BANK-ACCOUNT',
           pageBuilder: (BuildContext context, GoRouterState state) {
             return buildPageWithDefaultTransition(
                 context: context,
@@ -203,10 +203,13 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/receipt',
-      name: 'RECEIPT',
+      name: 'RECEIVE',
       pageBuilder: (BuildContext context, GoRouterState state) {
+        AccountsModel account = state.extra as AccountsModel;
         return buildPageWithDefaultTransition<void>(
-            context: context, state: state, child: const ReceiveScreen());
+            context: context,
+            state: state,
+            child: ReceiveScreen(account: account));
       },
     ),
     GoRoute(

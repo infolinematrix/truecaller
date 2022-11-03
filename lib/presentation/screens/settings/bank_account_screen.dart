@@ -166,7 +166,7 @@ class SettingsBankAccountScreen extends ConsumerWidget {
                                 .then((value) {
                               if (value == true) {
                                 EasyLoading.showSuccess("Successfull");
-                                GoRouter.of(context).replace("/home");
+                                GoRouter.of(context).replaceNamed("HOME");
                               }
                             });
                           } else {

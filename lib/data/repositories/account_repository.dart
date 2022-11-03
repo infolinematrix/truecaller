@@ -119,8 +119,10 @@ class AccountRepository {
       required DateTime endtDate}) async {
     QueryBuilder<TransactionsModel> builder = transactionBox.query(
       TransactionsModel_.account.equals(accountNo) &
-          TransactionsModel_.txnDate.between(startDate.millisecondsSinceEpoch,
-              endtDate.millisecondsSinceEpoch),
+          TransactionsModel_.txnDate
+              .greaterOrEqual(startDate.millisecondsSinceEpoch) &
+          TransactionsModel_.txnDate
+              .lessOrEqual(endtDate.microsecondsSinceEpoch),
     );
     Query<TransactionsModel> query = builder.build();
 
