@@ -99,35 +99,6 @@ class GroupCreateScreen extends ConsumerWidget {
                                 .toList(),
                           ),
                         ),
-                        UIHelper.verticalSpaceMedium(),
-
-                        SizedBox(
-                          // height: inputHeight,
-                          child: FormBuilderSwitch(
-                            title: const Text('Allow Payment entry'),
-                            name: 'allowPayment',
-                            initialValue: true,
-                            decoration: checkBoxDecoration,
-                          ),
-                        ),
-                        // UIHelper.verticalSpaceMedium(),
-                        SizedBox(
-                          // height: inputHeight,
-                          child: FormBuilderSwitch(
-                            title: const Text('Allow Receipt entry'),
-                            name: 'allowReceipt',
-                            initialValue: true,
-                            decoration: checkBoxDecoration,
-                          ),
-                        ),
-                        SizedBox(
-                          child: FormBuilderSwitch(
-                            title: const Text('Allow Transfer entry'),
-                            name: 'allowTransfer',
-                            initialValue: true,
-                            decoration: checkBoxDecoration,
-                          ),
-                        ),
                         UIHelper.verticalSpaceLarge(),
                         SizedBox(
                           height: inputHeight,
@@ -144,6 +115,36 @@ class GroupCreateScreen extends ConsumerWidget {
                             textCapitalization: TextCapitalization.words,
                           ),
                         ),
+                        UIHelper.verticalSpaceMedium(),
+
+                        SizedBox(
+                          // height: inputHeight,
+                          child: FormBuilderSwitch(
+                            title: const Text('Allow Payment'),
+                            name: 'allowPayment',
+                            initialValue: true,
+                            decoration: checkBoxDecoration,
+                          ),
+                        ),
+                        // UIHelper.verticalSpaceMedium(),
+                        SizedBox(
+                          // height: inputHeight,
+                          child: FormBuilderSwitch(
+                            title: const Text('Allow Receipt'),
+                            name: 'allowReceipt',
+                            initialValue: false,
+                            decoration: checkBoxDecoration,
+                          ),
+                        ),
+                        SizedBox(
+                          child: FormBuilderSwitch(
+                            title: const Text('Allow Transfer'),
+                            name: 'allowTransfer',
+                            initialValue: false,
+                            decoration: checkBoxDecoration,
+                          ),
+                        ),
+
                         UIHelper.verticalSpaceExtraLarge(),
                         Align(
                           alignment: Alignment.centerRight,

@@ -9,6 +9,7 @@ import 'package:truecaller/presentation/screens/accounts/statement_screen.dart';
 import 'package:truecaller/presentation/screens/groups/group_create_screen.dart';
 import 'package:truecaller/presentation/screens/groups/group_edit_screen.dart';
 import 'package:truecaller/presentation/screens/groups/groups_screen.dart';
+import 'package:truecaller/presentation/screens/help/helps_screen.dart';
 import 'package:truecaller/presentation/screens/home/home_screen.dart';
 import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
 import 'package:truecaller/presentation/screens/settings/bank_account_screen.dart';
@@ -20,6 +21,7 @@ import 'package:truecaller/presentation/screens/transactions/transfer_screen.dar
 
 import '../presentation/screens/error.dart';
 import '../presentation/screens/reports/report_screen.dart';
+import '../presentation/screens/settings/settings_update_screen.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
@@ -154,6 +156,16 @@ final GoRouter router = GoRouter(
       ),
       routes: [
         GoRoute(
+          path: 'update',
+          name: 'SETTINGS-UPDATE',
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return buildPageWithDefaultTransition(
+                context: context,
+                state: state,
+                child: const SettingsUpdateScreen());
+          },
+        ),
+        GoRoute(
           path: 'bank-account',
           name: 'SETTINGS-BANK-ACCOUNT',
           pageBuilder: (BuildContext context, GoRouterState state) {
@@ -218,6 +230,19 @@ final GoRouter router = GoRouter(
       pageBuilder: (BuildContext context, GoRouterState state) {
         return buildPageWithDefaultTransition<void>(
             context: context, state: state, child: const TransferScreen());
+      },
+    ),
+
+    //--HELP
+    GoRoute(
+      path: '/helps',
+      name: 'HELPS',
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const HelpsScreen(),
+        );
       },
     ),
   ],

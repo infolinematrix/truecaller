@@ -1,4 +1,6 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
@@ -10,32 +12,68 @@ class AccountSearchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final formKey = GlobalKey<FormBuilderState>();
+
     return Scaffold(
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              SliverAppBar(
-                backgroundColor: Theme.of(context).canvasColor,
-                title: const Text('SEARCH'),
-                pinned: true,
-                floating: true,
-                forceElevated: innerBoxIsScrolled,
-                bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(50.0.h),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Card(
-                      child: SizedBox(
-                        height: 40.h,
+              FormBuilder(
+                key: formKey,
+                child: SliverAppBar(
+                  backgroundColor: Theme.of(context).canvasColor,
+                  title: const Text('SEARCH'),
+                  pinned: true,
+                  floating: true,
+                  forceElevated: innerBoxIsScrolled,
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(45.0.h),
+                    child: Container(
+                      height: 45.h,
+                      margin: EdgeInsets.symmetric(horizontal: 8.0.w),
+                      child: Card(
+                        elevation: .50,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: const BorderRadius.only(
+                            bottomRight: Radius.circular(30),
+                            bottomLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                          ),
+                          side: BorderSide(
+                              width: .50,
+                              color: Theme.of(context).disabledColor),
+                        ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.0.w, vertical: 0.0.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const [
-                              Icon(Iconsax.search_normal),
-                              Icon(Iconsax.microphone),
+                            children: [
+                              SlideInLeft(
+                                  duration: const Duration(milliseconds: 300),
+                                  child: const Icon(Iconsax.search_normal)),
+
+                              Expanded(
+                                child: FormBuilderTextField(
+                                  name: 'searchText',
+                                  autofocus: true,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                  ),
+                                  onChanged: (val) {},
+                                ),
+                              ),
+                              //
+                              SlideInRight(
+                                  duration: const Duration(milliseconds: 300),
+                                  child: Text("SEARCH",
+                                      style:
+                                          Theme.of(context).textTheme.caption)),
                             ],
                           ),
                         ),
@@ -50,7 +88,6 @@ class AccountSearchScreen extends ConsumerWidget {
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  
                   visualDensity:
                       const VisualDensity(horizontal: 0, vertical: -4),
                   leading: ClipOval(

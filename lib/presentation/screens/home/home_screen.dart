@@ -74,9 +74,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
       child: Scaffold(
-        bottomNavigationBar: const BottomNavigation(
-          index: 0,
-        ),
+        bottomNavigationBar: const BottomNavigation(index: 0),
         floatingActionButton: ScaleTransition(
           scale: _hideFabAnimation!,
           alignment: Alignment.bottomCenter,
@@ -259,47 +257,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
                   SliverToBoxAdapter(
                     child: UIHelper.verticalSpaceSmall(),
-                  ),
-
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                      child: BoxedContainer(
-                          content: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                GoRouter.of(context).push(
-                                    "/transaction/account-select",
-                                    extra: {
-                                      'allowedTransactionType': 'PAYMENT'
-                                    });
-                              },
-                              child: const Text("PAYMENT")),
-                          TextButton(
-                              onPressed: () {
-                                GoRouter.of(context).push(
-                                    "/transaction/account-select",
-                                    extra: {
-                                      'allowedTransactionType': 'RECEIVE'
-                                    });
-                              },
-                              child: const Text("RECEIVE")),
-                          TextButton(
-                              onPressed: () {
-                                GoRouter.of(context).pushNamed("TRANSFER");
-                              },
-                              child: const Text("TRANSFER")),
-                          TextButton(
-                              onPressed: () {
-                                GoRouter.of(context)
-                                    .pushNamed("ACCOUNTS/SEARCH");
-                              },
-                              child: const Text("HELP")),
-                        ],
-                      )),
-                    ),
                   ),
 
                   SliverToBoxAdapter(

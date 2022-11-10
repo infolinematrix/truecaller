@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/presentation/widgets/container_block.dart';
 
 import '../../widgets/bottom_navigation.dart';
@@ -17,14 +16,6 @@ class ReportsScreen extends ConsumerWidget {
         title: const Text(
           "REPORTS",
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Iconsax.search_favorite,
-                // color: Colors.black,
-              ))
-        ],
       ),
       bottomNavigationBar: const BottomNavigation(
         index: 1,
@@ -117,19 +108,6 @@ class ReportsScreen extends ConsumerWidget {
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Budget Report",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: const Text("This is description of report"),
-                  ),
-                  ListTile(
-                    dense: true,
-                    visualDensity:
-                        const VisualDensity(horizontal: 0, vertical: -2),
-                    title: Text(
-                      "Report Title",
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!

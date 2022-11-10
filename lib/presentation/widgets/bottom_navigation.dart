@@ -22,7 +22,10 @@ class BottomNavigation extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           GestureDetector(
-            onTap: () => GoRouter.of(context).pushNamed('HOME'),
+            onTap: () {
+              GoRouter.of(context).pop();
+              GoRouter.of(context).pushNamed('HOME');
+            },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -85,7 +88,7 @@ class BottomNavigation extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => GoRouter.of(context).pushNamed('SETTINGS'),
+            onTap: () => GoRouter.of(context).pushNamed('SETTINGS-UPDATE'),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

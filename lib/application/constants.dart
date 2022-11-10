@@ -52,10 +52,9 @@ final yesNo = [
 
 //--11/10/2022
 final List<Map<String, dynamic>> accountType = [
-  {'code': 'REVENUE', 'name': 'Revenue'},
+  {'code': 'REVENUE', 'name': 'Revenue (Income)'},
   {'code': 'EXPENSES', 'name': 'Expenses'},
   {'code': 'ASSETS', 'name': 'Assets'},
   {'code': 'BANK', 'name': 'Bank'},
   {'code': 'LIABILITIES', 'name': 'Liabilities'},
-  {'code': 'EQUITY', 'name': 'Equity'},
 ];

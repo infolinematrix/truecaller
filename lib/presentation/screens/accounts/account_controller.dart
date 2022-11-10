@@ -68,12 +68,32 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   //--Delete
   Future delete({required int parentId, required int id}) async {
     try {
-      
       //--Check there is child account exist
       accountBox.remove(id);
       getAccounts(parentId);
     } catch (e) {
       rethrow;
     }
+  }
+}
+
+//----- ACCOUNT SEARCH PROVIDER ----------//
+final accountSearchProvider = StateNotifierProvider.autoDispose
+    .family<AccountSearchState, AsyncValue<List<AccountsModel>>, String>(
+        (ref, searchStr) {
+  return AccountSearchState();
+});
+
+class AccountSearchState
+    extends StateNotifier<AsyncValue<List<AccountsModel>>> {
+  AccountSearchState()
+      : super(const AsyncValue<List<AccountsModel>>.loading()) {
+    getAccounts();
+  }
+
+  //---GET ALL
+  getAccounts() async {
+    final data = await AccountRepository().getSearchedAccounts(searchStr);
+    state = AsyncValue<List<AccountsModel>>.data(data);
   }
 }

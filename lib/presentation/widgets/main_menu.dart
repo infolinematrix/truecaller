@@ -149,8 +149,7 @@ class MainMenuWidget extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     child: GestureDetector(
                       onTap: () async {
-                        Navigator.pushNamed(context, "/account_select",
-                            arguments: "RECEIPT");
+                        GoRouter.of(context).pushNamed('HELPS');
                       },
                       child: SizedBox(
                         width: mainMenuWidth,
@@ -189,8 +188,7 @@ class MainMenuWidget extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     child: GestureDetector(
                       onTap: () async {
-                        Navigator.pushNamed(context, "/account_select",
-                            arguments: "RECEIPT");
+                        GoRouter.of(context).push('/groups');
                       },
                       child: SizedBox(
                         width: mainMenuWidth,
@@ -214,7 +212,7 @@ class MainMenuWidget extends StatelessWidget {
                             ),
                             UIHelper.verticalSpaceSmall(),
                             Text(
-                              "Receipt",
+                              "Accounts",
                               style: TextStyle(
                                   // color: Colors.grey.shade800,
                                   fontSize: 12.sp,
