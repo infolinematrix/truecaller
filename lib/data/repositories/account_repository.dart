@@ -7,6 +7,31 @@ class AccountRepository {
   final accountBox = store!.objStore.box<AccountsModel>();
   final transactionBox = store!.objStore.box<TransactionsModel>();
 
+  Future<List<AccountsModel>> getSearchedAccounts(String searchStr) async {
+    if (searchStr != '') {
+      QueryBuilder<AccountsModel> builder = accountBox.query(
+        AccountsModel_.name.notEquals('') &
+            AccountsModel_.hasChild.equals(false) &
+            AccountsModel_.name.startsWith(searchStr.toUpperCase()),
+      )..order(AccountsModel_.name, flags: Order.caseSensitive);
+
+      Query<AccountsModel> query = builder.build();
+      List<AccountsModel> data = query.find().toList();
+      query.close();
+      return data;
+    } else {
+      QueryBuilder<AccountsModel> builder = accountBox.query(
+          AccountsModel_.name.notEquals('') &
+              AccountsModel_.hasChild.equals(false))
+        ..order(AccountsModel_.name, flags: Order.caseSensitive);
+
+      Query<AccountsModel> query = builder.build();
+      List<AccountsModel> data = query.find().toList();
+      query.close();
+      return data;
+    }
+  }
+
   Future<List<AccountsModel>> getGroups() async {
     QueryBuilder<AccountsModel> builder = accountBox.query(
         AccountsModel_.name.notEquals('') & AccountsModel_.parent.equals(0))

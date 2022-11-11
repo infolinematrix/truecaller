@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:truecaller/presentation/widgets/container_block.dart';
 
 import '../../widgets/bottom_navigation.dart';
@@ -46,7 +47,12 @@ class ReportsScreen extends ConsumerWidget {
                           .bodyLarge!
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: const Text("This is description of report"),
+                    subtitle: Text(
+                      "Statement of account",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () =>
+                        GoRouter.of(context).pushNamed('REPORTS/ACCOUNTS'),
                   ),
                   ListTile(
                     dense: true,
@@ -59,7 +65,12 @@ class ReportsScreen extends ConsumerWidget {
                           .bodyLarge!
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: const Text("This is description of report"),
+                    subtitle: Text(
+                      "Cash book for the month",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () =>
+                        GoRouter.of(context).pushNamed('REPORTS/CASHBOOK'),
                   ),
                   ListTile(
                     dense: true,
@@ -72,7 +83,12 @@ class ReportsScreen extends ConsumerWidget {
                           .bodyLarge!
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: const Text("This is description of report"),
+                    subtitle: Text(
+                      "This is description of report",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () =>
+                        GoRouter.of(context).pushNamed('REPORTS/BANKBOOK'),
                   ),
                   const Divider(),
                   ListTile(
@@ -86,21 +102,30 @@ class ReportsScreen extends ConsumerWidget {
                           .bodyLarge!
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: const Text("This is description of report"),
+                    subtitle: Text(
+                      "List of transactions( daily)",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () => GoRouter.of(context)
+                        .pushNamed('REPORTS/TRANSACTIONS/DAILY'),
                   ),
                   ListTile(
-                    dense: true,
-                    visualDensity:
-                        const VisualDensity(horizontal: 0, vertical: -2),
-                    title: Text(
-                      "Monthly Transactions",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: const Text("This is description of report"),
-                  ),
+                      dense: true,
+                      visualDensity:
+                          const VisualDensity(horizontal: 0, vertical: -2),
+                      title: Text(
+                        "Monthly Transactions",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(
+                        "Monthly transaction list",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      onTap: () => GoRouter.of(context)
+                          .pushNamed('REPORTS/TRANSACTIONS/MONTHLY')),
                   const Divider(),
                   ListTile(
                     dense: true,

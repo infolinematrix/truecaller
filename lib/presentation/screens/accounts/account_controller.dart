@@ -78,21 +78,31 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
 }
 
 //----- ACCOUNT SEARCH PROVIDER ----------//
-final accountSearchProvider = StateNotifierProvider.autoDispose
-    .family<AccountSearchState, AsyncValue<List<AccountsModel>>, String>(
-        (ref, searchStr) {
-  return AccountSearchState();
+
+final searchStringProvider = StateProvider.autoDispose<String>((ref) => '');
+
+final accountSearchProvider = StateNotifierProvider.autoDispose<
+    AccountSearchState, AsyncValue<List<AccountsModel>>>((ref) {
+  return AccountSearchState(ref);
 });
 
 class AccountSearchState
     extends StateNotifier<AsyncValue<List<AccountsModel>>> {
-  AccountSearchState()
+  final Ref ref;
+  AccountSearchState(this.ref)
       : super(const AsyncValue<List<AccountsModel>>.loading()) {
     getAccounts();
   }
 
   //---GET ALL
   getAccounts() async {
+    String searchStr = ref.read(searchStringProvider);
+    final data = await AccountRepository().getSearchedAccounts(searchStr);
+    state = AsyncValue<List<AccountsModel>>.data(data);
+  }
+
+  search() async {
+    String searchStr = ref.read(searchStringProvider);
     final data = await AccountRepository().getSearchedAccounts(searchStr);
     state = AsyncValue<List<AccountsModel>>.data(data);
   }

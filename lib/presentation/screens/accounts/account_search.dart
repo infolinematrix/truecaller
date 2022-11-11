@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
-import 'package:truecaller/utils/functions.dart';
+import 'package:truecaller/data/models/account_mode.dart';
+import 'package:truecaller/presentation/screens/accounts/account_controller.dart';
+import 'package:truecaller/utils/index.dart';
+
+import '../error.dart';
 
 class AccountSearchScreen extends ConsumerWidget {
   const AccountSearchScreen({super.key});
@@ -13,6 +18,8 @@ class AccountSearchScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormBuilderState>();
+
+    final accounts = ref.watch(accountSearchProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -58,15 +65,25 @@ class AccountSearchScreen extends ConsumerWidget {
 
                               Expanded(
                                 child: FormBuilderTextField(
-                                  name: 'searchText',
-                                  autofocus: true,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                  ),
-                                  onChanged: (val) {},
-                                ),
+                                    name: 'searchText',
+                                    autofocus: true,
+                                    initialValue:
+                                        ref.watch(searchStringProvider),
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                    ),
+                                    onChanged: (val) {
+                                      ref
+                                          .read(searchStringProvider.state)
+                                          .update(
+                                              (state) => val.toString().trim());
+
+                                      ref
+                                          .read(accountSearchProvider.notifier)
+                                          .search();
+                                    }),
                               ),
                               //
                               SlideInRight(
@@ -84,79 +101,55 @@ class AccountSearchScreen extends ConsumerWidget {
               ),
             ];
           },
-          body: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  visualDensity:
-                      const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: ClipOval(
-                    child: Container(
-                      alignment: Alignment.center,
-                      color: Color(randomColor[
-                          randomNumber(min: 0, max: randomColor.length - 1)]),
-                      height: 40.0.sp,
-                      width: 40.0.sp,
-                      child: Text(
-                        "M",
+          body: accounts.when(
+              error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              data: (data) {
+                return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final AccountsModel account = data[index];
+                    return ListTile(
+                      visualDensity:
+                          const VisualDensity(horizontal: 0, vertical: -4),
+                      leading: ClipOval(
+                        child: Container(
+                          alignment: Alignment.center,
+                          color: Color(randomColor[randomNumber(
+                              min: 0, max: randomColor.length - 1)]),
+                          height: 40.0.sp,
+                          width: 40.0.sp,
+                          child: Text(
+                            account.name[0],
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        account.name,
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
+                            .bodyText1!
                             .copyWith(fontWeight: FontWeight.w500),
                       ),
-                    ),
-                  ),
-                  title: Text(
-                    "Account name",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  subtitle: const Text("Account Descripttion"),
+                      subtitle: Text(
+                        account.description,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      onTap: () {
+                        GoRouter.of(context)
+                            .pushNamed('STATEMENT', extra: account);
+                      },
+                    );
+                  },
                 );
               }),
         ),
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   mainAxisSize: MainAxisSize.min,
-        //   children: [
-        //     Card(
-        //       child: SizedBox(
-        //         height: 50.h,
-        //         child: Padding(
-        //           padding:
-        //               EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 0.0.h),
-        //           child: Row(
-        //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //             crossAxisAlignment: CrossAxisAlignment.center,
-        //             children: [
-        //               const Icon(Iconsax.search_normal),
-        //               const Expanded(child: SizedBox.shrink()),
-        //               Text("SEARCH",
-        //                   style: Theme.of(context).textTheme.caption),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     Expanded(
-        //       child: ListView.builder(
-        //         itemCount: 10,
-        //         itemBuilder: (BuildContext context, int index) {
-        //           return ListTile(
-        //             dense: true,
-        //             visualDensity:
-        //                 const VisualDensity(horizontal: 0, vertical: -4),
-        //             title: Text(
-        //               "Account name",
-        //               style: Theme.of(context).textTheme.bodyText1,
-        //             ),
-        //             subtitle: const Text("Account Descripttion"),
-        //           );
-        //         },
-        //       ),
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }

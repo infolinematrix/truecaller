@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -64,7 +65,7 @@ class AccountStatementScreen extends ConsumerWidget {
                                 flex: 10,
                                 child: FormBuilderDateRangePicker(
                                   name: 'date_range',
-                                  firstDate: DateTime(1970),
+                                  firstDate: DateTime(2021),
                                   lastDate: DateTime(2030),
                                   format: DateFormat('yyyy-MM-dd'),
                                   // onChanged: _onChanged,
@@ -102,9 +103,7 @@ class AccountStatementScreen extends ConsumerWidget {
           Expanded(
             child: transactions.when(
               error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              loading: () => const Center(child: CircularProgressIndicator()),
               data: (data) {
                 return ListView.separated(
                   itemCount: data.length,
@@ -113,39 +112,44 @@ class AccountStatementScreen extends ConsumerWidget {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     TransactionsModel txn = data[index];
-                    return Slidable(
-                      key: const ValueKey(0),
-                      endActionPane: ActionPane(
-                        extentRatio: .20.w,
-                        motion: const ScrollMotion(),
-                        children: [
-                          SlidableAction(
-                            backgroundColor:
-                                Theme.of(context).primaryColorLight,
-                            foregroundColor: Theme.of(context).primaryColorDark,
-                            icon: Iconsax.close_circle,
-                            label: 'Delete',
-                            onPressed: (context) async {
-                              AlertAction? action = await confirmDialog(context,
-                                  '''Are you sure ?\nYou want delete transaction''');
+                    return SlideInDown(
+                      duration: Duration(milliseconds: (index + 1) * 100),
+                      child: Slidable(
+                        key: const ValueKey(0),
+                        endActionPane: ActionPane(
+                          extentRatio: .20.w,
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              backgroundColor:
+                                  Theme.of(context).primaryColorLight,
+                              foregroundColor:
+                                  Theme.of(context).primaryColorDark,
+                              icon: Iconsax.close_circle,
+                              label: 'Delete',
+                              onPressed: (context) async {
+                                AlertAction? action = await confirmDialog(
+                                    context,
+                                    '''Are you sure ?\nYou want delete transaction''');
 
-                              if (action == AlertAction.ok) {
-                                await ref
-                                    .read(transactionsProvider(account.id)
-                                        .notifier)
-                                    .delete(txnId: txn.id)
-                                    .then((value) {
-                                  if (value == true) {
-                                    EasyLoading.showSuccess("Deleted..");
-                                    ref.refresh(homeDataProvider);
-                                  }
-                                });
-                              }
-                            },
-                          ),
-                        ],
+                                if (action == AlertAction.ok) {
+                                  await ref
+                                      .read(transactionsProvider(account.id)
+                                          .notifier)
+                                      .delete(txnId: txn.id)
+                                      .then((value) {
+                                    if (value == true) {
+                                      EasyLoading.showSuccess("Deleted..");
+                                      ref.refresh(homeDataProvider);
+                                    }
+                                  });
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                        child: TransactionItem(txn: txn),
                       ),
-                      child: TransactionItem(txn: txn),
                     );
                   },
                 );

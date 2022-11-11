@@ -28,7 +28,7 @@ class TransactionState
     try {
       QueryBuilder<TransactionsModel> builder = transactionBox
           .query(TransactionsModel_.account.equals(accountNo))
-        ..order(TransactionsModel_.txnDate, flags: Order.descending);
+        ..order(TransactionsModel_.txnDate, flags: Order.caseSensitive);
 
       Query<TransactionsModel> query = builder.build();
       List<TransactionsModel> data = query.find().toList();

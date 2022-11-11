@@ -12,6 +12,11 @@ import 'package:truecaller/presentation/screens/groups/groups_screen.dart';
 import 'package:truecaller/presentation/screens/help/helps_screen.dart';
 import 'package:truecaller/presentation/screens/home/home_screen.dart';
 import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
+import 'package:truecaller/presentation/screens/reports/bankbook/bankbook_screen.dart';
+import 'package:truecaller/presentation/screens/reports/cashbook/cashbook_screen.dart';
+import 'package:truecaller/presentation/screens/reports/statement/accounts_screen.dart';
+import 'package:truecaller/presentation/screens/reports/transactions/daily_transactions_screen.dart';
+import 'package:truecaller/presentation/screens/reports/transactions/monthly_transactions_screen.dart';
 import 'package:truecaller/presentation/screens/settings/bank_account_screen.dart';
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/account_select_screen.dart';
@@ -48,15 +53,59 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/reports',
-      name: 'report',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ReportsScreen();
-      },
+      name: 'REPORTS',
       pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
         context: context,
         state: state,
         child: const ReportsScreen(),
       ),
+      routes: [
+        GoRoute(
+          path: 'reports-accounts',
+          name: 'REPORTS/ACCOUNTS',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const AccountsScreenReport(),
+          ),
+        ),
+        GoRoute(
+          path: 'reports-cashbook',
+          name: 'REPORTS/CASHBOOK',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const CashBookScreenReport(),
+          ),
+        ),
+        GoRoute(
+          path: 'reports-bankbook',
+          name: 'REPORTS/BANKBOOK',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const BankBookScreenReport(),
+          ),
+        ),
+        GoRoute(
+          path: 'reports-transactions-daily',
+          name: 'REPORTS/TRANSACTIONS/DAILY',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const DailyTransactionsScreen(),
+          ),
+        ),
+        GoRoute(
+          path: 'reports-transactions-monthly',
+          name: 'REPORTS/TRANSACTIONS/MONTHLY',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const MonthlyTransactionsScreen(),
+          ),
+        ),
+      ],
     ),
     GoRoute(
         path: '/groups',

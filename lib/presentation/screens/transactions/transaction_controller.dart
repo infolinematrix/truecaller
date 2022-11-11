@@ -83,7 +83,7 @@ final doPayment = FutureProvider.family
         modeAccount: 0,
         txnType: 'PAYMENT',
         scrollNo: scrollNo + 1,
-        txnDate: DateTime.now().toLocal(),
+        txnDate: formData['date'].toLocal(),
         createdOn: DateTime.now().toLocal(),
         description: formData['description'] ?? 'No description',
       );
@@ -105,7 +105,7 @@ final doPayment = FutureProvider.family
         modeAccount: bank!.id,
         txnType: 'PAYMENT',
         scrollNo: scrollNo + 1,
-        txnDate: DateTime.now().toLocal(),
+        txnDate: formData['date'].toLocal(),
         createdOn: DateTime.now().toLocal(),
         description: formData['description'] ?? 'No description',
       );
@@ -144,7 +144,7 @@ final doReceipt = FutureProvider.family
         modeAccount: 0,
         txnType: 'RECEIVE',
         scrollNo: scrollNo + 1,
-        txnDate: DateTime.now().toLocal(),
+        txnDate: formData['date'].toLocal(),
         createdOn: DateTime.now().toLocal(),
         description: formData['description'] ?? 'No description',
       );
@@ -166,7 +166,7 @@ final doReceipt = FutureProvider.family
         modeAccount: bank!.id,
         txnType: 'RECEIVE',
         scrollNo: scrollNo + 1,
-        txnDate: DateTime.now().toLocal(),
+        txnDate: formData['date'].toLocal(),
         createdOn: DateTime.now().toLocal(),
         description: formData['description'] ?? 'No description',
       );
