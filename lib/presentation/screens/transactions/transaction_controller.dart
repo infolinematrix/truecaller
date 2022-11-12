@@ -84,7 +84,8 @@ final doPayment = FutureProvider.family
         txnType: 'PAYMENT',
         scrollNo: scrollNo + 1,
         txnDate: formData['date'].toLocal(),
-        createdOn: DateTime.now().toLocal(),
+        // txnDate: formData['date'].toLocal(),
+        createdOn: DateTime.now().toUtc().toLocal(),
         description: formData['description'] ?? 'No description',
       );
 

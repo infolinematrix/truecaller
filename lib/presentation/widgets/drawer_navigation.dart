@@ -15,20 +15,6 @@ class DrawerNavigation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // UserAccountsDrawerHeader(
-            //   accountName: const Text("Ashish Rawat"),
-            //   accountEmail: const Text("Since : 24th October, 2022"),
-            //   currentAccountPicture: CircleAvatar(
-            //     backgroundColor:
-            //         Theme.of(context).platform == TargetPlatform.iOS
-            //             ? const Color(0xFF00897b)
-            //             : Colors.white,
-            //     child: const Text(
-            //       "A",
-            //       style: TextStyle(fontSize: 40.0),
-            //     ),
-            //   ),
-            // ),
             UserAccountsDrawerHeader(
               accountEmail:
                   const Text(''), // keep blank text because email is required
@@ -109,9 +95,7 @@ class DrawerNavigation extends StatelessWidget {
                 ),
               ],
             ),
-
             const Divider(),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -119,7 +103,6 @@ class DrawerNavigation extends StatelessWidget {
                 style: Theme.of(context).textTheme.caption,
               ),
             ),
-
             ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
