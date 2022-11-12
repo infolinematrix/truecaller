@@ -138,7 +138,12 @@ class ReportsScreen extends ConsumerWidget {
                           .bodyLarge!
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: const Text("This is description of report"),
+                    subtitle: Text(
+                      "Account wise Budget report",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () =>
+                        GoRouter.of(context).pushNamed('REPORTS/BUDGET'),
                   ),
                 ],
               ),

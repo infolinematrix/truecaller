@@ -13,6 +13,7 @@ import 'package:truecaller/presentation/screens/help/helps_screen.dart';
 import 'package:truecaller/presentation/screens/home/home_screen.dart';
 import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
 import 'package:truecaller/presentation/screens/reports/bankbook/bankbook_screen.dart';
+import 'package:truecaller/presentation/screens/reports/budget/budget_screen.dart';
 import 'package:truecaller/presentation/screens/reports/cashbook/cashbook_screen.dart';
 import 'package:truecaller/presentation/screens/reports/statement/accounts_screen.dart';
 import 'package:truecaller/presentation/screens/reports/transactions/daily_transactions_screen.dart';
@@ -105,6 +106,15 @@ final GoRouter router = GoRouter(
             child: const MonthlyTransactionsScreen(),
           ),
         ),
+        GoRoute(
+          path: 'reports-budget',
+          name: 'REPORTS/BUDGET',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const BudgetReportScreen(),
+          ),
+        ),
       ],
     ),
     GoRoute(
@@ -174,15 +184,16 @@ final GoRouter router = GoRouter(
                 );
               }),
           GoRoute(
-            path: 'edit',
-            name: 'ACCOUNTS/EDIT',
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition<void>(
-              context: context,
-              state: state,
-              child: const AccountEditScreen(),
-            ),
-          ),
+              path: 'edit',
+              name: 'ACCOUNT/EDIT',
+              pageBuilder: (context, state) {
+                AccountsModel account = state.extra as AccountsModel;
+                return buildPageWithDefaultTransition<void>(
+                  context: context,
+                  state: state,
+                  child: AccountEditScreen(account: account),
+                );
+              }),
           GoRoute(
               path: 'statement',
               name: "STATEMENT",

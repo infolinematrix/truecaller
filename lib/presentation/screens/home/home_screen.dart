@@ -13,6 +13,7 @@ import 'package:truecaller/utils/index.dart';
 
 import 'components/app_aupdate.dart';
 import 'components/app_bar.dart';
+import 'components/banner_widget.dart';
 import 'components/month_summary.dart';
 import 'components/recent_activity.dart';
 import 'components/today_summary.dart';
@@ -214,6 +215,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             ),
             data: (data) {
               return CustomScrollView(
+                shrinkWrap: true,
                 slivers: <Widget>[
                   const AppBarWidget(),
                   SliverAppBar(
@@ -235,29 +237,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
                   const RecentActivity(),
 
-                  SliverToBoxAdapter(
-                    child: UIHelper.verticalSpaceSmall(),
-                  ),
+                  SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
+
                   const MainMenuWidget(),
+                  SliverToBoxAdapter(child: UIHelper.verticalSpaceSmall()),
 
                   //--Today Summary
                   TodaySummary(data: data.todayMonthSummary),
+                  SliverToBoxAdapter(child: UIHelper.verticalSpaceSmall()),
 
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: const Image(
-                          image: AssetImage('assets/images/banner1.png'),
-                        ),
-                      ),
-                    ),
-                  ),
+                  const BannerWidget(),
 
-                  SliverToBoxAdapter(
-                    child: UIHelper.verticalSpaceSmall(),
-                  ),
+                  SliverToBoxAdapter(child: UIHelper.verticalSpaceSmall()),
 
                   SliverToBoxAdapter(
                     child: UIHelper.verticalSpaceMedium(),

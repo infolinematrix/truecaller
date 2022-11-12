@@ -18,6 +18,7 @@ class RecentActivity extends StatelessWidget {
           itemCount: 10,
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             return Stack(
               children: [

@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -9,10 +10,10 @@ import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/presentation/screens/accounts/account_controller.dart';
 import 'package:truecaller/presentation/screens/error.dart';
+import 'package:truecaller/presentation/screens/home/home_controller.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
-import 'package:truecaller/utils/functions.dart';
-import 'package:truecaller/utils/ui_helper.dart';
+import 'package:truecaller/utils/index.dart';
 
 class AccountsScreen extends ConsumerWidget {
   const AccountsScreen({super.key, required this.parent});
@@ -78,15 +79,37 @@ class AccountsScreen extends ConsumerWidget {
                                   extentRatio: .40.w,
                                   motion: const ScrollMotion(),
                                   children: [
-                                    SlidableAction(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColorLight,
-                                      foregroundColor:
-                                          Theme.of(context).primaryColorDark,
-                                      icon: Iconsax.close_circle,
-                                      label: 'Delete',
-                                      onPressed: (context) async {},
-                                    ),
+                                    account.hasChild == false
+                                        ? SlidableAction(
+                                            backgroundColor: Theme.of(context)
+                                                .primaryColorLight,
+                                            foregroundColor: Theme.of(context)
+                                                .primaryColorDark,
+                                            icon: Iconsax.close_circle,
+                                            label: 'Delete',
+                                            onPressed: (context) async {
+                                              AlertAction? action =
+                                                  await confirmDialog(context,
+                                                      "Are you sure! You want delete?\n\nYou will loose all the transactions on this account.");
+
+                                              if (action == AlertAction.ok) {
+                                                await ref
+                                                    .watch(accountProvider(
+                                                            parent.id)
+                                                        .notifier)
+                                                    .delete(id: account.id)
+                                                    .then((value) {
+                                                  if (value == true) {
+                                                    EasyLoading.showSuccess(
+                                                        "Account Deleted.");
+                                                    ref.refresh(
+                                                        homeDataProvider);
+                                                  }
+                                                });
+                                              }
+                                            },
+                                          )
+                                        : const SizedBox.shrink(),
                                     SlidableAction(
                                       backgroundColor:
                                           Theme.of(context).primaryColorLight,
@@ -94,7 +117,11 @@ class AccountsScreen extends ConsumerWidget {
                                           Theme.of(context).primaryColorDark,
                                       icon: Iconsax.edit,
                                       label: 'Update',
-                                      onPressed: (context) {},
+                                      onPressed: (context) {
+                                        GoRouter.of(context).pushNamed(
+                                            "ACCOUNT/EDIT",
+                                            extra: account);
+                                      },
                                     ),
                                   ],
                                 ),
