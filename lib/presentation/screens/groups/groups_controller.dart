@@ -60,10 +60,13 @@ class AccountGroupState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
       if (data.isNotEmpty) {
         EasyLoading.showError("Can't remove! Child account exist.");
         return false;
+      } else {
+        accountBox.remove(groupId);
+        getGroups();
+        return true;
       }
     } catch (e) {
       rethrow;
     }
-    return true;
   }
 }

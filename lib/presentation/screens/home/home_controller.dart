@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/data/models/transactions_model.dart';
 import 'package:truecaller/data/repositories/account_repository.dart';
@@ -14,12 +18,14 @@ class HomeDataModel {
   final List monthlyAccountWiseSummary;
   final Map<String, dynamic> currentMonthSummary;
   final Map<String, dynamic> todayMonthSummary;
+  final bool isUpdateAvailable;
 
   HomeDataModel({
     required this.transactionsToday,
     required this.monthlyAccountWiseSummary,
     required this.currentMonthSummary,
     required this.todayMonthSummary,
+    required this.isUpdateAvailable,
   });
 }
 
@@ -43,6 +49,7 @@ class HomeNotifier extends StateNotifier<AsyncValue<HomeDataModel>> {
           await ref.read(monthlyAccountWiseExpensesSummaryProvider),
       currentMonthSummary: ref.read(currentMonthSummaryProvider),
       todayMonthSummary: ref.read(currentDaySummaryProvider),
+      isUpdateAvailable: await ref.read(appUpdateProvider.future),
     );
 
     state = AsyncValue<HomeDataModel>.data(alldata);
@@ -156,4 +163,25 @@ final currentDaySummaryProvider =
   } catch (e) {
     rethrow;
   }
+});
+
+final appUpdateProvider = FutureProvider.autoDispose<bool>((ref) async {
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  final remoteConfig = FirebaseRemoteConfig.instance;
+  await remoteConfig.setConfigSettings(RemoteConfigSettings(
+    fetchTimeout: const Duration(minutes: 1),
+    minimumFetchInterval: const Duration(minutes: 5),
+  ));
+
+  await remoteConfig.fetch();
+  await remoteConfig.fetchAndActivate();
+
+  final requiredBuildNumber = remoteConfig.getInt(Platform.isAndroid
+      ? 'requiredBuildNumberAndroid'
+      : 'requiredBuildNumberIOS');
+
+  final currentBuildNumber = int.parse(packageInfo.buildNumber);
+
+  return currentBuildNumber < requiredBuildNumber;
 });

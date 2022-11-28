@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:truecaller/data/models/settings_model.dart';
-
 import 'package:truecaller/data/repositories/settings_repository.dart';
 import 'package:truecaller/utils/local_auth.dart';
 
@@ -12,8 +11,11 @@ class InitialDataModel {
   final List<SettingsModel> settings;
   final bool isAuth;
 
-  InitialDataModel(
-      {required this.isLoggedin, required this.settings, required this.isAuth});
+  InitialDataModel({
+    required this.isLoggedin,
+    required this.settings,
+    required this.isAuth,
+  });
 }
 
 final inttAppProvider =
@@ -23,7 +25,10 @@ final inttAppProvider =
   final isAuth = await ref.watch(localAuthProvider.future);
 
   return InitialDataModel(
-      isLoggedin: isLoggedin, settings: settings, isAuth: isAuth);
+    isLoggedin: isLoggedin,
+    settings: settings,
+    isAuth: isAuth,
+  );
 });
 
 // -- IS LOGGEDIN

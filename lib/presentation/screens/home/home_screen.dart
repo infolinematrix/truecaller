@@ -303,11 +303,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
 
                   SliverToBoxAdapter(
-                    child: UIHelper.verticalSpaceMedium(),
+                    child: UIHelper.verticalSpaceSmall(),
                   ),
                   //--Update
 
-                  const AppUpdate(),
+                  data.isUpdateAvailable == true
+                      ? const AppUpdate()
+                      : const SliverToBoxAdapter(
+                          child: SizedBox.shrink(),
+                        ),
 
                   //--Month Summary
                   MonthSummary(data: data.currentMonthSummary),

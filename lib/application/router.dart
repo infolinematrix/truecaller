@@ -11,6 +11,7 @@ import 'package:truecaller/presentation/screens/groups/group_edit_screen.dart';
 import 'package:truecaller/presentation/screens/groups/groups_screen.dart';
 import 'package:truecaller/presentation/screens/home/home_screen.dart';
 import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
+import 'package:truecaller/presentation/screens/reports/income_expenditure_statement.dart';
 import 'package:truecaller/presentation/screens/settings/bank_account_screen.dart';
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/account_select_screen.dart';
@@ -35,9 +36,6 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/home',
       name: 'HOME',
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
-      },
       pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
         context: context,
         state: state,
@@ -47,14 +45,24 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/reports',
       name: 'report',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ReportsScreen();
+      pageBuilder: (context, state) {
+        return buildPageWithDefaultTransition<void>(
+          context: context,
+          state: state,
+          child: const ReportsScreen(),
+        );
       },
-      pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
-        context: context,
-        state: state,
-        child: const ReportsScreen(),
-      ),
+      routes: [
+        GoRoute(
+          path: 'income_expenditure',
+          name: 'INCOME-EXPENDITURE',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const IncomeExpenditureStatement(),
+          ),
+        ),
+      ],
     ),
     GoRoute(
         path: '/groups',

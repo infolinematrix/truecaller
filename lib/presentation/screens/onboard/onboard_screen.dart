@@ -24,10 +24,6 @@ class OnboardScreen extends ConsumerWidget {
           return const SettingsScreen();
         }
 
-        // if (data.isAuth == false) {
-        //   exit(0);
-        // }
-
         return const HomeScreen();
       },
     );

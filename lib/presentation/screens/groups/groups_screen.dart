@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -11,8 +12,7 @@ import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/screens/groups/groups_controller.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
-import 'package:truecaller/utils/functions.dart';
-import 'package:truecaller/utils/ui_helper.dart';
+import 'package:truecaller/utils/index.dart';
 
 class GroupsScreen extends ConsumerWidget {
   const GroupsScreen({super.key});
@@ -75,19 +75,28 @@ class GroupsScreen extends ConsumerWidget {
                                   motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
-                                      // backgroundColor:
-                                      //     Theme.of(context).primaryColorLight,
-                                      // foregroundColor:
-                                      //     Theme.of(context).primaryColorDark,
-                                      icon: Iconsax.box_remove,
+                                      icon: Iconsax.close_circle,
                                       label: 'Delete',
-                                      onPressed: (context) async {},
+                                      onPressed: (context) async {
+                                        AlertAction? action = await confirmDialog(
+                                            context,
+                                            '''Are you sure ?\nYou want delete transaction''');
+
+                                        if (action == AlertAction.ok) {
+                                          await ref
+                                              .read(
+                                                  accountGroupProvider.notifier)
+                                              .delete(groupId: group.id)
+                                              .then((value) {
+                                            if (value == true) {
+                                              EasyLoading.showSuccess(
+                                                  "Deleted..");
+                                            }
+                                          });
+                                        }
+                                      },
                                     ),
                                     SlidableAction(
-                                      // backgroundColor:
-                                      //     Theme.of(context).primaryColorLight,
-                                      // foregroundColor:
-                                      //     Theme.of(context).primaryColorDark,
                                       icon: Iconsax.edit,
                                       label: 'Update',
                                       onPressed: (context) {},

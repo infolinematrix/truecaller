@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -11,8 +12,7 @@ import 'package:truecaller/presentation/screens/accounts/account_controller.dart
 import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
-import 'package:truecaller/utils/functions.dart';
-import 'package:truecaller/utils/ui_helper.dart';
+import 'package:truecaller/utils/index.dart';
 
 class AccountsScreen extends ConsumerWidget {
   const AccountsScreen({super.key, required this.parent});
@@ -79,19 +79,30 @@ class AccountsScreen extends ConsumerWidget {
                                   motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColorLight,
-                                      foregroundColor:
-                                          Theme.of(context).primaryColorDark,
                                       icon: Iconsax.close_circle,
                                       label: 'Delete',
-                                      onPressed: (context) async {},
+                                      onPressed: (context) async {
+                                        AlertAction? action = await confirmDialog(
+                                            context,
+                                            "WARNING\nYou want delete transaction. \nYou will loose all the transaction happend on this account.");
+
+                                        if (action == AlertAction.ok) {
+                                          await ref
+                                              .read(accountProvider(parent.id)
+                                                  .notifier)
+                                              .delete(
+                                                  parentId: parent.id,
+                                                  id: account.id)
+                                              .then((value) {
+                                            if (value == true) {
+                                              EasyLoading.showSuccess(
+                                                  "Success");
+                                            }
+                                          });
+                                        }
+                                      },
                                     ),
                                     SlidableAction(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColorLight,
-                                      foregroundColor:
-                                          Theme.of(context).primaryColorDark,
                                       icon: Iconsax.edit,
                                       label: 'Update',
                                       onPressed: (context) {},
