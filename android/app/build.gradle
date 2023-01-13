@@ -82,8 +82,11 @@ flutter {
 dependencies {
     def objectboxVersion = "3.1.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    
     // Add objectbox-android-objectbrowser only for debug builds.
     // Warning: when objectbox_flutter_libs updates check if version
     // needs update, e.g. check https://github.com/objectbox/objectbox-dart/releases.
     debugImplementation("io.objectbox:objectbox-android-objectbrowser:$objectboxVersion")
+    
 }
