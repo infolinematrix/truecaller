@@ -6,15 +6,14 @@ import 'package:truecaller/objectbox.g.dart';
 //---ACCOUNTS
 final searchStringProvider = StateProvider.autoDispose<String>((ref) => '');
 
-final accountNotifierProvider = StateNotifierProvider.autoDispose<
-    AccountSearchState, AsyncValue<List<AccountsModel>>>((ref) {
-  return AccountSearchState(ref);
+final accountNotifierProvider = StateNotifierProvider.autoDispose<AccountsState,
+    AsyncValue<List<AccountsModel>>>((ref) {
+  return AccountsState(ref);
 });
 
-class AccountSearchState
-    extends StateNotifier<AsyncValue<List<AccountsModel>>> {
+class AccountsState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   final Ref ref;
-  AccountSearchState(this.ref)
+  AccountsState(this.ref)
       : super(const AsyncValue<List<AccountsModel>>.loading()) {
     getAccounts();
   }
@@ -42,7 +41,7 @@ class AccountSearchState
                 AccountsModel_.name.notEquals('') &
                     AccountsModel_.hasChild.equals(false) &
                     AccountsModel_.type.notEquals('BANK') &
-                    AccountsModel_.name.startsWith(searchStr.toUpperCase()),
+                    AccountsModel_.name.startsWith(searchStr.toLowerCase()),
               )..order(AccountsModel_.name, flags: Order.caseSensitive);
 
       Query<AccountsModel> query = builder.build();

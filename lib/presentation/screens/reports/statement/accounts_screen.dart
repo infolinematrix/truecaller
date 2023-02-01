@@ -27,7 +27,7 @@ class AccountsScreenReport extends ConsumerWidget {
               key: formKey,
               child: SliverAppBar(
                 backgroundColor: Theme.of(context).canvasColor,
-                title: const Text('SEARCH'),
+                title: const Text('ACCOUNTS'),
                 pinned: true,
                 floating: true,
                 forceElevated: innerBoxIsScrolled,
@@ -70,8 +70,10 @@ class AccountsScreenReport extends ConsumerWidget {
                                     enabledBorder: InputBorder.none,
                                   ),
                                   onChanged: (val) {
-                                    ref.read(searchStringProvider.state).update(
-                                        (state) => val.toString().trim());
+                                    ref
+                                        .read(searchStringProvider.notifier)
+                                        .update(
+                                            (state) => val.toString().trim());
 
                                     ref
                                         .read(accountNotifierProvider.notifier)
@@ -83,7 +85,7 @@ class AccountsScreenReport extends ConsumerWidget {
                                 duration: const Duration(milliseconds: 300),
                                 child: Text("SEARCH",
                                     style:
-                                        Theme.of(context).textTheme.caption)),
+                                        Theme.of(context).textTheme.bodySmall)),
                           ],
                         ),
                       ),

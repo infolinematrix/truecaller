@@ -12,7 +12,7 @@ import firebase_messaging
 import firebase_storage
 import objectbox_flutter_libs
 import package_info_plus
-import path_provider_macos
+import path_provider_foundation
 import sqflite
 import url_launcher_macos
 

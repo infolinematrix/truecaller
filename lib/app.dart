@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
           builder: EasyLoading.init(),
-          supportedLocales: FormBuilderLocalizations.delegate.supportedLocales,
         );
       },
     );

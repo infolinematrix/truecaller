@@ -123,7 +123,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                     "PAYMENT",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .subtitle1!
+                                        .titleMedium!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: const Text(
@@ -157,7 +157,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                     "RECEIVE",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .subtitle1!
+                                        .titleMedium!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: const Text(
@@ -191,7 +191,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                     "TRANSFER",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .subtitle1!
+                                        .titleMedium!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: const Text(
@@ -236,7 +236,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
 
                   const RecentActivity(),
-
                   SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
 
                   const MainMenuWidget(),
@@ -311,7 +310,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                         ),
                         title: Text(
                           data.monthlyAccountWiseSummary[index]['account'].name,
-                          style: Theme.of(context).textTheme.subtitle2,
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
                         subtitle: Text(data
                             .monthlyAccountWiseSummary[index]['account']
@@ -361,7 +360,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                                     .toString(),
                                 style: Theme.of(context)
                                     .textTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .copyWith(fontWeight: FontWeight.w500)),
                             data.monthlyAccountWiseSummary[index]['account']
                                         .budget >

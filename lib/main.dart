@@ -10,7 +10,6 @@ import 'package:objectbox/objectbox.dart';
 import 'package:truecaller/data/source/objectstore.dart';
 import 'app.dart';
 import 'firebase_options.dart';
-import 'presentation/screens/error.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +36,7 @@ void main() {
           statusBarIconBrightness: Brightness.dark));
     }
   }, (Object error, StackTrace stack) {
-    ErrorScreen(msg: error.toString());
+    ErrorWidget(error.toString());
   });
 }
 
