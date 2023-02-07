@@ -12,7 +12,6 @@ class DateWidget extends StatelessWidget {
     final date = dateMap(strDate);
 
     return Container(
-      // margin: EdgeInsets.symmetric(vertical: 1.h),
       clipBehavior: Clip.hardEdge,
       width: 45.w,
       height: 45.h,
@@ -30,8 +29,8 @@ class DateWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            color: Theme.of(context).highlightColor,
-            height: 14.sp,
+            color: Theme.of(context).primaryColorDark,
+            height: 16.sp,
             margin: EdgeInsets.only(bottom: 4.sp),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -41,8 +40,7 @@ class DateWidget extends StatelessWidget {
                 Text(
                   date['month'],
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ],
             ),
@@ -54,7 +52,7 @@ class DateWidget extends StatelessWidget {
                   date['day'],
                   style: Theme.of(context)
                       .textTheme
-                      .titleMedium!
+                      .bodyMedium!
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 14.0.sp),
                 ),
                 Text(
@@ -62,7 +60,7 @@ class DateWidget extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
-                      .copyWith(fontSize: 8.sp),
+                      .copyWith(fontSize: 7.sp),
                 )
               ],
             ),

@@ -249,9 +249,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
                   SliverToBoxAdapter(child: UIHelper.verticalSpaceSmall()),
 
-                  SliverToBoxAdapter(
-                    child: UIHelper.verticalSpaceMedium(),
-                  ),
+                  SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
                   //--Update
 
                   const AppUpdate(),
@@ -260,124 +258,124 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   MonthSummary(data: data.currentMonthSummary),
 
                   //--Accouns summary month
-                  SliverToBoxAdapter(
-                      child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 16.0.w, vertical: 8.0.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "EXPENDITURE SUMMARY - ${months[DateTime.now().month - 1].toUpperCase()}, ${DateTime.now().year} ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "Sample letter to announce the anniversary of your business",
-                          style: Theme.of(context).textTheme.bodySmall,
-                        )
-                      ],
-                    ),
-                  )),
-                  SliverFixedExtentList(
-                    itemExtent: 50.h,
-                    delegate: SliverChildBuilderDelegate(
-                        childCount: data.monthlyAccountWiseSummary.length,
-                        (context, index) {
-                      return ListTile(
-                        visualDensity:
-                            const VisualDensity(horizontal: 0, vertical: -2),
-                        leading: ClipOval(
-                          child: Container(
-                            alignment: Alignment.center,
-                            color: Color(randomColor[randomNumber(
-                                min: 0, max: randomColor.length - 1)]),
-                            height: 40.0.sp,
-                            width: 40.0.sp,
-                            child: Text(
-                              data.monthlyAccountWiseSummary[index]['account']
-                                  .name[0],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ),
-                        title: Text(
-                          data.monthlyAccountWiseSummary[index]['account'].name,
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(data
-                            .monthlyAccountWiseSummary[index]['account']
-                            .description),
-                        trailing: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            data.monthlyAccountWiseSummary[index]['account']
-                                        .budget >
-                                    0
-                                ? SizedBox(
-                                    height: 10.0.h,
-                                    width: 100.w,
-                                    child: Stack(
-                                      children: <Widget>[
-                                        Container(
-                                          color:
-                                              Theme.of(context).disabledColor,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 4,
-                                        ),
-                                        Positioned(
-                                          right: 0,
-                                          child: Container(
-                                            color: Theme.of(context).hoverColor,
-                                            width: data.monthlyAccountWiseSummary[
-                                                    index]['percetageUsed'] ??
-                                                double.parse(data
-                                                        .monthlyAccountWiseSummary[
-                                                            index]
-                                                            ['percetageUsed']
-                                                        .toString())
-                                                    .toDouble()
-                                                    .w, // here you can define your percentage of progress, 0.2 = 20%, 0.3 = 30 % .....
-                                            height: 4,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : SizedBox(
-                                    height: 10.0.h,
-                                  ),
-                            Text(
-                                data.monthlyAccountWiseSummary[index]['balance']
-                                    .toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(fontWeight: FontWeight.w500)),
-                            data.monthlyAccountWiseSummary[index]['account']
-                                        .budget >
-                                    0
-                                ? Text(
-                                    "Budget ${data.monthlyAccountWiseSummary[index]['account'].budget}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .copyWith(fontStyle: FontStyle.italic),
-                                  )
-                                : const SizedBox.shrink(),
-                          ],
-                        ),
-                      );
-                    }),
-                  ),
+                  // SliverToBoxAdapter(
+                  //     child: Padding(
+                  //   padding: EdgeInsets.symmetric(
+                  //       horizontal: 16.0.w, vertical: 8.0.h),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     mainAxisSize: MainAxisSize.min,
+                  //     children: [
+                  //       Text(
+                  //         "EXPENDITURE SUMMARY - ${months[DateTime.now().month - 1].toUpperCase()}, ${DateTime.now().year} ",
+                  //         style: Theme.of(context)
+                  //             .textTheme
+                  //             .bodyLarge!
+                  //             .copyWith(fontWeight: FontWeight.w500),
+                  //       ),
+                  //       Text(
+                  //         "Sample letter to announce the anniversary of your business",
+                  //         style: Theme.of(context).textTheme.bodySmall,
+                  //       )
+                  //     ],
+                  //   ),
+                  // )),
+                  // SliverFixedExtentList(
+                  //   itemExtent: 50.h,
+                  //   delegate: SliverChildBuilderDelegate(
+                  //       childCount: data.monthlyAccountWiseSummary.length,
+                  //       (context, index) {
+                  //     return ListTile(
+                  //       visualDensity:
+                  //           const VisualDensity(horizontal: 0, vertical: -2),
+                  //       leading: ClipOval(
+                  //         child: Container(
+                  //           alignment: Alignment.center,
+                  //           color: Color(randomColor[randomNumber(
+                  //               min: 0, max: randomColor.length - 1)]),
+                  //           height: 40.0.sp,
+                  //           width: 40.0.sp,
+                  //           child: Text(
+                  //             data.monthlyAccountWiseSummary[index]['account']
+                  //                 .name[0],
+                  //             style: Theme.of(context)
+                  //                 .textTheme
+                  //                 .titleLarge!
+                  //                 .copyWith(fontWeight: FontWeight.w500),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       title: Text(
+                  //         data.monthlyAccountWiseSummary[index]['account'].name,
+                  //         style: Theme.of(context).textTheme.titleSmall,
+                  //       ),
+                  //       subtitle: Text(data
+                  //           .monthlyAccountWiseSummary[index]['account']
+                  //           .description),
+                  //       trailing: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.end,
+                  //         children: [
+                  //           data.monthlyAccountWiseSummary[index]['account']
+                  //                       .budget >
+                  //                   0
+                  //               ? SizedBox(
+                  //                   height: 10.0.h,
+                  //                   width: 100.w,
+                  //                   child: Stack(
+                  //                     children: <Widget>[
+                  //                       Container(
+                  //                         color:
+                  //                             Theme.of(context).disabledColor,
+                  //                         width:
+                  //                             MediaQuery.of(context).size.width,
+                  //                         height: 4,
+                  //                       ),
+                  //                       Positioned(
+                  //                         right: 0,
+                  //                         child: Container(
+                  //                           color: Theme.of(context).hoverColor,
+                  //                           width: data.monthlyAccountWiseSummary[
+                  //                                   index]['percetageUsed'] ??
+                  //                               double.parse(data
+                  //                                       .monthlyAccountWiseSummary[
+                  //                                           index]
+                  //                                           ['percetageUsed']
+                  //                                       .toString())
+                  //                                   .toDouble()
+                  //                                   .w, // here you can define your percentage of progress, 0.2 = 20%, 0.3 = 30 % .....
+                  //                           height: 4,
+                  //                         ),
+                  //                       ),
+                  //                     ],
+                  //                   ),
+                  //                 )
+                  //               : SizedBox(
+                  //                   height: 10.0.h,
+                  //                 ),
+                  //           Text(
+                  //               data.monthlyAccountWiseSummary[index]['balance']
+                  //                   .toString(),
+                  //               style: Theme.of(context)
+                  //                   .textTheme
+                  //                   .bodyLarge!
+                  //                   .copyWith(fontWeight: FontWeight.w500)),
+                  //           data.monthlyAccountWiseSummary[index]['account']
+                  //                       .budget >
+                  //                   0
+                  //               ? Text(
+                  //                   "Budget ${data.monthlyAccountWiseSummary[index]['account'].budget}",
+                  //                   style: Theme.of(context)
+                  //                       .textTheme
+                  //                       .bodySmall!
+                  //                       .copyWith(fontStyle: FontStyle.italic),
+                  //                 )
+                  //               : const SizedBox.shrink(),
+                  //         ],
+                  //       ),
+                  //     );
+                  //   }),
+                  // ),
 
                   const SliverToBoxAdapter(
                     child: Divider(),
@@ -399,7 +397,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               .copyWith(fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "Sample letter to announce the anniversary of your business",
+                          "List of transaction made today",
                           style: Theme.of(context).textTheme.bodySmall,
                         )
                       ],

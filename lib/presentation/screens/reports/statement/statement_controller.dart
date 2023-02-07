@@ -21,10 +21,10 @@ class AccountsState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   //---GET ALL
   getAccounts() async {
     QueryBuilder<AccountsModel> builder = AccountRepository().accountBox.query(
-        AccountsModel_.name.notEquals('') &
-            AccountsModel_.hasChild.equals(false) &
-            AccountsModel_.type.notEquals('BANK'))
-      ..order(AccountsModel_.name, flags: Order.caseSensitive);
+          AccountsModel_.name.notEquals('') &
+              AccountsModel_.parent.notEquals(0) &
+              AccountsModel_.type.notEquals('BANK'),
+        )..order(AccountsModel_.name, flags: Order.caseSensitive);
 
     Query<AccountsModel> query = builder.build();
     List<AccountsModel> data = query.find().toList();

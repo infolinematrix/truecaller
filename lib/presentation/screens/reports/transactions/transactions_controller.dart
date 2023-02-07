@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:truecaller/data/models/transactions_model.dart';
 import 'package:truecaller/data/repositories/transaction_repository.dart';
@@ -70,5 +72,20 @@ class MonthlyTransactionsStateNotifier
     query.close();
 
     state = AsyncValue<List<TransactionsModel>>.data(data);
+  }
+}
+
+///-- DAILY TRANSACTIONS
+
+final bankBookProvider = AsyncNotifierProvider.autoDispose<
+    DailyTransactionsState, List<TransactionsModel>>(() {
+  return DailyTransactionsState();
+});
+
+class DailyTransactionsState
+    extends AutoDisposeAsyncNotifier<List<TransactionsModel>> {
+  @override
+  FutureOr<List<TransactionsModel>> build() {
+    throw UnimplementedError();
   }
 }

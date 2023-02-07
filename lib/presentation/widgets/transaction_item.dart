@@ -22,7 +22,7 @@ class TransactionItem extends StatelessWidget {
         txn.description!,
         style: Theme.of(context)
             .textTheme
-            .bodyText2!
+            .bodyMedium!
             .copyWith(fontWeight: FontWeight.w500),
       ),
       subtitle: Column(
@@ -34,10 +34,17 @@ class TransactionItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                Iconsax.export_3, //import_2
-                size: 12.sp, color: Colors.red,
-              ),
+              if (txn.txnType == 'RECEIVE')
+                Icon(
+                  Iconsax.import_2,
+                  size: 12.sp,
+                  color: Colors.blue,
+                ),
+              if (txn.txnType == 'PAYMENT')
+                Icon(
+                  Iconsax.export_3, //import_2
+                  size: 12.sp, color: Colors.red,
+                ),
               UIHelper.horizontalSpaceExtraSmall(),
               Text(
                 txn.accountName!,
@@ -54,10 +61,10 @@ class TransactionItem extends StatelessWidget {
         children: [
           Text(
             "${txn.txnType == 'PAYMENT' ? '-' : '+'} ${formatCurrency(txn.amountDr)}",
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 fontWeight: FontWeight.w500,
                 color: txn.txnType == 'PAYMENT'
-                    ? Theme.of(context).errorColor
+                    ? Theme.of(context).colorScheme.error
                     : Theme.of(context).primaryColor),
           ),
           Text(

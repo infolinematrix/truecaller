@@ -96,9 +96,7 @@ class MainMenuWidget extends StatelessWidget {
                         Text(
                           "Receive",
                           style: TextStyle(
-                              // color: Colors.grey.shade800,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold),
+                              fontSize: 12.sp, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -109,8 +107,9 @@ class MainMenuWidget extends StatelessWidget {
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
                   onTap: () async {
-                    Navigator.pushNamed(context, "/account_select",
-                        arguments: "RECEIPT");
+                    // Navigator.pushNamed(context, "/account_select",
+                    //     arguments: "TRANSFER");
+                    GoRouter.of(context).pushNamed("TRANSFER");
                   },
                   child: SizedBox(
                     width: mainMenuWidth,
@@ -223,160 +222,6 @@ class MainMenuWidget extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // FadeInDown(
-              //   duration: const Duration(milliseconds: 200),
-              //   child: AspectRatio(
-              //     aspectRatio: 1,
-              //     child: GestureDetector(
-              //       onTap: () async {
-              //         Navigator.pushNamed(context, "/account_select",
-              //             arguments: "PAYMENT");
-              //       },
-              //       child: Column(
-              //         children: [
-              //           Container(
-              //             width: 100.sp,
-              //             height: 40.sp,
-              //             decoration: BoxDecoration(
-              //               color: Theme.of(context).highlightColor,
-              //               borderRadius: BorderRadius.circular(10.sp),
-              //             ),
-              //             child: Center(
-              //               child: Icon(
-              //                 Iconsax.export_1,
-              //                 // color: Colors.white,
-              //                 size: 24.sp,
-              //               ),
-              //             ),
-              //           ),
-              //           UIHelper.verticalSpaceSmall(),
-              //           Text(
-              //             "Payment",
-              //             style: TextStyle(
-              //                 // color: Colors.grey.shade800,
-              //                 fontSize: 12.sp,
-              //                 fontWeight: FontWeight.bold),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // FadeInDown(
-              //   duration: const Duration(milliseconds: 200),
-              //   child: AspectRatio(
-              //     aspectRatio: 1,
-              //     child: GestureDetector(
-              //       onTap: () async {
-              //         Navigator.pushNamed(context, "/account_select",
-              //             arguments: "PAYMENT");
-              //       },
-              //       child: Column(
-              //         children: [
-              //           Container(
-              //             width: 100.sp,
-              //             height: 40.sp,
-              //             decoration: BoxDecoration(
-              //               color: Theme.of(context).highlightColor,
-              //               borderRadius: BorderRadius.circular(10.sp),
-              //             ),
-              //             child: Center(
-              //               child: Icon(
-              //                 Iconsax.export_1,
-              //                 // color: Colors.white,
-              //                 size: 24.sp,
-              //               ),
-              //             ),
-              //           ),
-              //           UIHelper.verticalSpaceSmall(),
-              //           Text(
-              //             "Payment",
-              //             style: TextStyle(
-              //                 // color: Colors.grey.shade800,
-              //                 fontSize: 12.sp,
-              //                 fontWeight: FontWeight.bold),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
-              // FadeInDown(
-              //   duration: const Duration(milliseconds: 200),
-              //   child: AspectRatio(
-              //     aspectRatio: 1,
-              //     child: GestureDetector(
-              //       onTap: () async {
-              //         Navigator.pushNamed(context, "/transfer");
-              //       },
-              //       child: Column(
-              //         children: [
-              //           Container(
-              //             width: 100.sp,
-              //             height: 40.sp,
-              //             decoration: BoxDecoration(
-              //               color: Theme.of(context).highlightColor,
-              //               borderRadius: BorderRadius.circular(10.sp),
-              //             ),
-              //             child: Center(
-              //               child: Icon(
-              //                 Iconsax.empty_wallet_change,
-              //                 // color: Colors.white,
-              //                 size: 24.sp,
-              //               ),
-              //             ),
-              //           ),
-              //           UIHelper.verticalSpaceSmall(),
-              //           Text(
-              //             "Transfer",
-              //             style: TextStyle(
-              //                 // color: Colors.grey.shade800,
-              //                 fontSize: 12.sp,
-              //                 fontWeight: FontWeight.bold),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // FadeInDown(
-              //   duration: const Duration(milliseconds: 200),
-              //   child: AspectRatio(
-              //     aspectRatio: 1,
-              //     child: GestureDetector(
-              //       onTap: () async {},
-              //       child: Column(
-              //         children: [
-              //           Container(
-              //             width: 100.sp,
-              //             height: 40.sp,
-              //             decoration: BoxDecoration(
-              //               color: Theme.of(context).highlightColor,
-              //               borderRadius: BorderRadius.circular(10.sp),
-              //             ),
-              //             child: Center(
-              //               child: Icon(
-              //                 Iconsax.message_question,
-              //                 // color: Colors.white,
-              //                 size: 24.sp,
-              //               ),
-              //             ),
-              //           ),
-              //           UIHelper.verticalSpaceSmall(),
-              //           Text(
-              //             "Help",
-              //             style: TextStyle(
-              //                 // color: Colors.grey.shade800,
-              //                 fontSize: 12.sp,
-              //                 fontWeight: FontWeight.bold),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // )
             ],
           ),
         ),
