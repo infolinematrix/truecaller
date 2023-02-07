@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/index.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class MonthSummary extends StatelessWidget {
   const MonthSummary({Key? key, required this.data}) : super(key: key);
@@ -11,6 +12,11 @@ class MonthSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, double> dataMap = {
+      "Income": 9,
+      "Expenditure": 3,
+    };
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.all(16.0.sp),
@@ -21,30 +27,58 @@ class MonthSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Iconsax.calendar_2,
-                      size: 50.sp,
-                      color: Theme.of(context).toggleableActiveColor),
+                  Expanded(
+                    child: PieChart(
+                      dataMap: dataMap,
+                      animationDuration: const Duration(milliseconds: 800),
+                      chartLegendSpacing: 8.0.sp,
+                      chartRadius: MediaQuery.of(context).size.width / 8.2.w,
+
+                      initialAngleInDegree: 0,
+                      chartType: ChartType.ring,
+                      ringStrokeWidth: 16,
+                      centerText: "",
+                      legendOptions: const LegendOptions(
+                        showLegendsInRow: false,
+                        legendPosition: LegendPosition.left,
+                        showLegends: true,
+                        legendTextStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      chartValuesOptions: const ChartValuesOptions(
+                        showChartValueBackground: false,
+                        showChartValues: false,
+                        showChartValuesInPercentage: true,
+                        showChartValuesOutside: false,
+                        decimalPlaces: 1,
+                      ),
+                      // gradientList: ---To add gradient colors---
+                      // emptyColorGradient: ---Empty Color gradient---
+                    ),
+                  ),
                   UIHelper.horizontalSpaceMedium(),
                   Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Month Summary",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.w500),
-                      ),
-                      UIHelper.verticalSpaceSmall(),
-                      const Text(
-                          "I gave it a border, but it would be nice to have rounded borders."),
-                      UIHelper.verticalSpaceMedium(),
-                    ],
-                  )),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Month Summary",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w500),
+                        ),
+                        UIHelper.verticalSpaceSmall(),
+                        const Text("Monthly Income and Expenditure summary."),
+                        UIHelper.verticalSpaceMedium(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
+              UIHelper.verticalSpaceMedium(),
               IntrinsicHeight(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -122,7 +156,7 @@ class MonthSummary extends StatelessWidget {
                               UIHelper.horizontalSpaceSmall(),
                               Icon(
                                 Iconsax.export_1,
-                                color: Theme.of(context).errorColor,
+                                color: Theme.of(context).colorScheme.error,
                               )
                             ],
                           ),

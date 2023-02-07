@@ -11,50 +11,11 @@ class TodaysTransactionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return SliverToBoxAdapter(
-    //   child: ListView.builder(
-    //     itemCount: txns.length,
-    //     itemBuilder: (BuildContext context, int index) {
-    //       return TransactionItem(txn: txns[index]);
-    //     },
-    //   ),
-    // );
     return SliverFixedExtentList(
       itemExtent: 50.h, // I'm forcing item heights
       delegate:
           SliverChildBuilderDelegate(childCount: txns.length, (context, index) {
         return TransactionItem(txn: txns[index]);
-        // return ListTile(
-        //   // leading:  DateWidget(),
-        //   title: Text(
-        //     "Account Head",
-        //     style: Theme.of(context)
-        //         .textTheme
-        //         .bodyText1!
-        //         .copyWith(fontWeight: FontWeight.w500),
-        //   ),
-        //   subtitle: Row(
-        //     children: [
-        //       Text(
-        //         "Subtitle",
-        //         style: Theme.of(context).textTheme.bodySmall,
-        //       )
-        //     ],
-        //   ),
-        //   trailing: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.end,
-        //     children: [
-        //       Text(
-        //         "12,456",
-        //         style: Theme.of(context).textTheme.subtitle2,
-        //       ),
-        //       Text(
-        //         "Payment",
-        //         style: Theme.of(context).textTheme.bodySmall,
-        //       ),
-        //     ],
-        //   ),
-        // );
       }),
     );
   }

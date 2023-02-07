@@ -77,7 +77,19 @@ class MonthlyTransactionsStateNotifier
 
 ///-- DAILY TRANSACTIONS
 
-final bankBookProvider = AsyncNotifierProvider.autoDispose<
+final isFilterProvider = StateProvider.autoDispose<bool>((ref) => false);
+
+class DateRangeModel {
+  final DateTime reportDate;
+
+  DateRangeModel(this.reportDate);
+}
+
+final dateRangeProvider = StateProvider.autoDispose<DateRangeModel>((ref) {
+  return DateRangeModel(dateTodayStart());
+});
+
+final dailyTransactionsProvider = AsyncNotifierProvider.autoDispose<
     DailyTransactionsState, List<TransactionsModel>>(() {
   return DailyTransactionsState();
 });
@@ -86,6 +98,26 @@ class DailyTransactionsState
     extends AutoDisposeAsyncNotifier<List<TransactionsModel>> {
   @override
   FutureOr<List<TransactionsModel>> build() {
-    throw UnimplementedError();
+    try {
+      final DateTime reportDate = ref.watch(dateRangeProvider).reportDate;
+
+      QueryBuilder<TransactionsModel> builder = TransactionRepository()
+          .transactionBox
+          .query(TransactionsModel_.txnDate
+                  .notNull()
+                  .and(TransactionsModel_.txnType.equals('PAYMENT'))
+                  .or(TransactionsModel_.txnType.equals('RECEIVE')) &
+              TransactionsModel_.txnDate
+                  .greaterOrEqual(reportDate.millisecondsSinceEpoch))
+        ..order(TransactionsModel_.txnDate, flags: Order.descending);
+
+      Query<TransactionsModel> query = builder.build();
+      List<TransactionsModel> data = query.find().toList();
+      query.close();
+
+      return data;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

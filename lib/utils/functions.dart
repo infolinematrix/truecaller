@@ -62,7 +62,6 @@ DateTime lastDayOfMonth() {
   DateTime now = DateTime.now().toLocal();
 
   var lstday = DateTime(now.year, now.month + 1, 0);
-  print(lstday.day);
   return lstday;
 }
 

@@ -109,23 +109,6 @@ class ReportsScreen extends ConsumerWidget {
                     onTap: () => GoRouter.of(context)
                         .pushNamed('REPORTS/TRANSACTIONS/DAILY'),
                   ),
-                  ListTile(
-                      dense: true,
-                      visualDensity:
-                          const VisualDensity(horizontal: 0, vertical: -2),
-                      title: Text(
-                        "Monthly Transactions",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.w500),
-                      ),
-                      subtitle: Text(
-                        "Monthly transaction list",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      onTap: () => GoRouter.of(context)
-                          .pushNamed('REPORTS/TRANSACTIONS/MONTHLY')),
                   const Divider(),
                   ListTile(
                     dense: true,
