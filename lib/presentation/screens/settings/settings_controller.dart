@@ -1,4 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart' as fcs;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:objectbox/objectbox.dart';
@@ -54,7 +56,8 @@ final createSettings = FutureProvider.autoDispose
     });
 
     //--Store data to Firebase user collection
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    fcs.CollectionReference users =
+        fcs.FirebaseFirestore.instance.collection('users');
     Map<String, dynamic> fbData = {};
 
     if (auth.currentUser != null) {
@@ -89,3 +92,60 @@ final createSettings = FutureProvider.autoDispose
     return ErrorScreen(msg: e.toString());
   }
 });
+
+//--- UPDATE SETTINGS
+final settingsProvider =
+    AsyncNotifierProvider.autoDispose<SettingsDataState, Map<String, dynamic>>(
+        () {
+  return SettingsDataState();
+});
+
+class SettingsDataState extends AutoDisposeAsyncNotifier<Map<String, dynamic>> {
+  @override
+  FutureOr<Map<String, dynamic>> build() async {
+    try {
+      QueryBuilder<SettingsModel> builder = settingBox.query();
+
+      Query<SettingsModel> query = builder.build();
+      final data = query.find().toList();
+      List<Map<String, dynamic>> md = [{}];
+
+      for (var element in data) {
+        md.addAll([
+          {element.key: element.value}
+        ]);
+      }
+
+      Map<String, dynamic> w = md.reduce((a, b) {
+        a.addAll(b);
+        return a;
+      });
+
+      return w;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+//--UPDATE SETTINGS
+  Future<bool> updateSettings(Map<String, dynamic> formData) async {
+    try {
+      store!.objStore.runInTransaction(TxMode.write, () {
+        settingBox.removeAll();
+
+        for (var element in formData.entries) {
+          settingBox.put(
+            SettingsModel(
+              key: element.key,
+              value: element.value.toString(),
+            ),
+          );
+        }
+      });
+
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+}

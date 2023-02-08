@@ -46,7 +46,7 @@ class SettingsScreen extends ConsumerWidget {
                         "SETTINGS",
                         style: Theme.of(context)
                             .textTheme
-                            .caption!
+                            .bodySmall!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       UIHelper.verticalSpaceSmall(),
@@ -223,7 +223,6 @@ class SettingsScreen extends ConsumerWidget {
                                       GoRouter.of(context).replaceNamed(
                                           'SETTINGS-BANK-ACCOUNT');
                                     } else {
-                                      
                                       GoRouter.of(context).replaceNamed('HOME');
                                     }
                                   }

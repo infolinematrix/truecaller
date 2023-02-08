@@ -12,7 +12,7 @@ import 'package:truecaller/presentation/screens/home/home_controller.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
-
+import 'package:intl/intl.dart';
 import 'transaction_controller.dart';
 
 class ReceiveScreen extends StatelessWidget {
@@ -58,7 +58,7 @@ class ReceiveScreen extends StatelessWidget {
                               "RECEIVE ENTRY",
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption!
+                                  .bodySmall!
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
                             UIHelper.verticalSpaceSmall(),
@@ -90,6 +90,7 @@ class ReceiveScreen extends StatelessWidget {
                                     child: FormBuilderDateTimePicker(
                                       name: 'date',
                                       style: inputTextStyle,
+                                      format: DateFormat('dd-MM-yyyy'),
                                       initialEntryMode:
                                           DatePickerEntryMode.calendarOnly,
                                       initialValue: DateTime.now(),
@@ -237,7 +238,8 @@ class ReceiveScreen extends StatelessWidget {
                                                         style: TextStyle(
                                                             color: Theme.of(
                                                                     context)
-                                                                .errorColor)),
+                                                                .colorScheme
+                                                                .error)),
                                                   );
                                           },
                                         ),

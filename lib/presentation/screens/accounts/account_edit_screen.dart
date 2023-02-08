@@ -53,8 +53,10 @@ class AccountEditScreen extends ConsumerWidget {
                             "ACCOUNT",
                             style: Theme.of(context)
                                 .textTheme
-                                .caption!
-                                .copyWith(fontWeight: FontWeight.bold),
+                                .bodySmall!
+                                .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColorDark),
                           ),
                           UIHelper.verticalSpaceSmall(),
                           Text(
@@ -92,6 +94,7 @@ class AccountEditScreen extends ConsumerWidget {
                                 Expanded(
                                   child: FormBuilderDropdown(
                                     name: 'hasChild',
+                                    enabled: false,
                                     style: inputTextStyle,
                                     isExpanded: false,
                                     itemHeight: null,
@@ -184,7 +187,7 @@ class AccountEditScreen extends ConsumerWidget {
                                                   .toList(),
                                               onChanged: (val) {
                                                 ref
-                                                    .read(hasBudget.state)
+                                                    .read(hasBudget.notifier)
                                                     .state = val as bool;
                                               },
                                             ),
@@ -314,8 +317,10 @@ class AccountEditScreen extends ConsumerWidget {
                             "SETTINGS",
                             style: Theme.of(context)
                                 .textTheme
-                                .caption!
-                                .copyWith(fontWeight: FontWeight.bold),
+                                .bodySmall!
+                                .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColorDark),
                           ),
                           UIHelper.verticalSpaceSmall(),
                           Text(

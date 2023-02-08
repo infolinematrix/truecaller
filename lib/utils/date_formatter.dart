@@ -74,6 +74,14 @@ String strToMonth(String dt) {
   return d;
 }
 
+String strToMonthLong(String dt) {
+  DateTime tempDate = DateTime.now();
+
+  String d = "${months[tempDate.month - 1]}, ${tempDate.year}";
+
+  return d;
+}
+
 String strToShortDate(String dt) {
   DateTime tempDate = DateTime.now();
 

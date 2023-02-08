@@ -98,6 +98,7 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
           transactionBox.query(TransactionsModel_.account.equals(id)).build();
       List<TransactionsModel> txnData = txnQuery.find().toList();
 
+      //-- Delete all transactions of this account
       for (var element in txnData) {
         transactionBox.remove(element.id);
       }
@@ -116,7 +117,7 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
       {required AccountsModel account,
       required Map<String, dynamic> formData}) async {
     try {
-      account.hasChild = formData['hasChild'];
+      // account.hasChild = formData['hasChild'];
       account.name = formData['name'].toString().trim();
       account.description = formData['description'].toString().trim();
       account.budget = formData['hasBudget'] == true
@@ -172,3 +173,6 @@ class AccountSearchState
     state = AsyncValue<List<AccountsModel>>.data(data);
   }
 }
+//--- END OF ACCOUNT SEARCH --------------------//
+
+

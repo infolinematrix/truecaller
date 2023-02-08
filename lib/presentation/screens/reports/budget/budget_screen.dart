@@ -34,8 +34,8 @@ class BudgetReportScreen extends ConsumerWidget {
               return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, index) {
-                  return const ListTile(
-                    title: Text("Account Head"),
+                  return ListTile(
+                    title: Text(data[index]['accountName'].toString()),
                   );
                 },
               );

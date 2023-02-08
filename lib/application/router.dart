@@ -176,7 +176,7 @@ final GoRouter router = GoRouter(
               }),
           GoRoute(
               path: 'edit',
-              name: 'ACCOUNT/EDIT',
+              name: 'ACCOUNT-EDIT',
               pageBuilder: (context, state) {
                 AccountsModel account = state.extra as AccountsModel;
                 return buildPageWithDefaultTransition<void>(

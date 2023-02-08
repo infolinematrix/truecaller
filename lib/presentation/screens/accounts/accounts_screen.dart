@@ -102,7 +102,7 @@ class AccountsScreen extends ConsumerWidget {
                                                   if (value == true) {
                                                     EasyLoading.showSuccess(
                                                         "Account Deleted.");
-                                                    ref.refresh(
+                                                    ref.invalidate(
                                                         homeDataProvider);
                                                   }
                                                 });
@@ -119,7 +119,7 @@ class AccountsScreen extends ConsumerWidget {
                                       label: 'Update',
                                       onPressed: (context) {
                                         GoRouter.of(context).pushNamed(
-                                            "ACCOUNT/EDIT",
+                                            "ACCOUNT-EDIT",
                                             extra: account);
                                       },
                                     ),

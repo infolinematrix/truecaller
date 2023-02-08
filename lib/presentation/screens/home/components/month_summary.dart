@@ -60,19 +60,22 @@ class MonthSummary extends StatelessWidget {
                   UIHelper.horizontalSpaceMedium(),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Month Summary",
+                          strToMonthLong(DateTime.now().toString()),
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(fontWeight: FontWeight.w500),
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
-                        UIHelper.verticalSpaceSmall(),
-                        const Text("Monthly Income and Expenditure summary."),
-                        UIHelper.verticalSpaceMedium(),
+                        // UIHelper.verticalSpaceSmall(),
+                        const Text(
+                          "Monthly Income and Expenditure summary",
+                          textAlign: TextAlign.right,
+                        ),
+                        // UIHelper.verticalSpaceMedium(),
                       ],
                     ),
                   ),
@@ -89,7 +92,7 @@ class MonthSummary extends StatelessWidget {
                         direction: Axis.vertical,
                         children: [
                           Text(
-                            "Income",
+                            "INCOME",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -133,7 +136,7 @@ class MonthSummary extends StatelessWidget {
                         direction: Axis.vertical,
                         children: [
                           Text(
-                            "Expenditure",
+                            "EXPENDITURE",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
