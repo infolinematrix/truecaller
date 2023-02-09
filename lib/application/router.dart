@@ -15,6 +15,7 @@ import 'package:truecaller/presentation/screens/onboard/onboard_screen.dart';
 import 'package:truecaller/presentation/screens/reports/bankbook/bankbook_screen.dart';
 import 'package:truecaller/presentation/screens/reports/budget/budget_screen.dart';
 import 'package:truecaller/presentation/screens/reports/cashbook/cashbook_screen.dart';
+import 'package:truecaller/presentation/screens/reports/income/income_statement_screen.dart';
 import 'package:truecaller/presentation/screens/reports/statement/accounts_screen.dart';
 import 'package:truecaller/presentation/screens/reports/transactions/daily_transactions_screen.dart';
 import 'package:truecaller/presentation/screens/settings/bank_account_create_screen.dart';
@@ -27,6 +28,7 @@ import 'package:truecaller/presentation/screens/transactions/receive_screen.dart
 import 'package:truecaller/presentation/screens/transactions/transfer_screen.dart';
 
 import '../presentation/screens/error.dart';
+import '../presentation/screens/reports/expenses/expenses_statement_screen.dart';
 import '../presentation/screens/reports/report_screen.dart';
 import '../presentation/screens/settings/settings_update_screen.dart';
 
@@ -113,7 +115,7 @@ final GoRouter router = GoRouter(
           pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             context: context,
             state: state,
-            child: const BudgetReportScreen(),
+            child: const IncomeStatementScreen(),
           ),
         ),
         GoRoute(
@@ -122,7 +124,7 @@ final GoRouter router = GoRouter(
           pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             context: context,
             state: state,
-            child: const BudgetReportScreen(),
+            child: const ExpensesStatementScreen(),
           ),
         ),
       ],

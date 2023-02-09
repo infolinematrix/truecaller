@@ -22,7 +22,7 @@ final dateRangeProvider = StateProvider.autoDispose<DateRangeModel>((ref) {
   return DateRangeModel(firstDayOfMonth(), lastDayOfMonth());
 });
 
-final expensesStatementProvider = AsyncNotifierProvider.autoDispose<
+final incomeStatementProvider = AsyncNotifierProvider.autoDispose<
     AccountTransactions, List<TransactionsModel>>(() {
   return AccountTransactions();
 });

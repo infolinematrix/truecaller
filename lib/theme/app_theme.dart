@@ -4,23 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData lightTheme = ThemeData(
   // brightness: Brightness.light,
+  useMaterial3: true,
   visualDensity: const VisualDensity(vertical: 0.5, horizontal: 0.5),
-//   // primarySwatch: const MaterialColor(
-//   //   0xff457BE0,
-//   //   <int, Color>{
-//   //     50: Color(0x1aF5E0C3),
-//   //     100: Color(0xa1F5E0C3),
-//   //     200: Color(0xaaF5E0C3),
-//   //     300: Color(0xafF5E0C3),
-//   //     400: Color(0xffF5E0C3),
-//   //     500: Color(0xffEDD5B3),
-//   //     600: Color(0xffDEC29B),
-//   //     700: Color(0xffC9A87C),
-//   //     800: Color(0xffB28E5E),
-//   //     900: Color(0xff936F3E)
-//   //   },
-//   // ),
-  primarySwatch: Colors.blue,
   splashColor: Colors.grey,
   primaryColor: const Color(0xFF212121),
   primaryColorLight: const Color(0x1aF5E0C3),
@@ -28,22 +13,15 @@ ThemeData lightTheme = ThemeData(
   canvasColor: Colors.white,
 
   scaffoldBackgroundColor: const Color(0xFFFFFFFF),
-  bottomAppBarColor: const Color(0xffffffff),
   cardColor: const Color(0xaaF5E0C3),
   dividerColor: const Color(0x1f6D42CE),
   focusColor: const Color(0x1aF5E0C3),
   hoverColor: const Color(0xBD0D7BE0),
   highlightColor: const Color(0xFFe3f2fd),
-
-  backgroundColor: const Color(0xff457BE0),
   dialogBackgroundColor: Colors.white,
   indicatorColor: const Color(0xffb3e5fc),
   hintColor: Colors.grey,
-  errorColor: Colors.red,
-  toggleableActiveColor: const Color(0xBD0D7BE0),
   secondaryHeaderColor: Colors.grey,
-
-  selectedRowColor: Colors.grey,
   unselectedWidgetColor: Colors.grey.shade400,
   disabledColor: Colors.grey.shade200,
   buttonTheme: const ButtonThemeData(
@@ -167,6 +145,55 @@ ThemeData lightTheme = ThemeData(
 
   fontFamily: 'ROBOTO',
   splashFactory: InkSplash.splashFactory,
+  switchTheme: SwitchThemeData(
+    thumbColor:
+        MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.disabled)) {
+        return null;
+      }
+      if (states.contains(MaterialState.selected)) {
+        return const Color(0xBD0D7BE0);
+      }
+      return null;
+    }),
+    trackColor:
+        MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.disabled)) {
+        return null;
+      }
+      if (states.contains(MaterialState.selected)) {
+        return const Color(0xBD0D7BE0);
+      }
+      return null;
+    }),
+  ),
+  radioTheme: RadioThemeData(
+    fillColor:
+        MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.disabled)) {
+        return null;
+      }
+      if (states.contains(MaterialState.selected)) {
+        return const Color(0xBD0D7BE0);
+      }
+      return null;
+    }),
+  ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor:
+        MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.disabled)) {
+        return null;
+      }
+      if (states.contains(MaterialState.selected)) {
+        return const Color(0xBD0D7BE0);
+      }
+      return null;
+    }),
+  ),
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+      .copyWith(background: const Color(0xff457BE0))
+      .copyWith(error: Colors.red),
 );
 
 /// DARK THEME
@@ -178,15 +205,12 @@ ThemeData darkTheme = ThemeData(
     primaryColorDark: const Color(0xff936F3E),
     canvasColor: const Color(0xffE09E45),
     scaffoldBackgroundColor: const Color(0xffB5BFD3),
-    bottomAppBarColor: const Color(0xff6D42CE),
     cardColor: const Color(0xaa311F06),
     dividerColor: const Color(0x1f6D42CE),
     focusColor: const Color(0x1a311F06),
     hoverColor: const Color(0xa15D4524),
     highlightColor: const Color(0xaf2F1E06),
     splashColor: const Color(0xff457BE0),
-//  splashFactory: # override create method from  InteractiveInkFeatureFactory
-    selectedRowColor: Colors.grey,
     unselectedWidgetColor: Colors.grey.shade400,
     disabledColor: Colors.grey.shade200,
     buttonTheme: const ButtonThemeData(
@@ -196,15 +220,9 @@ ThemeData darkTheme = ThemeData(
 //toggle button theme
         ),
     secondaryHeaderColor: Colors.grey,
-    // textSelectionColor: Color(0x1a483112),
-    // cursorColor: Color(0xff483112),
-    // textSelectionHandleColor: Color(0xff483112),
-    backgroundColor: const Color(0xff457BE0),
     dialogBackgroundColor: Colors.white,
     indicatorColor: const Color(0xff457BE0),
     hintColor: Colors.grey,
-    errorColor: Colors.red,
-    toggleableActiveColor: const Color(0xff6D42CE),
     textTheme: const TextTheme(
 //text themes that contrast with card and canvas
         ),
@@ -302,6 +320,55 @@ ThemeData darkTheme = ThemeData(
     buttonBarTheme: const ButtonBarThemeData(
         // button bar theme
         ),
+    fontFamily: 'ROBOTO',
+    splashFactory: InkSplash.splashFactory,
+    // bottomAppBarTheme: const BottomAppBarTheme(color: Color(0xff6D42CE)),
+    switchTheme: SwitchThemeData(
+      thumbColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return const Color(0xff6D42CE);
+        }
+        return null;
+      }),
+      trackColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return const Color(0xff6D42CE);
+        }
+        return null;
+      }),
+    ),
+    radioTheme: RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return const Color(0xff6D42CE);
+        }
+        return null;
+      }),
+    ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return const Color(0xff6D42CE);
+        }
+        return null;
+      }),
+    ),
     colorScheme: const ColorScheme(
             primary: Color(0xff5D4524),
             secondary: Color(0xff457BE0),
@@ -314,9 +381,9 @@ ThemeData darkTheme = ThemeData(
             onSecondary: Color(0xff457BE0),
             onSurface: Color(0xff457BE0),
             surface: Color(0xff457BE0))
-        .copyWith(secondary: const Color(0xff457BE0)),
-    fontFamily: 'ROBOTO',
-    splashFactory: InkSplash.splashFactory);
+        .copyWith(secondary: const Color(0xff457BE0))
+        .copyWith(background: const Color(0xff457BE0))
+        .copyWith(error: Colors.red));
 
 /// CheckBox Decoration
 InputDecoration checkBoxDecoration = InputDecoration(
