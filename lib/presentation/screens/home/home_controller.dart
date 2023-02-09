@@ -72,10 +72,6 @@ final monthlyAccountWiseExpensesSummaryProvider =
               startDate: firstDayCurrentMonth,
               endtDate: lastDayCurrentMonth);
 
-          // var balance =
-          //     double.parse(account.openingBalance.toString()).toDouble() -
-          //         (double.parse(summary['sum_credit'].toString()).toDouble() -
-          //             double.parse(summary['sum_debit'].toString()).toDouble());
           double balance = 0;
           double percentageUsed = 0;
 
@@ -128,7 +124,18 @@ final currentMonthSummaryProvider =
       }
     }
 
-    return {'income': r, 'expenditure': p};
+    double savP = 0;
+    double exP = p * 100 / r;
+    if (exP < 100) {
+      savP = 100 - exP;
+    }
+
+    return {
+      'income': r,
+      'expenditure': p,
+      'expensesPercentage': exP,
+      'savingsPercentage': savP
+    };
   } catch (e) {
     rethrow;
   }

@@ -115,6 +115,43 @@ class ReportsScreen extends ConsumerWidget {
                     visualDensity:
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
+                      "Income Statement",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      "Income statement with detail",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () =>
+                        GoRouter.of(context).pushNamed('INCOME-STATEMENT'),
+                  ),
+                  ListTile(
+                    dense: true,
+                    visualDensity:
+                        const VisualDensity(horizontal: 0, vertical: -2),
+                    title: Text(
+                      "Expenses Statement",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      "Expenses statement with date range",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () =>
+                        GoRouter.of(context).pushNamed('EXPENSES-STATEMENT'),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    dense: true,
+                    visualDensity:
+                        const VisualDensity(horizontal: 0, vertical: -2),
+                    title: Text(
                       "Budget Report",
                       style: Theme.of(context)
                           .textTheme

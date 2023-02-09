@@ -164,6 +164,7 @@ class SettingsUpdateScreen extends ConsumerWidget {
                                     name: 'hasBank',
                                     isExpanded: false,
                                     itemHeight: null,
+                                    enabled: false,
                                     initialValue: data['hasBank'],
                                     dropdownColor: Theme.of(context)
                                         .scaffoldBackgroundColor,
@@ -177,10 +178,12 @@ class SettingsUpdateScreen extends ConsumerWidget {
                                             alignment: AlignmentDirectional
                                                 .centerStart,
                                             value: bank['code'],
-                                            child: Text(bank['name'],
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.w500)),
+                                            child: Text(
+                                              bank['name'],
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
                                           ),
                                         )
                                         .toList(),
@@ -205,15 +208,17 @@ class SettingsUpdateScreen extends ConsumerWidget {
                                       if (value == true) {
                                         EasyLoading.showSuccess("Successful");
 
-                                        if (formKey.currentState!
-                                                .value['hasBank'] ==
-                                            'YES') {
-                                          GoRouter.of(context).replaceNamed(
-                                              'SETTINGS-BANK-ACCOUNT');
-                                        } else {
-                                          GoRouter.of(context)
-                                              .replaceNamed('HOME');
-                                        }
+                                        // if (formKey.currentState!
+                                        //         .value['hasBank'] ==
+                                        //     'YES') {
+                                        //   GoRouter.of(context).replaceNamed(
+                                        //       'SETTINGS-BANK-ACCOUNT');
+                                        // } else {
+                                        //   GoRouter.of(context)
+                                        //       .replaceNamed('HOME');
+                                        // }
+                                        GoRouter.of(context)
+                                            .replaceNamed('HOME');
                                       }
                                     });
                                   } else {

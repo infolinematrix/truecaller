@@ -17,6 +17,7 @@ import 'package:truecaller/presentation/screens/reports/budget/budget_screen.dar
 import 'package:truecaller/presentation/screens/reports/cashbook/cashbook_screen.dart';
 import 'package:truecaller/presentation/screens/reports/statement/accounts_screen.dart';
 import 'package:truecaller/presentation/screens/reports/transactions/daily_transactions_screen.dart';
+import 'package:truecaller/presentation/screens/settings/bank_account_create_screen.dart';
 
 import 'package:truecaller/presentation/screens/settings/bank_account_screen.dart';
 import 'package:truecaller/presentation/screens/settings/settings_screen.dart';
@@ -100,6 +101,24 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'reports-budget',
           name: 'REPORTS/BUDGET',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const BudgetReportScreen(),
+          ),
+        ),
+        GoRoute(
+          path: 'income-statement',
+          name: 'INCOME-STATEMENT',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const BudgetReportScreen(),
+          ),
+        ),
+        GoRoute(
+          path: 'expenses-statement',
+          name: 'EXPENSES-STATEMENT',
           pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             context: context,
             state: state,
@@ -224,6 +243,16 @@ final GoRouter router = GoRouter(
                 context: context,
                 state: state,
                 child: const SettingsBankAccountScreen());
+          },
+        ),
+        GoRoute(
+          path: 'bank-account-create',
+          name: 'SETTINGS-BANK-ACCOUNT-CREATE',
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return buildPageWithDefaultTransition(
+                context: context,
+                state: state,
+                child: const SettingsBankAccountCreateScreen());
           },
         ),
       ],

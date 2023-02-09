@@ -13,8 +13,8 @@ class MonthSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, double> dataMap = {
-      "Income": 9,
-      "Expenditure": 3,
+      "Expenses": data['expensesPercentage'],
+      "Savings": data['savingsPercentage'],
     };
 
     return SliverToBoxAdapter(
@@ -31,16 +31,15 @@ class MonthSummary extends StatelessWidget {
                     child: PieChart(
                       dataMap: dataMap,
                       animationDuration: const Duration(milliseconds: 800),
-                      chartLegendSpacing: 8.0.sp,
-                      chartRadius: MediaQuery.of(context).size.width / 8.2.w,
-
+                      chartLegendSpacing: MediaQuery.of(context).size.width / 5,
+                      chartRadius: MediaQuery.of(context).size.width / 5.0.w,
                       initialAngleInDegree: 0,
                       chartType: ChartType.ring,
-                      ringStrokeWidth: 16,
+                      ringStrokeWidth: 18.0.sp,
                       centerText: "",
                       legendOptions: const LegendOptions(
-                        showLegendsInRow: false,
-                        legendPosition: LegendPosition.left,
+                        showLegendsInRow: true,
+                        legendPosition: LegendPosition.right,
                         showLegends: true,
                         legendTextStyle: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -57,10 +56,16 @@ class MonthSummary extends StatelessWidget {
                       // emptyColorGradient: ---Empty Color gradient---
                     ),
                   ),
-                  UIHelper.horizontalSpaceMedium(),
+                ],
+              ),
+              UIHelper.verticalSpaceMedium(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -72,7 +77,7 @@ class MonthSummary extends StatelessWidget {
                         ),
                         // UIHelper.verticalSpaceSmall(),
                         const Text(
-                          "Monthly Income and Expenditure summary",
+                          "Income & Expenditure Summary",
                           textAlign: TextAlign.right,
                         ),
                         // UIHelper.verticalSpaceMedium(),
@@ -92,7 +97,7 @@ class MonthSummary extends StatelessWidget {
                         direction: Axis.vertical,
                         children: [
                           Text(
-                            "INCOME",
+                            "Income",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -136,7 +141,7 @@ class MonthSummary extends StatelessWidget {
                         direction: Axis.vertical,
                         children: [
                           Text(
-                            "EXPENDITURE",
+                            "Expenditure",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!

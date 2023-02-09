@@ -221,7 +221,7 @@ class SettingsScreen extends ConsumerWidget {
                                             .currentState!.value['hasBank'] ==
                                         'YES') {
                                       GoRouter.of(context).replaceNamed(
-                                          'SETTINGS-BANK-ACCOUNT');
+                                          'SETTINGS-BANK-ACCOUNT-CREATE');
                                     } else {
                                       GoRouter.of(context).replaceNamed('HOME');
                                     }
