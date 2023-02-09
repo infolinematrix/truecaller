@@ -11,6 +11,15 @@ final accountBox = store!.objStore.box<AccountsModel>();
 final transactionBox = store!.objStore.box<TransactionsModel>();
 final isFilterProvider = StateProvider.autoDispose<bool>((ref) => false);
 
+final totalProvider = StateProvider.family
+    .autoDispose<double, List<TransactionsModel>>((ref, txn) {
+  double total = 0.0;
+  for (var element in txn) {
+    total = total + element.amountCr;
+  }
+  return total;
+});
+
 class DateRangeModel {
   final DateTime startDate;
   final DateTime endDate;
@@ -50,6 +59,10 @@ class AccountTransactions
 
       Query<TransactionsModel> query = builder.build();
       final data = query.find().toList();
+
+      // ref.read(totalProvider.notifier).state = total;
+
+      // ref.read(totalProvider.notifier).update((state) => total);
 
       query.close();
       return data;

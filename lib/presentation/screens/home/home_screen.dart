@@ -219,7 +219,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 slivers: <Widget>[
                   const AppBarWidget(),
                   SliverAppBar(
-                    backgroundColor: Theme.of(context).canvasColor,
+                    surfaceTintColor: Colors.transparent,
                     pinned: true,
                     expandedHeight: 45.h,
                     stretch: true,
@@ -394,7 +394,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(fontWeight: FontWeight.w500),
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "List of transaction made today",

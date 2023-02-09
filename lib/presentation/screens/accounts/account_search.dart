@@ -29,7 +29,7 @@ class AccountSearchScreen extends ConsumerWidget {
               FormBuilder(
                 key: formKey,
                 child: SliverAppBar(
-                  backgroundColor: Theme.of(context).canvasColor,
+                  surfaceTintColor: Colors.transparent,
                   title: const Text('SEARCH'),
                   pinned: true,
                   floating: true,
@@ -89,8 +89,9 @@ class AccountSearchScreen extends ConsumerWidget {
                               SlideInRight(
                                   duration: const Duration(milliseconds: 300),
                                   child: Text("SEARCH",
-                                      style:
-                                          Theme.of(context).textTheme.caption)),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall)),
                             ],
                           ),
                         ),
@@ -124,7 +125,7 @@ class AccountSearchScreen extends ConsumerWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge!
-                                .copyWith(fontWeight: FontWeight.w500),
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -132,7 +133,7 @@ class AccountSearchScreen extends ConsumerWidget {
                         account.name,
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1!
+                            .bodyLarge!
                             .copyWith(fontWeight: FontWeight.w500),
                       ),
                       subtitle: Text(

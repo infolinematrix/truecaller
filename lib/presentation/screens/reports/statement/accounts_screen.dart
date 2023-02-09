@@ -26,7 +26,7 @@ class AccountsScreenReport extends ConsumerWidget {
             FormBuilder(
               key: formKey,
               child: SliverAppBar(
-                backgroundColor: Theme.of(context).canvasColor,
+                surfaceTintColor: Colors.transparent,
                 title: const Text('ACCOUNTS'),
                 pinned: true,
                 floating: true,

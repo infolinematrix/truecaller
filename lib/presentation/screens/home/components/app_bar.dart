@@ -9,7 +9,7 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: Theme.of(context).canvasColor,
+      surfaceTintColor: Colors.transparent,
       title: const Text("FINDO"),
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Iconsax.notification))

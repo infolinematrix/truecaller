@@ -20,12 +20,12 @@ class SplashScreen extends ConsumerWidget {
                 "WELCOME",
                 style: Theme.of(context)
                     .textTheme
-                    .headline5!
+                    .headlineMedium!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               UIHelper.verticalSpaceExtraSmall(),
               Text("AseztakTK Whole sale.",
-                  style: Theme.of(context).textTheme.bodyText2),
+                  style: Theme.of(context).textTheme.bodyMedium),
               UIHelper.verticalSpaceMedium(),
               SizedBox(
                 width: 150.0.w,

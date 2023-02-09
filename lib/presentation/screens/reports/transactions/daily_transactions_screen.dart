@@ -9,7 +9,7 @@ import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/data/models/transactions_model.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/index.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 import 'transactions_controller.dart';
 
 class DailyTransactionsScreen extends ConsumerWidget {
@@ -24,7 +24,7 @@ class DailyTransactionsScreen extends ConsumerWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Theme.of(context).canvasColor,
+              surfaceTintColor: Colors.transparent,
               title: const Text('DAILY TRANSACTIONS'),
               pinned: true,
               floating: true,
@@ -32,13 +32,13 @@ class DailyTransactionsScreen extends ConsumerWidget {
               actions: [
                 IconButton(
                     onPressed: () {
-                      // ref.watch(isFilterProvider) == true
-                      //     ? ref
-                      //         .watch(isFilterProvider.notifier)
-                      //         .update((state) => false)
-                      //     : ref
-                      //         .watch(isFilterProvider.notifier)
-                      //         .update((state) => true);
+                      ref.watch(isFilterProvider) == true
+                          ? ref
+                              .watch(isFilterProvider.notifier)
+                              .update((state) => false)
+                          : ref
+                              .watch(isFilterProvider.notifier)
+                              .update((state) => true);
                     },
                     icon: Icon(
                       Iconsax.filter_square,
@@ -68,14 +68,14 @@ class DailyTransactionsScreen extends ConsumerWidget {
                               name: 'report_date',
                               initialEntryMode: DatePickerEntryMode.calendar,
                               initialValue: DateTime.now(),
-                              inputType: InputType.both,
-                              format: DateFormat('yyyy-MM-dd'),
+                              inputType: InputType.date,
+                              format: intl.DateFormat('yyyy-MM-dd'),
                               onChanged: (v) {
-                                // ref
-                                //     .read(dateRangeProvider.notifier)
-                                //     .update((state) {
-                                //   return DateRangeModel(v!.start);
-                                // });
+                                ref
+                                    .read(dateRangeProvider.notifier)
+                                    .update((state) {
+                                  return DateRangeModel(v!);
+                                });
                               },
                               decoration: InputDecoration(
                                 labelText: 'Report Date',

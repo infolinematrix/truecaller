@@ -16,7 +16,7 @@ class BudgetReportScreen extends ConsumerWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Theme.of(context).canvasColor,
+              surfaceTintColor: Colors.transparent,
               title: const Text('BUDGET REPORT'),
               pinned: true,
               floating: true,

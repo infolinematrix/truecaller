@@ -24,10 +24,10 @@ class IncomeStatementScreen extends ConsumerWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Theme.of(context).canvasColor,
+              surfaceTintColor: Colors.transparent,
               title: const Text('INCOME STATEMENT'),
               pinned: true,
-              floating: true,
+              floating: false,
               forceElevated: innerBoxIsScrolled,
               actions: [
                 IconButton(
@@ -47,6 +47,28 @@ class IncomeStatementScreen extends ConsumerWidget {
                     )),
                 UIHelper.horizontalSpaceMedium()
               ],
+              // bottom: PreferredSize(
+              //   preferredSize: const Size.fromHeight(kToolbarHeight / 1.5),
+              //   child: Container(
+              //     width: double.infinity,
+              //     padding: EdgeInsets.symmetric(
+              //         horizontal: 16.0.w, vertical: 12.0.h),
+              //     color: const Color(0xFFe0f7fa),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         const Text("Total"),
+              //         Text(
+              //           "${ref.watch(totalProvider)}",
+              //           style: Theme.of(context)
+              //               .textTheme
+              //               .titleLarge!
+              //               .copyWith(fontWeight: FontWeight.bold),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ),
           ];
         },
@@ -97,54 +119,84 @@ class IncomeStatementScreen extends ConsumerWidget {
                 error: (error, stackTrace) => ErrorWidget(error.toString()),
                 loading: () => const Center(child: CircularProgressIndicator()),
                 data: (data) {
-                  return ListView.separated(
-                    itemCount: data.length,
-                    separatorBuilder: (context, index) => Divider(
-                      height: 5.0.h,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      TransactionsModel txn = data[index];
-                      return SlideInDown(
-                        duration: Duration(milliseconds: (index + 1) * 100),
-                        child: Slidable(
-                          key: const ValueKey(0),
-                          endActionPane: ActionPane(
-                            extentRatio: .20.w,
-                            motion: const ScrollMotion(),
-                            children: [
-                              SlidableAction(
-                                backgroundColor:
-                                    Theme.of(context).primaryColorLight,
-                                foregroundColor:
-                                    Theme.of(context).primaryColorDark,
-                                icon: Iconsax.close_circle,
-                                label: 'Delete',
-                                onPressed: (context) async {
-                                  AlertAction? action = await confirmDialog(
-                                      context,
-                                      '''Are you sure ?\nYou want delete transaction''');
-
-                                  if (action == AlertAction.ok) {
-                                    // await ref
-                                    //     .watch(accountTransactions(
-                                    //         {'accountNo': account.id}).notifier)
-                                    //     .delete(txnId: txn.id)
-                                    //     .then((value) {
-                                    //   if (value == true) {
-                                    //     EasyLoading.showSuccess("Deleted..");
-                                    //     ref.invalidate(accountTransactions);
-                                    //     ref.invalidate(homeDataProvider);
-                                    //   }
-                                    // });
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                          child: TransactionItem(txn: txn),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16.0.w, vertical: 12.0.h),
+                        color: const Color(0xFFe0f7fa),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Total"),
+                            Text(
+                              formatCurrency(ref.watch(totalProvider(data))),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0.sp),
+                            ),
+                          ],
                         ),
-                      );
-                    },
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: data.length,
+                          separatorBuilder: (context, index) => Divider(
+                            height: 5.0.h,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            TransactionsModel txn = data[index];
+
+                            return SlideInDown(
+                              duration:
+                                  Duration(milliseconds: (index + 1) * 100),
+                              child: Slidable(
+                                key: const ValueKey(0),
+                                endActionPane: ActionPane(
+                                  extentRatio: .20.w,
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      backgroundColor:
+                                          Theme.of(context).primaryColorLight,
+                                      foregroundColor:
+                                          Theme.of(context).primaryColorDark,
+                                      icon: Iconsax.close_circle,
+                                      label: 'Delete',
+                                      onPressed: (context) async {
+                                        AlertAction? action = await confirmDialog(
+                                            context,
+                                            '''Are you sure ?\nYou want delete transaction''');
+
+                                        if (action == AlertAction.ok) {
+                                          // await ref
+                                          //     .watch(accountTransactions(
+                                          //         {'accountNo': account.id}).notifier)
+                                          //     .delete(txnId: txn.id)
+                                          //     .then((value) {
+                                          //   if (value == true) {
+                                          //     EasyLoading.showSuccess("Deleted..");
+                                          //     ref.invalidate(accountTransactions);
+                                          //     ref.invalidate(homeDataProvider);
+                                          //   }
+                                          // });
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                child: TransactionItem(txn: txn),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),

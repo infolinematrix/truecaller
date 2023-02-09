@@ -18,6 +18,15 @@ class DateRangeModel {
   DateRangeModel(this.startDate, this.endDate);
 }
 
+final totalProvider = StateProvider.family
+    .autoDispose<double, List<TransactionsModel>>((ref, txn) {
+  double total = 0.0;
+  for (var element in txn) {
+    total = total + element.amountDr;
+  }
+  return total;
+});
+
 final dateRangeProvider = StateProvider.autoDispose<DateRangeModel>((ref) {
   return DateRangeModel(firstDayOfMonth(), lastDayOfMonth());
 });
@@ -38,7 +47,7 @@ class AccountTransactions
 
       QueryBuilder<TransactionsModel> builder = transactionBox.query(
           TransactionsModel_.account.notEquals(0) &
-              TransactionsModel_.txnType.equals('RECEIVE') &
+              TransactionsModel_.txnType.equals('PAYMENT') &
               TransactionsModel_.txnDate
                   .greaterOrEqual(startDate.millisecondsSinceEpoch) &
               TransactionsModel_.txnDate

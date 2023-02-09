@@ -27,7 +27,8 @@ DateTime convertDateToLocal(String strDate) {
 }
 
 DateTime dateTodayStart() {
-  final now = DateTime.now().toLocal();
+  DateTime now = DateTime.now().toLocal();
+
   final lastMidnight = now.subtract(Duration(
     hours: now.hour,
     minutes: now.minute,
@@ -35,6 +36,31 @@ DateTime dateTodayStart() {
     milliseconds: now.millisecond,
     microseconds: now.microsecond,
   ));
+
+  return lastMidnight;
+}
+
+DateTime startDate({required DateTime date}) {
+  final lastMidnight = date.subtract(Duration(
+    hours: date.hour,
+    minutes: date.minute,
+    seconds: date.second,
+    milliseconds: date.millisecond,
+    microseconds: date.microsecond,
+  ));
+
+  return lastMidnight;
+}
+
+DateTime endDate({required DateTime date}) {
+  // final lastMidnight = date.subtract(Duration(
+  //   hours: date.hour,
+  //   minutes: date.minute,
+  //   seconds: date.second,
+  //   milliseconds: date.millisecond,
+  //   microseconds: date.microsecond,
+  // ));
+  final lastMidnight = date.add(const Duration(days: 1));
 
   return lastMidnight;
 }

@@ -31,7 +31,7 @@ class AccountsScreen extends ConsumerWidget {
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  backgroundColor: Theme.of(context).canvasColor,
+                  surfaceTintColor: Colors.transparent,
                   title: Text(parent.name.toUpperCase()),
                   pinned: true,
                   floating: true,

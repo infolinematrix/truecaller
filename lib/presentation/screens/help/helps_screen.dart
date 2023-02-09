@@ -6,12 +6,12 @@ class HelpsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return const Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Theme.of(context).canvasColor,
-            title: const Text("Help"),
+            surfaceTintColor: Colors.transparent,
+            title: Text("Help"),
           )
         ],
       ),

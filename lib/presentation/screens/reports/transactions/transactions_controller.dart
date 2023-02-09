@@ -101,6 +101,9 @@ class DailyTransactionsState
     try {
       final DateTime reportDate = ref.watch(dateRangeProvider).reportDate;
 
+      final sDateTime = startDate(date: reportDate);
+      final eDateTime = endDate(date: reportDate);
+
       QueryBuilder<TransactionsModel> builder = TransactionRepository()
           .transactionBox
           .query(TransactionsModel_.txnDate
@@ -108,7 +111,9 @@ class DailyTransactionsState
                   .and(TransactionsModel_.txnType.equals('PAYMENT'))
                   .or(TransactionsModel_.txnType.equals('RECEIVE')) &
               TransactionsModel_.txnDate
-                  .greaterOrEqual(reportDate.millisecondsSinceEpoch))
+                  .greaterOrEqual(sDateTime.millisecondsSinceEpoch) &
+              TransactionsModel_.txnDate
+                  .lessOrEqual(eDateTime.millisecondsSinceEpoch))
         ..order(TransactionsModel_.txnDate, flags: Order.descending);
 
       Query<TransactionsModel> query = builder.build();

@@ -46,8 +46,8 @@ class MonthSummary extends StatelessWidget {
                         ),
                       ),
                       chartValuesOptions: const ChartValuesOptions(
-                        showChartValueBackground: false,
-                        showChartValues: false,
+                        showChartValueBackground: true,
+                        showChartValues: true,
                         showChartValuesInPercentage: true,
                         showChartValuesOutside: false,
                         decimalPlaces: 1,
