@@ -15,7 +15,7 @@ ThemeData lightTheme = ThemeData(
 
   // scaffoldBackgroundColor: const Color(0xFFFFFFFF),
   // cardColor: const Color(0xaaF5E0C3),
-  dividerColor: Colors.grey.shade100,
+  dividerColor: Colors.grey.shade200,
   // focusColor: const Color(0x1aF5E0C3),
   // hoverColor: const Color(0xBD0D7BE0),
   // highlightColor: const Color(0xFFe3f2fd),

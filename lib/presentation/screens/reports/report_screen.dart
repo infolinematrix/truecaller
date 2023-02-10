@@ -85,7 +85,7 @@ class ReportsScreen extends ConsumerWidget {
                         GoRouter.of(context).pushNamed('REPORTS/BANKBOOK'),
                   ),
                   Divider(
-                    color: Colors.grey.shade200,
+                    color: Theme.of(context).dividerColor,
                   ),
                   ListTile(
                     dense: true,
@@ -104,7 +104,7 @@ class ReportsScreen extends ConsumerWidget {
                         .pushNamed('REPORTS/TRANSACTIONS/DAILY'),
                   ),
                   Divider(
-                    color: Colors.grey.shade200,
+                    color: Theme.of(context).dividerColor,
                   ),
                   ListTile(
                     dense: true,
@@ -139,7 +139,7 @@ class ReportsScreen extends ConsumerWidget {
                         GoRouter.of(context).pushNamed('EXPENSES-STATEMENT'),
                   ),
                   Divider(
-                    color: Colors.grey.shade200,
+                    color: Theme.of(context).dividerColor,
                   ),
                   ListTile(
                     dense: true,
