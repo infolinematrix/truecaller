@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart' as intl;
+
 //--
 List<String> monthsShortUpercase = [
   'JAN',
@@ -135,4 +137,28 @@ String strToWeekDay(DateTime dt) {
   String d = dayOfWeek[dt.weekday];
 
   return d;
+}
+
+String timeAgoCustom(DateTime d) {
+  // <-- Custom method Time Show  (Display Example  ==> 'Today 7:00 PM')     // WhatsApp Time Show Status Shimila
+  Duration diff = DateTime.now().difference(d);
+  if (diff.inDays > 365) {
+    return "${(diff.inDays / 365).floor()} ${(diff.inDays / 365).floor() == 1 ? "year" : "years"} ago";
+  }
+  if (diff.inDays > 30) {
+    return "${(diff.inDays / 30).floor()} ${(diff.inDays / 30).floor() == 1 ? "month" : "months"} ago";
+  }
+  if (diff.inDays > 7) {
+    return "${(diff.inDays / 7).floor()} ${(diff.inDays / 7).floor() == 1 ? "week" : "weeks"} ago";
+  }
+  if (diff.inDays > 0) {
+    return intl.DateFormat.E().add_jm().format(d);
+  }
+  if (diff.inHours > 0) {
+    return "Today ${intl.DateFormat('jm').format(d)}";
+  }
+  if (diff.inMinutes > 0) {
+    return "${diff.inMinutes} ${diff.inMinutes == 1 ? "minute" : "minutes"} ago";
+  }
+  return "just now";
 }

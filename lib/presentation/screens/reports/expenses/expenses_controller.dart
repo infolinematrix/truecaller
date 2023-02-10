@@ -54,7 +54,7 @@ class AccountTransactions
                   .lessOrEqual(endtDate.millisecondsSinceEpoch))
         ..order(
           TransactionsModel_.txnDate,
-          flags: Order.caseSensitive,
+          flags: Order.descending,
         );
 
       Query<TransactionsModel> query = builder.build();

@@ -383,28 +383,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   //   child: Divider(),
                   // ),
                   SliverToBoxAdapter(
-                      child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 16.0.w, vertical: 8.0.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "TRANSACTIONS OF THE DAY",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "List of transaction made today",
-                          style: Theme.of(context).textTheme.bodySmall,
-                        )
-                      ],
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.0.w, vertical: 8.0.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "TRANSACTIONS OF THE DAY",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "List of transaction made today",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          )
+                        ],
+                      ),
                     ),
-                  )),
+                  ),
                   TodaysTransactionWidget(
                     txns: data.transactionsToday,
                   ),

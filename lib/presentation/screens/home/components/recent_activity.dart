@@ -24,7 +24,7 @@ class RecentActivity extends StatelessWidget {
               children: [
                 Center(
                   child: Container(
-                    width: 65.w,
+                    width: 75.w,
                     margin: EdgeInsets.symmetric(horizontal: 8.0.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,8 +44,8 @@ class RecentActivity extends StatelessWidget {
                                 txn['account'][0],
                                 style: Theme.of(context)
                                     .textTheme
-                                    .titleLarge!
-                                    .copyWith(),
+                                    .bodyLarge!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -55,27 +55,27 @@ class RecentActivity extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                             child: Text(
-                              "12,650",
+                              formatCurrency(txn['amount']),
                               maxLines: 1,
                               overflow: TextOverflow.clip,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.w500),
+                                  .labelLarge!
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                         Flexible(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                            padding: EdgeInsets.symmetric(horizontal: 4.0.w),
                             child: Text(
-                              "12 min ago",
+                              timeAgoCustom(txn['createdOn']),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall!
-                                  .copyWith(),
+                                  .copyWith(fontSize: 9.sp),
                             ),
                           ),
                         )

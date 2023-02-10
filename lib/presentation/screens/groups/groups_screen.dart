@@ -112,9 +112,9 @@ class GroupsScreen extends ConsumerWidget {
                                         group.name[0],
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleLarge!
+                                            .bodyLarge!
                                             .copyWith(
-                                                fontWeight: FontWeight.w500),
+                                                fontWeight: FontWeight.w900),
                                       ),
                                     ),
                                   ),
@@ -134,7 +134,7 @@ class GroupsScreen extends ConsumerWidget {
                                   trailing: ClipOval(
                                     child: Container(
                                       alignment: Alignment.center,
-                                      color: Theme.of(context).disabledColor,
+                                      color: Theme.of(context).canvasColor,
                                       height: 25.0.sp,
                                       width: 25.0.sp,
                                       child: Icon(
@@ -167,9 +167,9 @@ class GroupsScreen extends ConsumerWidget {
                                       group.name[0],
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleLarge!
+                                          .bodyLarge!
                                           .copyWith(
-                                              fontWeight: FontWeight.w500),
+                                              fontWeight: FontWeight.w900),
                                     ),
                                   ),
                                 ),
@@ -188,7 +188,7 @@ class GroupsScreen extends ConsumerWidget {
                                 trailing: ClipOval(
                                   child: Container(
                                     alignment: Alignment.center,
-                                    color: Theme.of(context).disabledColor,
+                                    color: Theme.of(context).canvasColor,
                                     height: 25.0.sp,
                                     width: 25.0.sp,
                                     child: Icon(

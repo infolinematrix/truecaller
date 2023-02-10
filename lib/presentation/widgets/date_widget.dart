@@ -13,8 +13,8 @@ class DateWidget extends StatelessWidget {
 
     return Container(
       clipBehavior: Clip.hardEdge,
-      width: 45.w,
-      height: 60.h,
+      width: 50.w,
+      height: 50.h,
       decoration: BoxDecoration(
         border: Border.all(
           color: Theme.of(context).highlightColor,
@@ -52,15 +52,15 @@ class DateWidget extends StatelessWidget {
                   date['day'],
                   style: Theme.of(context)
                       .textTheme
-                      .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 12.0.sp),
+                      .titleMedium!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   date['year'],
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
-                      .copyWith(fontSize: 7.sp),
+                      .copyWith(fontSize: 9.sp),
                 )
               ],
             ),

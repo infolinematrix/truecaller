@@ -16,11 +16,14 @@ class TransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      visualDensity: const VisualDensity(horizontal: 0, vertical: -2),
+      visualDensity: const VisualDensity(horizontal: 0, vertical: 0),
       leading: DateWidget(strDate: txn.txnDate!.toString()),
       title: Text(
         txn.description!,
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(),
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(fontWeight: FontWeight.bold),
       ),
       subtitle: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -58,11 +61,11 @@ class TransactionItem extends StatelessWidget {
         children: [
           Text(
             "${txn.txnType == 'PAYMENT' ? '-' : '+'} ${formatCurrency(txn.amountDr)}",
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                fontWeight: FontWeight.w500,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.bold,
                 color: txn.txnType == 'PAYMENT'
                     ? Theme.of(context).colorScheme.error
-                    : Theme.of(context).primaryColor),
+                    : Theme.of(context).primaryColorDark),
           ),
           Text(
             txn.narration!,

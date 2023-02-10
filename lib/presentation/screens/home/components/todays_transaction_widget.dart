@@ -12,7 +12,7 @@ class TodaysTransactionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverFixedExtentList(
-      itemExtent: 55.h, // I'm forcing item heights
+      itemExtent: 60.h, // I'm forcing item heights
       delegate:
           SliverChildBuilderDelegate(childCount: txns.length, (context, index) {
         return TransactionItem(txn: txns[index]);

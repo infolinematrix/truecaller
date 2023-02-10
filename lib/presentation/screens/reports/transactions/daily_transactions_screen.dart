@@ -100,8 +100,8 @@ class DailyTransactionsScreen extends ConsumerWidget {
                   return ListView.separated(
                     itemCount: data.length,
                     separatorBuilder: (context, index) => Divider(
-                      height: 5.0.h,
-                      color: Colors.grey.shade100,
+                      height: 0,
+                      color: Theme.of(context).dividerColor,
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       TransactionsModel txn = data[index];
