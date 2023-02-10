@@ -12,15 +12,16 @@ final transactionBox = store!.objStore.box<TransactionsModel>();
 class HomeDataModel {
   final List<TransactionsModel> transactionsToday;
   final List monthlyAccountWiseSummary;
+  final List<Map<String, dynamic>> recentActivity;
   final Map<String, dynamic> currentMonthSummary;
   final Map<String, dynamic> todayMonthSummary;
 
-  HomeDataModel({
-    required this.transactionsToday,
-    required this.monthlyAccountWiseSummary,
-    required this.currentMonthSummary,
-    required this.todayMonthSummary,
-  });
+  HomeDataModel(
+      {required this.transactionsToday,
+      required this.monthlyAccountWiseSummary,
+      required this.currentMonthSummary,
+      required this.todayMonthSummary,
+      required this.recentActivity});
 }
 
 //=========== HOME PROVIDER ==================================================
@@ -43,6 +44,7 @@ class HomeNotifier extends StateNotifier<AsyncValue<HomeDataModel>> {
           await ref.read(monthlyAccountWiseExpensesSummaryProvider),
       currentMonthSummary: ref.read(currentMonthSummaryProvider),
       todayMonthSummary: ref.read(currentDaySummaryProvider),
+      recentActivity: ref.read(recentActivityProvider),
     );
 
     state = AsyncValue<HomeDataModel>.data(alldata);
@@ -160,6 +162,34 @@ final currentDaySummaryProvider =
     }
 
     return {'income': r, 'expenditure': p};
+  } catch (e) {
+    rethrow;
+  }
+});
+
+//--Recent Activity
+final recentActivityProvider =
+    Provider.autoDispose<List<Map<String, dynamic>>>((ref) {
+  try {
+    final List<TransactionsModel> data = TransactionRepository().getAllToday();
+
+    List<Map<String, dynamic>> mDataList = [];
+
+    for (var element in data) {
+      mDataList.addAll(
+        [
+          {
+            'account': element.accountName,
+            'amount':
+                element.amountCr == 0 ? element.amountDr : element.amountCr,
+            'txnMode': element.txnType,
+            'createdOn': element.createdOn
+          }
+        ],
+      );
+    }
+
+    return mDataList;
   } catch (e) {
     rethrow;
   }

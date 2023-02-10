@@ -20,10 +20,7 @@ class TransactionItem extends StatelessWidget {
       leading: DateWidget(strDate: txn.txnDate!.toString()),
       title: Text(
         txn.description!,
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(fontWeight: FontWeight.w500),
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(),
       ),
       subtitle: Column(
         mainAxisAlignment: MainAxisAlignment.start,

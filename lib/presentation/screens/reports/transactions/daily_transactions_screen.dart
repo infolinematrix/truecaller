@@ -101,6 +101,7 @@ class DailyTransactionsScreen extends ConsumerWidget {
                     itemCount: data.length,
                     separatorBuilder: (context, index) => Divider(
                       height: 5.0.h,
+                      color: Colors.grey.shade100,
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       TransactionsModel txn = data[index];

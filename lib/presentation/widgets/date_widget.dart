@@ -14,7 +14,7 @@ class DateWidget extends StatelessWidget {
     return Container(
       clipBehavior: Clip.hardEdge,
       width: 45.w,
-      height: 45.h,
+      height: 60.h,
       decoration: BoxDecoration(
         border: Border.all(
           color: Theme.of(context).highlightColor,
@@ -29,9 +29,9 @@ class DateWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            color: Theme.of(context).primaryColorDark,
+            color: Theme.of(context).primaryColor,
             height: 16.sp,
-            margin: EdgeInsets.only(bottom: 4.sp),
+            margin: EdgeInsets.only(bottom: 2.sp),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +53,7 @@ class DateWidget extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 14.0.sp),
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 12.0.sp),
                 ),
                 Text(
                   date['year'],

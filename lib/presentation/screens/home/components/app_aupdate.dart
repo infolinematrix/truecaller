@@ -28,12 +28,12 @@ class AppUpdate extends StatelessWidget {
                     "NEW UPDATE AVAILABLE",
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle2!
+                        .titleMedium!
                         .copyWith(fontWeight: FontWeight.w500),
                   ),
                   UIHelper.verticalSpaceSmall(),
                   const Text(
-                      "I gave it a border, but it would be nice to have rounded borders."),
+                      "There is new version of this app avilable for download. Install the new version."),
                   UIHelper.verticalSpaceSmall(),
                   Row(
                     children: [
@@ -53,7 +53,7 @@ class AppUpdate extends StatelessWidget {
               Icon(
                 Iconsax.arrow_square_down,
                 size: 50.sp,
-                color: Theme.of(context).secondaryHeaderColor,
+                color: Theme.of(context).primaryColor,
               )
             ],
           ),

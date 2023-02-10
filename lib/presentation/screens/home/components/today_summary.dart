@@ -40,7 +40,7 @@ class TodaySummary extends StatelessWidget {
                   Icon(
                     Iconsax.calendar_1,
                     size: 50.sp,
-                    color: Theme.of(context).toggleableActiveColor,
+                    color: Theme.of(context).primaryColorLight,
                   )
                 ],
               ),
@@ -76,9 +76,9 @@ class TodaySummary extends StatelessWidget {
                                     ),
                               ),
                               UIHelper.horizontalSpaceSmall(),
-                              Icon(
+                              const Icon(
                                 Iconsax.import_1,
-                                color: Theme.of(context).hoverColor,
+                                color: Colors.green,
                               )
                             ],
                           ),
@@ -119,9 +119,9 @@ class TodaySummary extends StatelessWidget {
                                     ),
                               ),
                               UIHelper.horizontalSpaceSmall(),
-                              Icon(
+                              const Icon(
                                 Iconsax.export_1,
-                                color: Theme.of(context).errorColor,
+                                color: Colors.red,
                               )
                             ],
                           ),

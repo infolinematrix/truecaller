@@ -22,7 +22,7 @@ class SearchBar extends StatelessWidget {
             topRight: Radius.circular(30),
             topLeft: Radius.circular(30),
           ),
-          side: BorderSide(width: .50, color: Theme.of(context).disabledColor),
+          side: BorderSide(width: .50, color: Colors.grey.shade200),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 0.0.h),
@@ -37,7 +37,7 @@ class SearchBar extends StatelessWidget {
               SlideInRight(
                   duration: const Duration(milliseconds: 300),
                   child: Text("SEARCH",
-                      style: Theme.of(context).textTheme.caption)),
+                      style: Theme.of(context).textTheme.bodySmall)),
             ],
           ),
         ),

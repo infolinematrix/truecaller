@@ -235,7 +235,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
                   SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
 
-                  const RecentActivity(),
+                  RecentActivity(
+                    data: data.recentActivity,
+                  ),
                   SliverToBoxAdapter(child: UIHelper.verticalSpaceMedium()),
 
                   const MainMenuWidget(),
@@ -377,9 +379,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   //   }),
                   // ),
 
-                  const SliverToBoxAdapter(
-                    child: Divider(),
-                  ),
+                  // const SliverToBoxAdapter(
+                  //   child: Divider(),
+                  // ),
                   SliverToBoxAdapter(
                       child: Padding(
                     padding: EdgeInsets.symmetric(

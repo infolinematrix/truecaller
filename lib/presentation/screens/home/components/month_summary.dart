@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/index.dart';
@@ -93,39 +94,43 @@ class MonthSummary extends StatelessWidget {
                   children: [
                     Flexible(
                       fit: FlexFit.tight,
-                      child: Wrap(
-                        direction: Axis.vertical,
-                        children: [
-                          Text(
-                            "Income",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: Theme.of(context).hintColor,
+                      child: InkWell(
+                        onTap: () =>
+                            GoRouter.of(context).pushNamed('INCOME-STATEMENT'),
+                        child: Wrap(
+                          direction: Axis.vertical,
+                          children: [
+                            Text(
+                              "Income",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color: Theme.of(context).hintColor,
+                                  ),
+                            ),
+                            UIHelper.verticalSpaceExtraSmall(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  formatCurrency(data['income']),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
-                          ),
-                          UIHelper.verticalSpaceExtraSmall(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                formatCurrency(data['income']),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              UIHelper.horizontalSpaceSmall(),
-                              Icon(
-                                Iconsax.import_1,
-                                color: Theme.of(context).hoverColor,
-                              )
-                            ],
-                          ),
-                        ],
+                                UIHelper.horizontalSpaceSmall(),
+                                const Icon(
+                                  Iconsax.import_1,
+                                  color: Colors.green,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Flexible(
@@ -137,38 +142,42 @@ class MonthSummary extends StatelessWidget {
                     ),
                     Flexible(
                       // fit: FlexFit.tight,
-                      child: Wrap(
-                        direction: Axis.vertical,
-                        children: [
-                          Text(
-                            "Expenditure",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: Theme.of(context).hintColor,
+                      child: InkWell(
+                        onTap: () => GoRouter.of(context)
+                            .pushNamed('EXPENSES-STATEMENT'),
+                        child: Wrap(
+                          direction: Axis.vertical,
+                          children: [
+                            Text(
+                              "Expenditure",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color: Theme.of(context).hintColor,
+                                  ),
+                            ),
+                            UIHelper.verticalSpaceExtraSmall(),
+                            Row(
+                              children: [
+                                Text(
+                                  formatCurrency(data['expenditure']),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
-                          ),
-                          UIHelper.verticalSpaceExtraSmall(),
-                          Row(
-                            children: [
-                              Text(
-                                formatCurrency(data['expenditure']),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              UIHelper.horizontalSpaceSmall(),
-                              Icon(
-                                Iconsax.export_1,
-                                color: Theme.of(context).colorScheme.error,
-                              )
-                            ],
-                          ),
-                        ],
+                                UIHelper.horizontalSpaceSmall(),
+                                const Icon(
+                                  Iconsax.export_1,
+                                  color: Colors.red,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

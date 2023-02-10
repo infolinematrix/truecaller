@@ -42,10 +42,8 @@ class ReportsScreen extends ConsumerWidget {
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Account Statement",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style:
+                          Theme.of(context).textTheme.titleMedium!.copyWith(),
                     ),
                     subtitle: Text(
                       "Statement of account",
@@ -60,10 +58,8 @@ class ReportsScreen extends ConsumerWidget {
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Cash Book",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style:
+                          Theme.of(context).textTheme.titleMedium!.copyWith(),
                     ),
                     subtitle: Text(
                       "Cash book for the month",
@@ -78,10 +74,8 @@ class ReportsScreen extends ConsumerWidget {
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Bank Book",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style:
+                          Theme.of(context).textTheme.titleMedium!.copyWith(),
                     ),
                     subtitle: Text(
                       "This is description of report",
@@ -90,17 +84,17 @@ class ReportsScreen extends ConsumerWidget {
                     onTap: () =>
                         GoRouter.of(context).pushNamed('REPORTS/BANKBOOK'),
                   ),
-                  const Divider(),
+                  Divider(
+                    color: Colors.grey.shade200,
+                  ),
                   ListTile(
                     dense: true,
                     visualDensity:
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Daily Transactions",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style:
+                          Theme.of(context).textTheme.titleMedium!.copyWith(),
                     ),
                     subtitle: Text(
                       "List of transactions( daily)",
@@ -109,17 +103,17 @@ class ReportsScreen extends ConsumerWidget {
                     onTap: () => GoRouter.of(context)
                         .pushNamed('REPORTS/TRANSACTIONS/DAILY'),
                   ),
-                  const Divider(),
+                  Divider(
+                    color: Colors.grey.shade200,
+                  ),
                   ListTile(
                     dense: true,
                     visualDensity:
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Income Statement",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style:
+                          Theme.of(context).textTheme.titleMedium!.copyWith(),
                     ),
                     subtitle: Text(
                       "Income statement with detail",
@@ -134,10 +128,8 @@ class ReportsScreen extends ConsumerWidget {
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Expenses Statement",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style:
+                          Theme.of(context).textTheme.titleMedium!.copyWith(),
                     ),
                     subtitle: Text(
                       "Expenses statement with date range",
@@ -146,17 +138,17 @@ class ReportsScreen extends ConsumerWidget {
                     onTap: () =>
                         GoRouter.of(context).pushNamed('EXPENSES-STATEMENT'),
                   ),
-                  const Divider(),
+                  Divider(
+                    color: Colors.grey.shade200,
+                  ),
                   ListTile(
                     dense: true,
                     visualDensity:
                         const VisualDensity(horizontal: 0, vertical: -2),
                     title: Text(
                       "Budget Report",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style:
+                          Theme.of(context).textTheme.titleMedium!.copyWith(),
                     ),
                     subtitle: Text(
                       "Account wise Budget report",
