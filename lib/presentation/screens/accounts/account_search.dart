@@ -41,6 +41,7 @@ class AccountSearchScreen extends ConsumerWidget {
                       margin: EdgeInsets.symmetric(horizontal: 8.0.w),
                       child: Card(
                         elevation: .50,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: const BorderRadius.only(
                             bottomRight: Radius.circular(30),

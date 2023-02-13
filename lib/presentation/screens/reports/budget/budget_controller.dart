@@ -4,6 +4,7 @@ import 'package:truecaller/data/models/transactions_model.dart';
 import 'package:truecaller/data/repositories/account_repository.dart';
 import 'package:truecaller/data/repositories/transaction_repository.dart';
 import 'package:truecaller/objectbox.g.dart';
+import 'package:truecaller/utils/index.dart';
 
 final budgetReportProvider =
     FutureProvider.autoDispose<List<Map<String, dynamic>>>((ref) async {
@@ -13,6 +14,7 @@ final budgetReportProvider =
         .accountBox
         .query(AccountsModel_.name
             .notNull()
+            .and(AccountsModel_.hasChild.equals(false))
             .and(AccountsModel_.hasChild.equals(false))
             .and(AccountsModel_.budget.greaterThan(0)));
 
@@ -29,7 +31,7 @@ final budgetReportProvider =
           'accountName': account.name,
           'description': account.description,
           'budget': account.budget,
-          'balance': balance
+          'spentAmount': balance
         }
       ]);
 
@@ -46,9 +48,13 @@ double getBalance(int accountId) {
   QueryBuilder<TransactionsModel> txnBuilder = TransactionRepository()
       .transactionBox
       .query(TransactionsModel_.account
-          .equals(accountId)
-          .and(TransactionsModel_.txnType.equals('PAYMENT'))
-          .or(TransactionsModel_.txnType.equals('RECEIVE')));
+              .equals(accountId)
+              .and(TransactionsModel_.txnType.equals('PAYMENT'))
+              .or(TransactionsModel_.txnType.equals('RECEIVE')) &
+          TransactionsModel_.txnDate
+              .greaterOrEqual(firstDayCurrentMonth.millisecondsSinceEpoch) &
+          TransactionsModel_.txnDate
+              .lessOrEqual(lastDayCurrentMonth.millisecondsSinceEpoch));
 
   Query<TransactionsModel> txnQuery = txnBuilder.build();
   List<TransactionsModel> txnList = txnQuery.find().toList();

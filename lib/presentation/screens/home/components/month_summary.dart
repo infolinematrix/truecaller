@@ -104,7 +104,7 @@ class MonthSummary extends StatelessWidget {
                               "Income",
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleMedium!
+                                  .titleSmall!
                                   .copyWith(
                                     color: Theme.of(context).hintColor,
                                   ),
@@ -117,9 +117,9 @@ class MonthSummary extends StatelessWidget {
                                   formatCurrency(data['income']),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleLarge!
+                                      .titleMedium!
                                       .copyWith(
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w900,
                                       ),
                                 ),
                                 UIHelper.horizontalSpaceSmall(),
@@ -152,7 +152,7 @@ class MonthSummary extends StatelessWidget {
                               "Expenditure",
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleMedium!
+                                  .titleSmall!
                                   .copyWith(
                                     color: Theme.of(context).hintColor,
                                   ),
@@ -164,9 +164,9 @@ class MonthSummary extends StatelessWidget {
                                   formatCurrency(data['expenditure']),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleLarge!
+                                      .titleMedium!
                                       .copyWith(
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w900,
                                       ),
                                 ),
                                 UIHelper.horizontalSpaceSmall(),

@@ -219,7 +219,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 slivers: <Widget>[
                   const AppBarWidget(),
                   SliverAppBar(
-                    surfaceTintColor: Colors.transparent,
+                    surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     pinned: true,
                     expandedHeight: 45.h,
                     stretch: true,

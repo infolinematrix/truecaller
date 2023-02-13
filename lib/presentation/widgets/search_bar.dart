@@ -14,6 +14,7 @@ class SearchBar extends StatelessWidget {
       height: 45.h,
       margin: EdgeInsets.symmetric(horizontal: 8.0.w),
       child: Card(
+        color: Theme.of(context).scaffoldBackgroundColor,
         elevation: .50,
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.only(

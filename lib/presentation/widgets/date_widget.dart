@@ -50,17 +50,17 @@ class DateWidget extends StatelessWidget {
               children: [
                 Text(
                   date['day'],
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.w900,
+                        height: 1.3,
+                      ),
                 ),
                 Text(
                   date['year'],
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
-                      .copyWith(fontSize: 9.sp),
+                      .copyWith(fontSize: 8.sp),
                 )
               ],
             ),

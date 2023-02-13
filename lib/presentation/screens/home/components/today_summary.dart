@@ -28,8 +28,10 @@ class TodaySummary extends StatelessWidget {
                         "Today's Summary",
                         style: Theme.of(context)
                             .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.w500),
+                            .titleMedium!
+                            .copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).disabledColor),
                       ),
                       UIHelper.verticalSpaceSmall(),
                       const Text(

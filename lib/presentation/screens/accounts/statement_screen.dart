@@ -29,7 +29,7 @@ class AccountStatementScreen extends ConsumerWidget {
         ref.watch(accountTransactions({'accountNo': account.id}));
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).canvasColor,
+        surfaceTintColor: Colors.transparent,
         title: Text("STATEMENT - ${account.name.toUpperCase()}"),
         actions: [
           IconButton(
