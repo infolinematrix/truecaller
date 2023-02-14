@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
+import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
 
 import 'settings_controller.dart';
@@ -64,8 +65,7 @@ class SettingsUpdateScreen extends ConsumerWidget {
                             child: FormBuilderTextField(
                               name: 'name',
                               initialValue: data['name'],
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w500),
+                              style: inputTextStyle,
                               validator: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(),
                               ]),
@@ -99,9 +99,7 @@ class SettingsUpdateScreen extends ConsumerWidget {
                                                   .centerStart,
                                               value: gender,
                                               child: Text(gender,
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500)),
+                                                  style: inputTextStyle),
                                             ))
                                         .toList(),
                                   ),
@@ -125,9 +123,7 @@ class SettingsUpdateScreen extends ConsumerWidget {
                                                   .centerStart,
                                               value: currencie['code'],
                                               child: Text(currencie['name'],
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500)),
+                                                  style: inputTextStyle),
                                             ))
                                         .toList(),
                                   ),
@@ -144,8 +140,8 @@ class SettingsUpdateScreen extends ConsumerWidget {
                                   child: FormBuilderTextField(
                                     name: 'cashInHand',
                                     initialValue: data['cashInHand'],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w500),
+                                    style: inputTextStyle.copyWith(
+                                        fontWeight: FontWeight.bold),
                                     validator: FormBuilderValidators.compose(
                                         [FormBuilderValidators.required()]),
                                     decoration: const InputDecoration(
@@ -178,12 +174,8 @@ class SettingsUpdateScreen extends ConsumerWidget {
                                             alignment: AlignmentDirectional
                                                 .centerStart,
                                             value: bank['code'],
-                                            child: Text(
-                                              bank['name'],
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
+                                            child: Text(bank['name'],
+                                                style: inputTextStyle),
                                           ),
                                         )
                                         .toList(),

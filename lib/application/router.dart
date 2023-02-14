@@ -27,7 +27,6 @@ import 'package:truecaller/presentation/screens/transactions/payment_screen.dart
 import 'package:truecaller/presentation/screens/transactions/receive_screen.dart';
 import 'package:truecaller/presentation/screens/transactions/transfer_screen.dart';
 
-import '../presentation/screens/error.dart';
 import '../presentation/screens/reports/expenses/expenses_statement_screen.dart';
 import '../presentation/screens/reports/report_screen.dart';
 import '../presentation/screens/settings/settings_update_screen.dart';
@@ -330,7 +329,7 @@ final GoRouter router = GoRouter(
   ],
 
   //--ERROR SCREEN
-  errorBuilder: (context, state) => ErrorScreen(msg: state.error.toString()),
+  errorBuilder: (context, state) => ErrorWidget(state.error.toString()),
 );
 
 //--TRANSITION

@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/data/models/account_mode.dart';
-import 'package:truecaller/presentation/screens/error.dart';
+import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
 
 import 'statement_controller.dart';
@@ -38,6 +38,7 @@ class AccountsScreenReport extends ConsumerWidget {
                     margin: EdgeInsets.symmetric(horizontal: 8.0.w),
                     child: Card(
                       elevation: .50,
+                      surfaceTintColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: const BorderRadius.only(
                           bottomRight: Radius.circular(30),
@@ -45,8 +46,8 @@ class AccountsScreenReport extends ConsumerWidget {
                           topRight: Radius.circular(30),
                           topLeft: Radius.circular(30),
                         ),
-                        side: BorderSide(
-                            width: .50, color: Theme.of(context).disabledColor),
+                        side:
+                            BorderSide(width: .50, color: Colors.grey.shade200),
                       ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -57,7 +58,9 @@ class AccountsScreenReport extends ConsumerWidget {
                           children: [
                             SlideInLeft(
                                 duration: const Duration(milliseconds: 300),
-                                child: const Icon(Iconsax.search_normal)),
+                                child: const Icon(
+                                  Iconsax.search_normal,
+                                )),
 
                             Expanded(
                               child: FormBuilderTextField(
@@ -97,7 +100,7 @@ class AccountsScreenReport extends ConsumerWidget {
           ];
         },
         body: accounts.when(
-          error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+          error: (error, stackTrace) => ErrorWidget(error.toString()),
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
@@ -120,19 +123,20 @@ class AccountsScreenReport extends ConsumerWidget {
                         account.name[0],
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
+                            .titleMedium!
                             .copyWith(fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
                   title: Text(
-                    account.name,
+                    '${account.name}#${account.id}',
                     maxLines: 1,
-                    style: const TextStyle(fontWeight: FontWeight.w500),
+                    style: listTileTitle,
                   ),
                   subtitle: Text(
                     account.description,
                     maxLines: 1,
+                    style: listTileSubTitle.copyWith(),
                   ),
                   onTap: () {
                     GoRouter.of(context).pushNamed("STATEMENT", extra: account);

@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/data/models/account_mode.dart';
-import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
+import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/functions.dart';
 
 import 'transaction_controller.dart';
@@ -40,7 +40,7 @@ class AccountSelectScreen extends ConsumerWidget {
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 0.0.sp, vertical: 0),
             child: accounts.when(
-              error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+              error: (error, stackTrace) => ErrorWidget(error.toString()),
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
@@ -71,11 +71,12 @@ class AccountSelectScreen extends ConsumerWidget {
                       title: Text(
                         account.name,
                         maxLines: 1,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
+                        style: listTileTitle,
                       ),
                       subtitle: Text(
                         account.description,
                         maxLines: 1,
+                        style: listTileSubTitle,
                       ),
                       onTap: () {
                         if (allowedTransactionType == 'PAYMENT') {

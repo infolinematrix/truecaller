@@ -10,8 +10,6 @@ import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/presentation/screens/accounts/account_controller.dart';
 import 'package:truecaller/utils/index.dart';
 
-import '../error.dart';
-
 class AccountSearchScreen extends ConsumerWidget {
   const AccountSearchScreen({super.key});
 
@@ -104,7 +102,7 @@ class AccountSearchScreen extends ConsumerWidget {
             ];
           },
           body: accounts.when(
-              error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+              error: (error, stackTrace) => ErrorWidget(error.toString()),
               loading: () => const Center(child: CircularProgressIndicator()),
               data: (data) {
                 return ListView.builder(

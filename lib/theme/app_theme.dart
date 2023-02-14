@@ -4,23 +4,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
-  visualDensity: VisualDensity(vertical: 0.5.h, horizontal: 0.5.w),
+  // visualDensity: VisualDensity(vertical: 0.5.h, horizontal: 0.5.w),
+  visualDensity: VisualDensity.adaptivePlatformDensity,
   fontFamily: 'ROBOTO',
-  splashFactory: InkSplash.splashFactory,
-  // splashColor: Colors.grey,
-  // primaryColor: const Color(0xFF212121),
-  // primaryColorLight: const Color(0x1aF5E0C3),
-  // primaryColorDark: const Color(0xff457BE0),
-  // canvasColor: Colors.white,
 
+  canvasColor: Colors.white,
   scaffoldBackgroundColor: const Color(0xFFFFFFFF),
   cardColor: const Color(0xFFFFFFFF),
-  dividerColor: Colors.grey.shade200,
-  // focusColor: const Color(0x1aF5E0C3),
-  // hoverColor: const Color(0xBD0D7BE0),
-  // highlightColor: const Color(0xFFe3f2fd),
+  dividerColor: Colors.grey.shade100,
+
+  // splashFactory: InkSplash.splashFactory,
+  // focusColor: Colors.redAccent,
+  // hoverColor: Colors.redAccent,
+  // highlightColor: Colors.green,
   // dialogBackgroundColor: Colors.white,
-  // indicatorColor: const Color(0xffb3e5fc),
+  // indicatorColor: Colors.redAccent,
   // hintColor: Colors.grey,
   // secondaryHeaderColor: Colors.grey,
   // unselectedWidgetColor: Colors.grey.shade400,
@@ -44,6 +42,12 @@ ThemeData lightTheme = ThemeData(
   // toggleButtonsTheme: const ToggleButtonsThemeData(),
   // textTheme: const TextTheme(),
   // primaryTextTheme: const TextTheme(),
+
+  // listTileTheme: const ListTileThemeData(
+  //   tileColor: Colors.white,
+  // ),
+
+  // cardTheme: const CardTheme(color: Colors.white),
 
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
@@ -108,56 +112,15 @@ ThemeData lightTheme = ThemeData(
 
   textTheme: textTheme,
 
-  // switchTheme: SwitchThemeData(
-  //   thumbColor:
-  //       MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-  //     if (states.contains(MaterialState.disabled)) {
-  //       return null;
-  //     }
-  //     if (states.contains(MaterialState.selected)) {
-  //       return const Color(0xBD0D7BE0);
-  //     }
-  //     return null;
-  //   }),
-  //   trackColor:
-  //       MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-  //     if (states.contains(MaterialState.disabled)) {
-  //       return null;
-  //     }
-  //     if (states.contains(MaterialState.selected)) {
-  //       return const Color(0xBD0D7BE0);
-  //     }
-  //     return null;
-  //   }),
-  // ),
-  // radioTheme: RadioThemeData(
-  //   fillColor:
-  //       MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-  //     if (states.contains(MaterialState.disabled)) {
-  //       return null;
-  //     }
-  //     if (states.contains(MaterialState.selected)) {
-  //       return const Color(0xBD0D7BE0);
-  //     }
-  //     return null;
-  //   }),
-  // ),
-  // checkboxTheme: CheckboxThemeData(
-  //   fillColor:
-  //       MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-  //     if (states.contains(MaterialState.disabled)) {
-  //       return null;
-  //     }
-  //     if (states.contains(MaterialState.selected)) {
-  //       return const Color(0xBD0D7BE0);
-  //     }
-  //     return null;
-  //   }),
-  // ),
-  // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+  // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.indigo)
   //     .copyWith(background: const Color(0xff457BE0))
   //     .copyWith(error: Colors.red),
 );
+
+final dateStyle = ThemeData.light().copyWith(
+    colorScheme: const ColorScheme.light(
+  primary: Colors.blueAccent,
+));
 
 final textTheme = TextTheme(
   displayLarge: GoogleFonts.inter(
@@ -445,6 +408,12 @@ InputDecoration checkBoxDecoration = InputDecoration(
 );
 
 TextStyle inputTextStyle = TextStyle(
-  fontWeight: FontWeight.w500,
-  fontSize: 14.0.sp,
+  fontWeight: FontWeight.w700,
+  fontSize: 13.0.sp,
 );
+
+//--ListTitle
+TextStyle listTileTitle =
+    TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w700);
+TextStyle listTileSubTitle = TextStyle(
+    fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: Colors.black54);

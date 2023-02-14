@@ -7,7 +7,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/data/models/account_mode.dart';
-import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
@@ -31,7 +30,7 @@ class AccountEditScreen extends ConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
             child: parent.when(
-          error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+          error: (error, stackTrace) => ErrorWidget(error.toString()),
           loading: () => const Center(child: CircularProgressIndicator()),
           data: (parentAccount) {
             return FormBuilder(

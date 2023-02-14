@@ -15,7 +15,6 @@ final budgetReportProvider =
         .query(AccountsModel_.name
             .notNull()
             .and(AccountsModel_.hasChild.equals(false))
-            .and(AccountsModel_.hasChild.equals(false))
             .and(AccountsModel_.budget.greaterThan(0)));
 
     Query<AccountsModel> accountsQuery = accountsBuilder.build();
@@ -34,8 +33,6 @@ final budgetReportProvider =
           'spentAmount': balance
         }
       ]);
-
-      print(data);
     }
 
     return data;
@@ -49,8 +46,7 @@ double getBalance(int accountId) {
       .transactionBox
       .query(TransactionsModel_.account
               .equals(accountId)
-              .and(TransactionsModel_.txnType.equals('PAYMENT'))
-              .or(TransactionsModel_.txnType.equals('RECEIVE')) &
+              .and(TransactionsModel_.txnType.equals('PAYMENT')) &
           TransactionsModel_.txnDate
               .greaterOrEqual(firstDayCurrentMonth.millisecondsSinceEpoch) &
           TransactionsModel_.txnDate
@@ -60,15 +56,16 @@ double getBalance(int accountId) {
   List<TransactionsModel> txnList = txnQuery.find().toList();
 
   double paymentAmt = 0.0;
-  double receiveAmt = 0.0;
+  // double receiveAmt = 0.0;
   double balanceAmt = 0.0;
 
   for (var txn in txnList) {
     if (txn.txnType == 'PAYMENT') paymentAmt += txn.amountDr;
-    if (txn.txnType == 'RECEIVE') receiveAmt += txn.amountCr;
+    // if (txn.txnType == 'RECEIVE') receiveAmt += txn.amountCr;
   }
 
-  balanceAmt = receiveAmt - paymentAmt;
+  // balanceAmt = receiveAmt - paymentAmt;
+  balanceAmt = paymentAmt;
 
   return balanceAmt;
 }

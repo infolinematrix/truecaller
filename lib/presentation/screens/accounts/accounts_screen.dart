@@ -9,7 +9,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
 import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/presentation/screens/accounts/account_controller.dart';
-import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/screens/home/home_controller.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
@@ -58,7 +57,7 @@ class AccountsScreen extends ConsumerWidget {
               ];
             },
             body: accounts.when(
-              error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+              error: (error, stackTrace) => ErrorWidget(error.toString()),
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),

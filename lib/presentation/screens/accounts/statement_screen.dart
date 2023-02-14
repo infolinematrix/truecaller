@@ -13,6 +13,7 @@ import 'package:truecaller/presentation/screens/accounts/account_statement_contr
 import 'package:truecaller/presentation/screens/home/home_controller.dart';
 
 import 'package:truecaller/presentation/widgets/index.dart';
+import 'package:truecaller/theme/app_theme.dart';
 import 'package:truecaller/utils/index.dart';
 import 'package:intl/intl.dart';
 
@@ -65,24 +66,27 @@ class AccountStatementScreen extends ConsumerWidget {
                         padding: EdgeInsets.all(16.0.sp),
                         child: SizedBox(
                           height: inputHeight,
-                          child: FormBuilderDateRangePicker(
-                            name: 'date_range',
-                            firstDate: DateTime(2021),
-                            lastDate: DateTime(2030),
-                            format: DateFormat('yyyy-MM-dd'),
-                            onChanged: (v) {
-                              ref
-                                  .read(dateRangeProvider.notifier)
-                                  .update((state) {
-                                return DateRangeModel(v!.start, v.end);
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Date Range',
-                              iconColor: Colors.red,
-                              suffixIcon: Icon(
-                                Iconsax.calendar,
-                                color: Theme.of(context).primaryColorDark,
+                          child: Theme(
+                            data: dateStyle,
+                            child: FormBuilderDateRangePicker(
+                              name: 'date_range',
+                              firstDate: DateTime(2021),
+                              lastDate: DateTime(2030),
+                              format: DateFormat('yyyy-MM-dd'),
+                              onChanged: (v) {
+                                ref
+                                    .read(dateRangeProvider.notifier)
+                                    .update((state) {
+                                  return DateRangeModel(v!.start, v.end);
+                                });
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'Date Range',
+                                iconColor: Colors.red,
+                                suffixIcon: Icon(
+                                  Iconsax.calendar,
+                                  color: Theme.of(context).primaryColorDark,
+                                ),
                               ),
                             ),
                           ),

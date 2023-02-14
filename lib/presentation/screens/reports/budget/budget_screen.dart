@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/utils/index.dart';
 
@@ -27,7 +26,7 @@ class BudgetReportScreen extends ConsumerWidget {
           ];
         },
         body: accounts.when(
-          error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+          error: (error, stackTrace) => ErrorWidget(error.toString()),
           loading: () => const Center(child: CircularProgressIndicator()),
           data: (data) {
             if (data.isEmpty) {

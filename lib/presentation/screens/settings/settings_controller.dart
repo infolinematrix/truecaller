@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart' as fcs;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:truecaller/data/models/account_mode.dart';
 import 'package:truecaller/data/models/scroll_model.dart';
 import 'package:truecaller/data/models/settings_model.dart';
 import 'package:truecaller/data/source/objectstore.dart';
-import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/utils/functions.dart';
 
 final settingBox = store!.objStore.box<SettingsModel>();
@@ -89,7 +89,7 @@ final createSettings = FutureProvider.autoDispose
 
     return true;
   } catch (e) {
-    return ErrorScreen(msg: e.toString());
+    return ErrorWidget(e.toString());
   }
 });
 

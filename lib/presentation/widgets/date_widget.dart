@@ -52,7 +52,8 @@ class DateWidget extends StatelessWidget {
                   date['day'],
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.w900,
-                        height: 1.3,
+                        fontSize: 14.0.sp,
+                        height: 1.5,
                       ),
                 ),
                 Text(

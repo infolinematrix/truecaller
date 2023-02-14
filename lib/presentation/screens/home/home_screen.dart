@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:truecaller/application/constants.dart';
-import 'package:truecaller/presentation/screens/error.dart';
 import 'package:truecaller/presentation/widgets/bottom_navigation.dart';
 import 'package:truecaller/presentation/widgets/index.dart';
 import 'package:truecaller/presentation/widgets/main_menu.dart';
@@ -209,7 +208,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         drawer: const DrawerNavigation(),
         body: SafeArea(
           child: homeData.when(
-            error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
+            error: (error, stackTrace) => ErrorWidget(error.toString()),
             loading: () => const Center(
               child: CircularProgressIndicator(),
             ),

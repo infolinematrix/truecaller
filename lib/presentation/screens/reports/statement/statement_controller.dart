@@ -41,7 +41,8 @@ class AccountsState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
                 AccountsModel_.name.notEquals('') &
                     AccountsModel_.hasChild.equals(false) &
                     AccountsModel_.type.notEquals('BANK') &
-                    AccountsModel_.name.startsWith(searchStr.toLowerCase()),
+                    AccountsModel_.type.notEquals('CASH') &
+                    AccountsModel_.name.startsWith(searchStr),
               )..order(AccountsModel_.name, flags: Order.caseSensitive);
 
       Query<AccountsModel> query = builder.build();

@@ -65,24 +65,29 @@ class CashBookScreenReport extends ConsumerWidget {
                           padding: EdgeInsets.all(16.0.sp),
                           child: SizedBox(
                             height: inputHeight,
-                            child: FormBuilderDateRangePicker(
-                              name: 'date_range',
-                              firstDate: DateTime(2021),
-                              lastDate: DateTime(2030),
-                              format: DateFormat('yyyy-MM-dd'),
-                              onChanged: (v) {
-                                ref
-                                    .read(dateRangeProvider.notifier)
-                                    .update((state) {
-                                  return DateRangeModel(v!.start, v.end);
-                                });
-                              },
-                              decoration: InputDecoration(
-                                labelText: 'Date Range',
-                                iconColor: Colors.red,
-                                suffixIcon: Icon(
-                                  Iconsax.calendar,
-                                  color: Theme.of(context).primaryColorDark,
+                            child: Theme(
+                              data: ThemeData(
+                                primaryColor: Theme.of(context).primaryColor,
+                              ),
+                              child: FormBuilderDateRangePicker(
+                                name: 'date_range',
+                                firstDate: DateTime(2021),
+                                lastDate: DateTime(2030),
+                                format: DateFormat('yyyy-MM-dd'),
+                                onChanged: (v) {
+                                  ref
+                                      .read(dateRangeProvider.notifier)
+                                      .update((state) {
+                                    return DateRangeModel(v!.start, v.end);
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'Date Range',
+                                  iconColor: Colors.red,
+                                  suffixIcon: Icon(
+                                    Iconsax.calendar,
+                                    color: Theme.of(context).primaryColorDark,
+                                  ),
                                 ),
                               ),
                             ),
